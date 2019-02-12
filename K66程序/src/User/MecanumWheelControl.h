@@ -1,16 +1,11 @@
 /*!
 * @file       MecanumWheelControl.h
-* @brief      四轮麦轮控制部分程序头文件
+* @brief      四轮麦轮控制部分的程序头文件
 * @details    
 * @author     pig's grief
 * @version    v1.0
 * @date       2019-2-12
-* @History    
-*             v1.0:2019-2-12 构建了RunSpeed、PIDControl两大结构体
-                             编写函数PIDControl_Constructor、PIDControl_FunctionDefine
-                             编写了PID控制的主要函数：GetPIDControlValue、Para_Refresh
-                             编写电机输出函数:MotorOutput
-                             !!以上函数均为测试
+* @to do      编写四轮麦轮运动控制解算
 */
 
 # ifndef _MECANUMWHEELCONTROL_H
@@ -50,14 +45,14 @@ typedef enum
     PID_Control
 }PIDControlModel;
 
-typedef struct
+typedef struct PIDControl
 {
-    float KP;               
-    float KD;               
-    float KI;               
+    float KP;
+    float KD;
+    float KI;
 
-    float P_Output;         
-    float D_Output;         
+    float P_Output;
+    float D_Output;
     float I_Output;
     float Output;
     float Last_Output;
@@ -70,14 +65,41 @@ typedef struct
     float IntegralLimit;
     float MaxOutput;
     float DeadBand;
-
-    ///<summary>PIDControl结构体的构造函数，用于初始化该结构体</summary>
-    void(*f_Constructor)(PIDControl* PID, float P_set, float D_set, float I_set,
-                         float I_Limit_Set, float MaxOutput_Set, float DeadBand_Set);
-    //获得PID控制量
-    float(*f_GetPIDControlValue)(PIDControl* PID, PIDControlModel PIDModel,float MeasuredValue);
-    //PID参数的刷新
-    void(*f_para_Refresh)(PIDControl* PID, float kp, float kd, float ki);
-}PIDControl;
+    /*
+    * @brirf                PIDControl结构体的构造函数，用于初始化该结构体
+    * @param-PID            要构造的结构体
+    * @param-P_set          KP参数的设定值
+    * @param-D_set          KD参数的设定值
+    * @param-I_set          KI参数的设定值
+    * @param-I_Limit_Set    积分限幅上限
+    * @param-MaxOutput_Set  最大电机输出，即电机限幅
+    * @param-DeadBand_Set   电机死区设定值
+    * @return        void
+    * @note
+    * @example       PIDTest.f_Constructor(&PIDTest, 20, 0, 0, 2000, 9600, 0);
+    */
+    void(*f_Constructor)(struct PIDControl* PID, float P_set, float D_set, float I_set
+        , float I_Limit_Set, float MaxOutput_Set, float DeadBand_Set);
+    /*
+    * @brirf               根据本次测量了计算并获得本次的PID控制量
+    * @param-PID           确定是哪个PID控制
+    * @param-PIDModel      确定控制器：纯P、PD、PI、PID
+    * @param-MeasuredValue 本次测量值
+    * @return              本次PID控制量
+    * @note
+    * @example             out = PIDTest.f_GetPIDControlValue(&PIDTest, PID_Control, Measure);
+    */
+    float(*f_GetPIDControlValue)(struct PIDControl* PID, PIDControlModel PIDModel, float MeasuredValue);
+    /*
+    * @brirf               PID控制参数刷新
+    * @param-PID           确定是哪个PID控制
+    * @param-kp            要更新的参数KP
+    * @param-kd            要更新的参数KD
+    * @param-ki            要更新的参数KI
+    * @note
+    * @example             PIDTest.f_para_Refresh(&PIDTest, 20, 1, 0.1);
+    */
+    void(*f_para_Refresh)(struct PIDControl* PID, float kp, float kd, float ki);
+}PIDTest;
 
 #endif

@@ -1,16 +1,11 @@
 /*!
-* @file       MecanumWheelControl.h
-* @brief      四轮麦轮控制部分程序头文件
+* @file       MecanumWheelControl.c
+* @brief      四轮麦轮控制部分的程序
 * @details
 * @author     pig's grief
 * @version    v1.0
 * @date       2019-2-12
-* @History
-*             v1.0:2019-2-12 构建了RunSpeed、PIDControl两大结构体
-                             编写函数PIDControl_Constructor、PIDControl_FunctionDefine
-                             编写了PID控制的主要函数：GetPIDControlValue、Para_Refresh
-                             编写电机输出函数:MotorOutput
-                             !!以上函数均为测试
+* @to do      编写四轮麦轮运动控制解算                           
 */
 
 # include "include.h"
@@ -20,9 +15,9 @@ FTM_CHn_e Wheels_FTMChannel[4][2] = { { FTMChannel_Use_W1_1, FTMChannel_Use_W1_2
                                       { FTMChannel_Use_W3_1, FTMChannel_Use_W3_2 },
                                       { FTMChannel_Use_W4_1, FTMChannel_Use_W4_2 } };
 
-
-void PIDControl_Constructor(PIDControl* PID, float P_set, float D_set, float I_set,
-                            float I_Limit_Set, float MaxOutput_Set, float DeadBand_Set)
+///<summary>对应PIDControl结构体内的f_Constructor</summary>
+void PIDControl_Constructor(struct PIDControl* PID, float P_set, float D_set, float I_set,
+    float I_Limit_Set, float MaxOutput_Set, float DeadBand_Set)
 {
     PID->KP = P_set;
     PID->KD = D_set;
@@ -38,8 +33,8 @@ void PIDControl_Constructor(PIDControl* PID, float P_set, float D_set, float I_s
     PID->Last_Error = 0;
     PID->Last_Output = 0;
 }
-
-float GetPIDControlValue(PIDControl* PID, PIDControlModel PIDModel, float MeasuredValue)
+///<summary>对应PIDControl结构体内的f_GetPIDControlValue</summary>
+float GetPIDControlValue(struct PIDControl* PID, PIDControlModel PIDModel, float MeasuredValue)
 {
     PID->Last_Error = PID->Error;
     PID->Last_Output = PID->Output;
@@ -75,16 +70,17 @@ float GetPIDControlValue(PIDControl* PID, PIDControlModel PIDModel, float Measur
 
     return PID->Output;
 }
-
-void Para_Refresh(PIDControl* PID, float kp, float kd, float ki)
+///<summary>对应PIDControl结构体内的f_para_Refresh</summary>
+void Para_Refresh(struct PIDControl* PID, float kp, float kd, float ki)
 {
     PID->KP = kp;
     PID->KD = kd;
     PID->KI = ki;
 }
 
-///<summary>使结构体PIDControl中的函数指针指向具体定义的函数</summary>
-void PIDControl_FunctionDefine(PIDControl* PID)
+/// <summary>使结构体PIDControl中的函数指针指向具体定义的函数</summary>
+/// <param name="PID">PIDControl结构体</param>
+void PIDControl_FunctionDefine(struct PIDControl* PID)
 {
     PID->f_Constructor = PIDControl_Constructor;
     PID->f_GetPIDControlValue = GetPIDControlValue;
