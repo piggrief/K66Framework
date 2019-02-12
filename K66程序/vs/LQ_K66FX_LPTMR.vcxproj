@@ -55,6 +55,8 @@
     </ClCompile>
     <ClCompile Include="..\src\User\OV7620.c">
     </ClCompile>
+    <ClCompile Include="..\src\User\MecanumWheelControl.c">
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Includes\ADC.h">
@@ -111,13 +113,15 @@
     </ClInclude>
     <ClInclude Include="..\src\User\OV7620.h">
     </ClInclude>
+    <ClInclude Include="..\src\User\MecanumWheelControl.h">
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\Project_Setting\Startup\crt0.s">
     </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F273CB04-F279-4485-7244-24F3DC98261D}</ProjectGuid>
+    <ProjectGuid>{19451989-EC13-40EA-5253-18EB29548BD5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LQ_K66FX_LPTMR</RootNamespace>
   </PropertyGroup>

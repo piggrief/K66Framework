@@ -2551,6 +2551,15 @@
     </group>
     <group>
         <name>User</name>
+        <group>
+            <name>MecanumWheelControl</name>
+            <file>
+                <name>$PROJ_DIR$\src\User\MecanumWheelControl.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\src\User\MecanumWheelControl.h</name>
+            </file>
+        </group>
         <file>
             <name>$PROJ_DIR$\src\Source\LQ12864.c</name>
         </file>

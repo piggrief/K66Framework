@@ -965,7 +965,7 @@
                     <item>uart_receive_flag</item>
                     <item>receive_num</item>
                     <item>receive</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

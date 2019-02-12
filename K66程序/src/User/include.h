@@ -52,5 +52,5 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
     //#include "LQSERVO.h"
     #include "LQ12864.h"
     //#include "LQnRF24L01.h"
-
+    #include "MecanumWheelControl.h"
 #endif
