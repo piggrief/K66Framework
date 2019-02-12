@@ -5,7 +5,7 @@
 * @author     pig's grief
 * @version    v1.0
 * @date       2019-2-12
-* @to do      编写四轮麦轮运动控制解算                           
+* @to do      编写编码器测速程序并测试                           
 */
 
 # include "include.h"
@@ -78,7 +78,10 @@ void Para_Refresh(struct PIDControl* PID, float kp, float kd, float ki)
     PID->KI = ki;
 }
 
-/// <summary>使结构体PIDControl中的函数指针指向具体定义的函数</summary>
+/// <summary>
+///使结构体PIDControl中的函数指针指向具体定义的函数
+///<para>example:  PIDControl_FunctionDefine(&amp;PIDTest);</para>
+///</summary>
 /// <param name="PID">PIDControl结构体</param>
 void PIDControl_FunctionDefine(struct PIDControl* PID)
 {
@@ -86,6 +89,39 @@ void PIDControl_FunctionDefine(struct PIDControl* PID)
     PID->f_GetPIDControlValue = GetPIDControlValue;
     PID->f_para_Refresh = Para_Refresh;
 }
+struct PIDControl WheelControl[4];//四个轮子的PID控制数组
+
+///麦轮控制部分
+
+/// <summary>
+///设定整车运动速度（x、y轴平动速度和自转速度）
+///<para>example:  SetTargetSpeed_Car(&amp;PIDTest, 10, 15, 20);</para>
+///</summary>
+/// <param name="TargetSpeed">用来存储三个速度的结构体</param>
+/// <param name="Vx">x轴平动速度</param>
+/// <param name="Vy">y轴平动速度</param>
+/// <param name="W_yaw">自转角速度</param>
+void SetTargetSpeed_Car(struct RunSpeed* TargetSpeed, float Vx, float Vy, float W_yaw)
+{
+    TargetSpeed->XSpeed = Vx;
+    TargetSpeed->YSpeed = Vy;
+    TargetSpeed->YawSpeed = W_yaw;
+}
+/// <summary>
+///根据整车的运动状态来计算每个麦轮需要输出的速度值
+///<para>example:  CalTargetSpeed_EachWheel(&amp;TargetSpeed);</para>
+///</summary>
+/// <param name="TargetSpeed">车整体的三个运动速度结构体</param>
+void CalTargetSpeed_EachWheel(struct RunSpeed* TargetSpeed)
+{
+    ///O-长方形麦轮底盘的逆运动学模型
+    ///用底盘运动状态解算四个轮子应有的速度
+    WheelControl[0].TargetValue = TargetSpeed->YSpeed - TargetSpeed->XSpeed + TargetSpeed->YawSpeed;
+    WheelControl[1].TargetValue = TargetSpeed->YSpeed + TargetSpeed->XSpeed - TargetSpeed->YawSpeed;
+    WheelControl[2].TargetValue = TargetSpeed->YSpeed - TargetSpeed->XSpeed - TargetSpeed->YawSpeed;
+    WheelControl[3].TargetValue = TargetSpeed->YSpeed + TargetSpeed->XSpeed + TargetSpeed->YawSpeed;
+}
+
 
 ///<summary>根据四个控制量ControlValue来输出四个电机的占空比</summary>
 void MotorOutput(float * ControlValue)

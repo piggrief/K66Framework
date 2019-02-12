@@ -5,7 +5,7 @@
 * @author     pig's grief
 * @version    v1.0
 * @date       2019-2-12
-* @to do      编写四轮麦轮运动控制解算
+* @to do      编写编码器测速程序并测试
 */
 
 # ifndef _MECANUMWHEELCONTROL_H
@@ -30,12 +30,12 @@
 
 //RunState麦轮车运动速度
 //用三个速度来表示麦轮车的运动速度
-typedef struct 
+typedef struct RunSpeed
 {
     float XSpeed;   //x轴(左右)平动速度
     float YSpeed;   //y轴(前后)平动速度
     float YawSpeed; //yaw轴转动的角速度
-}RunSpeed;
+};
 
 typedef enum
 {
