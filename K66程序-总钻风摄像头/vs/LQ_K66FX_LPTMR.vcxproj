@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Source\ADC.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\DMA.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\FTM.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\GPIO.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\I2C.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\LPTMR.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\PIT.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\PLL.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\RTC.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\SPI.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\Systick.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\TFTDriver.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\UART.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\vectors.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\wdog.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\common.c">
+    </ClCompile>
+    <ClCompile Include="..\src\SEEKFREE\SEEKFREE_MT9V032.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Project_Setting\Startup\start.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\LQ12864.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\LQKEY.c">
+    </ClCompile>
+    <ClCompile Include="..\src\Source\LQLED.c">
+    </ClCompile>
+    <ClCompile Include="..\src\User\main.c">
+    </ClCompile>
+    <ClCompile Include="..\src\User\OV7620.c">
+    </ClCompile>
+    <ClCompile Include="..\src\User\MecanumWheelControl.c">
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Includes\ADC.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\DMA.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\FTM.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\GPIO.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\GPIO_Cfg.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\I2C.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\Lptmr.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\PIT.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\PLL.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\RTC.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\SPI.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\Systick.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\TFTDriver.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\UART.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\vectors.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\wdog.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Libs\arm_common_tables.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Libs\arm_const_structs.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Libs\arm_math.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Libs\core_cm4.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Libs\MK66F18.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\common.h">
+    </ClInclude>
+    <ClInclude Include="..\src\User\include.h">
+    </ClInclude>
+    <ClInclude Include="..\src\SEEKFREE\SEEKFREE_MT9V032.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\LQ12864.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\LQKEY.h">
+    </ClInclude>
+    <ClInclude Include="..\src\Includes\LQLED.h">
+    </ClInclude>
+    <ClInclude Include="..\src\User\OV7620.h">
+    </ClInclude>
+    <ClInclude Include="..\src\User\MecanumWheelControl.h">
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\Project_Setting\Startup\crt0.s">
+    </None>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A8B383FA-D085-4AE7-75E8-D125DD6C6B51}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>LQ_K66FX_LPTMR</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\src\Includes;..\src\Libs;..\src\User</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>
+    </IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props">
+  </Import>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props">
+  </Import>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets">
+  </Import>
+</Project>
