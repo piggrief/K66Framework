@@ -533,7 +533,7 @@ void displayimage032(uint8 *p)
         for (j = 0; j<160; j++)
         {
             temp = *(p + i*120 / 120 * 188 + (188 - 1) - j*(188 - 1) / (160 - 1));//¶ÁÈ¡ÏñËØµã
-
+            
             color = (0x001f & ((temp) >> 3)) << 11;
             color = color | (((0x003f)&((temp) >> 2)) << 5);
             color = color | (0x001f & ((temp) >> 3));
