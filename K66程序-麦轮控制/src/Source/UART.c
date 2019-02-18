@@ -22,7 +22,7 @@ UART_MemMapPtr UARTN[UART_MAX] = {UART0_BASE_PTR, UART1_BASE_PTR, UART2_BASE_PTR
 //参  数: uratn:模块名如：UART0 
 //        baud: 波特率
 //返  回: 无                                                              
-//简  例: uart_init(UART4,115200);UART4对应引脚参考UART.H文件                                   
+//简  例: UART_Init(UART_4,115200);UART4对应引脚参考UART.H文件                                   
 //-------------------------------------------------------------------------*
 
 void UART_Init (UARTn_e uratn, uint32 baud)
@@ -261,7 +261,7 @@ void UART_Init (UARTn_e uratn, uint32 baud)
 //参  数: uratn:模块名如：UART0 
 //        ch: 保存接收数据指针
 //返  回: 无                                                              
-//简  例: uart_getchar (UART4,a[]) 将接收到的数据保存在a数组里                                
+//简  例: UART_Get_Char (UART4,a[]) 将接收到的数据保存在a数组里                                
 //-------------------------------------------------------------------------*
 char UART_Get_Char (UARTn_e uratn)
 {

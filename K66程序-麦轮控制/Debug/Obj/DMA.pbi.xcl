@@ -1,25 +1,25 @@
-"D:\智能车\麦轮信标\程序\K66框架\src\Source\DMA.c"
+"D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\src\Source\DMA.c"
 -std=c11
 -ferror-limit=0
 -fbracket-depth=512
 -I
-D:\智能车\麦轮信标\程序\K66框架\src\Source
+D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\src\Source
 -I
-D:\智能车\麦轮信标\程序\K66框架\src\Includes
+D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\src\Includes
 -I
-D:\智能车\麦轮信标\程序\K66框架\src\Libs
+D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\src\Libs
 -I
-D:\智能车\麦轮信标\程序\K66框架\src\User
+D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\src\User
 -I
 D:\software\IAR Systems\Embedded Workbench 8.1\arm\inc
 -I
 D:\software\IAR Systems\Embedded Workbench 8.1\arm\inc\c
 -I
-D:\智能车\麦轮信标\程序\K66框架\src\Includes
+D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\src\Includes
 -I
-D:\智能车\麦轮信标\程序\K66框架\src\Libs
+D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\src\Libs
 -I
-D:\智能车\麦轮信标\程序\K66框架\src\User
+D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\src\User
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0

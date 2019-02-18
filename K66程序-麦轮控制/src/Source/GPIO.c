@@ -158,7 +158,7 @@ void EXTI_Init(GPIO_Type * port, u8 n, exti_cfg cfg)
          break;
      }
 
-    PORT_PCR_REG(p, n) = PORT_PCR_MUX(1) |PORT_PCR_IRQC(cfg) ; // 复用GPIO , 确定触发模式 ,开启上拉或下拉电阻
+    PORT_PCR_REG(p, n) = PORT_PCR_MUX(1) | PORT_PCR_IRQC(cfg) | ((cfg & 0xc0 ) >> 6) ; // 复用GPIO , 确定触发模式 ,开启上拉或下拉电阻
     NVIC_EnableIRQ(IRQ);                         //使能PORT中断，PORTA的ISR中断号为87
 }
 
@@ -204,21 +204,15 @@ void PORTB_Interrupt()
       /* 用户自行添加中断内程序 */
   }
 }
-
+extern void VSYNC(void);
 void PORTC_Interrupt()
 {
   int n;
-  n=0;
+  n=6;
   if((PORTC_ISFR & (1<<n)))
   {
       PORTC_ISFR |= (1<<n);
-      // 用户自行添加中断内程序 
-  }
-  n=1;
-   if((PORTC_ISFR & (1<<n)))
-  {
-      PORTC_ISFR |= (1<<n);
-      // 用户自行添加中断内程序 
+      // 用户自行添加中断内程序
   }
 }
 

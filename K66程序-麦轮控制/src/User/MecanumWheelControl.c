@@ -5,15 +5,17 @@
 * @author     pig's grief
 * @version    v1.0
 * @date       2019-2-12
-* @to do      编写编码器测速程序并测试                           
+* @to do      
+*             解决编码器测速程序的DMA无法计数问题
 */
 
 # include "include.h"
-
+//规定了每个轮子对应的FTM输出通道，调正反转应该这个数组
 FTM_CHn_e Wheels_FTMChannel[4][2] = { { FTMChannel_Use_W1_1, FTMChannel_Use_W1_2 },
                                       { FTMChannel_Use_W2_1, FTMChannel_Use_W2_2 },
-                                      { FTMChannel_Use_W3_1, FTMChannel_Use_W3_2 },
-                                      { FTMChannel_Use_W4_1, FTMChannel_Use_W4_2 } };
+                                      { FTMChannel_Use_W3_2, FTMChannel_Use_W3_1 },
+                                      { FTMChannel_Use_W4_2, FTMChannel_Use_W4_1 } };
+
 
 ///<summary>对应PIDControl结构体内的f_Constructor</summary>
 void PIDControl_Constructor(struct PIDControl* PID, float P_set, float D_set, float I_set,
@@ -131,15 +133,65 @@ void MotorOutput(float * ControlValue)
     {
         if (ControlValue[i] >= 0)
         {
-            FTM_PWM_Duty(FTMType_Use, Wheels_FTMChannel[i][2], 0);
-            FTM_PWM_Duty(FTMType_Use, Wheels_FTMChannel[i][1], ControlValue[i]);
+            FTM_PWM_Duty(FTMType_Use, Wheels_FTMChannel[i][1], 0);
+            FTM_PWM_Duty(FTMType_Use, Wheels_FTMChannel[i][0], ControlValue[i]);
         }
         else
         {
             FTM_PWM_Duty(FTMType_Use, Wheels_FTMChannel[i][1], 0);
-            FTM_PWM_Duty(FTMType_Use, Wheels_FTMChannel[i][2], -ControlValue[i]);
+            FTM_PWM_Duty(FTMType_Use, Wheels_FTMChannel[i][0], -ControlValue[i]);
         }
     }
 }
+//编码器测速用的DMA通道号
+DMA_CHn Encoder_DMAChannel[4] = { DMA_CH5, DMA_CH6, DMA_CH7, DMA_CH8 };
+//编码器测速用的步进脉冲Port端口
+PTXn_e  Encoder_PORT[4] = { PTA5, PTA6, PTA7, PTA8 };
+//编码器测速用的旋转方向Port总端口
+# define EncoderDirectionPort PTA
+//编码器测速用的旋转方向Port端口索引
+int Encoder_PORTIndex_Direction[4] = { 9, 10, 11, 12 };
+PTXn_e Encoder_Direction[4] = {PTA9, PTA10, PTA11, PTA12};
 
+///<summary>四个编码器初始化</summary>
+void EncoderMeasure_Init(void)
+{
+    int i = 0;
+    for (i = 0; i < 4; i++)
+    {
+        GPIO_Init(EncoderDirectionPort, Encoder_PORTIndex_Direction[i], GPI, 0);
+        DMA_Count_Init(Encoder_DMAChannel[i], Encoder_PORT[i], 0x7FFF, DMA_falling_up_keepon);
+        
+    }
+}
 
+uint16 temp_Speed[4] = {0};
+uint32 SpeedCount[4] = { 0 };
+//四个轮子反转时的旋转方向IO
+u8 Flag_Reverse[4] = { 0, 0, 0, 0 };
+
+///<summary>获得第index个轮子的转速</summary>
+void GetSpeed(int index)
+{
+    u8 flag_temp = 0;
+    index--;
+
+    temp_Speed[index] = DMA_Count_Get(Encoder_DMAChannel[index]);
+    
+    flag_temp = GPIO_Get(Encoder_Direction[index]);
+    if (flag_temp == Flag_Reverse[index])
+    {
+        temp_Speed[index] *= -1;
+    }
+    SpeedCount[index] += temp_Speed[index];
+
+    DMA_Count_Reset(Encoder_DMAChannel[index]);
+}
+
+///<summary>速度计数清零</summary>
+void SpeedClean(void)
+{
+    int i = 0;
+    for (i = 0; i < 4; i++)
+        SpeedCount[i] = 0;
+}

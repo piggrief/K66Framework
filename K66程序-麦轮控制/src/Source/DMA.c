@@ -17,6 +17,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define COUNTDADDR   0x4004000C  //(&counttempaddr)
 
 u32 count_init[16];         //用来保存16个通道的初始化计数值
+uint8 abg,bbg;
 
 extern GPIO_MemMapPtr GPIOX[5];
 extern PORT_MemMapPtr PORTX[5];
@@ -109,8 +110,8 @@ void DMA_PORTx2BUFF_Init(DMA_CHn CHn, void *SADDR, void *DADDR, PTXn_e ptxn, DMA
     }
 
     /*  输入源管脚选择功能脚  */
-    n = (u8)(((u32)SADDR - ((u32)(&PTA_BYTE0_IN))) & 0x3f);         //最小的引脚号
-    tmp = n + (BYTEs << 3);                                         //最大的引脚号
+    n = (u8)(((u32)SADDR - ((u32)(&PTA_BYTE0_IN))) & 0x3f) * 8;         //最小的引脚号
+    tmp = n + (BYTEs * 8) - 1;       //最大的引脚号
     for(i = n; i < tmp; i++)
     {
         PORT_PCR_REG(PORTX[   ((((u32)SADDR)&0x1ff)>>6)    ], i) = (0
@@ -215,11 +216,11 @@ void DMA_Count_Reset(DMA_CHn CHn)
     DMA_CITER_ELINKNO(CHn) = count_init[CHn] ;
 }
 
-
 void DMA_CH4_Handler(void)
 {
     DMA_IRQ_CLEAN(DMA_CH4);                                 //清除通道传输中断标志位    (这样才能再次进入中断)
     DMA_DIS(DMA_CH4);                                       //采集完H个数据后进入这个DMA中断，停止DMA传输。行中断中打开DMA传输
+    
     /********************/
     //串口调试用到
    // if(V_Cnt >= 319)

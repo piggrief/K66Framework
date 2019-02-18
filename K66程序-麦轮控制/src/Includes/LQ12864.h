@@ -26,5 +26,14 @@ extern void Draw_LibLogo(void);
 extern void Draw_BMP(unsigned char x0,unsigned char y0,unsigned char x1,unsigned char y1,unsigned char * bmp); 
 extern void Draw_Road(void);
 void Draw_Frame(void);
+//显示3位整数和1位小数！（慎用，在主函数循环里面一直跑的话，比较占单片机资源）
+void LCD_PrintFloat_31(unsigned char x, unsigned char y, float num);
+//显示5位整数
+void LCD_PrintInt5(unsigned char x, unsigned char y, int num);
+//显示4位整数
+void LCD_PrintInt4(unsigned char x, unsigned char y, int num);
+//显示3位整数
+void LCD_PrintInt3(unsigned char x, unsigned char y, int num);
+
 #endif
 

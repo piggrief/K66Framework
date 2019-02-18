@@ -696,28 +696,88 @@ void LCD_PrintU16(unsigned char x,unsigned char y,unsigned int num)
 	LCD_P6x8Str(x,y,tmp);
 	
 }
-void LCD_PrintFloat(unsigned char x,unsigned char y,float num)
+void LCD_PrintInt5(unsigned char x, unsigned char y, int num)
 {
-	unsigned char tmp[6],i;
-	tmp[5]=0;
-	num *= 10;
+    unsigned char tmp[7], i;
+    tmp[6] = 0;
+    if (num < 0)
+    {
+        tmp[0] = '-';
+        num *= -1;
+    }
+    else
+        tmp[0] = ' ';
+
+    tmp[5] = (unsigned char)(num % 10 + 0x30);
+    tmp[4] = (unsigned char)(num / 10 % 10 + 0x30);
+    tmp[3] = (unsigned char)(num / 100 % 10 + 0x30);
+    tmp[2] = (unsigned char)(num / 1000 % 10 + 0x30);
+    tmp[1] = (unsigned char)(num / 10000 % 10 + 0x30);
+
+    LCD_P6x8Str(x, y, tmp);
+}
+void LCD_PrintInt4(unsigned char x, unsigned char y, int num)
+{
+    unsigned char tmp[6], i;
+    tmp[5] = 0;
+    if (num < 0)
+    {
+        tmp[0] = '-';
+        num *= -1;
+    }
+    else
+        tmp[0] = ' ';
+
+    tmp[4] = (unsigned char)(num % 10 + 0x30);
+    tmp[3] = (unsigned char)(num / 10 % 10 + 0x30);
+    tmp[2] = (unsigned char)(num / 100 % 10 + 0x30);
+    tmp[1] = (unsigned char)(num / 1000 % 10 + 0x30);
+
+    LCD_P6x8Str(x, y, tmp);
+}
+void LCD_PrintInt3(unsigned char x, unsigned char y, int num)
+{
+    unsigned char tmp[5], i;
+    tmp[4] = 0;
+    if (num < 0)
+    {
+        tmp[0] = '-';
+        num *= -1;
+    }
+    else
+        tmp[0] = ' ';
+
+    tmp[3] = (unsigned char)(num % 10 + 0x30);
+    tmp[2] = (unsigned char)(num / 10 % 10 + 0x30);
+    tmp[1] = (unsigned char)(num / 100 % 10 + 0x30);
+
+    LCD_P6x8Str(x, y, tmp);
+}
+
+void LCD_PrintFloat_31(unsigned char x,unsigned char y,float num)
+{
+	unsigned char tmp[7],i;
+    tmp[6] = 0;
+    num *= 10;
 	if(num>0)
 	{
 		tmp[0]='+';
-		tmp[4]=(unsigned char)((int)num%10+0x30);
-		tmp[3]=(unsigned char)((int)num/10%10+0x30);
-		tmp[2]=(unsigned char)((int)num/100%10+0x30);
-		tmp[1]=(unsigned char)((int)num/1000%10+0x30);
+        tmp[5] = (unsigned char)((int)num % 10 + 0x30);
+        tmp[4] = '.';
+        tmp[3] = (unsigned char)((int)num / 10 % 10 + 0x30);
+        tmp[2] = (unsigned char)((int)num / 100 % 10 + 0x30);
+        tmp[1] = (unsigned char)((int)num / 1000 % 10 + 0x30);
 	}
 	else
 	{
 		tmp[0]='-';
 		num=-num;
-		tmp[4]=(unsigned char)((int)num%10+0x30);
-		tmp[3]=(unsigned char)((int)num/10%10+0x30);
-		tmp[2]=(unsigned char)((int)num/100%10+0x30);
-		tmp[1]=(unsigned char)((int)num/1000%10+0x30);
-	}
+        tmp[5] = (unsigned char)((int)num % 10 + 0x30);
+        tmp[4] = '.';
+        tmp[3] = (unsigned char)((int)num / 10 % 10 + 0x30);
+        tmp[2] = (unsigned char)((int)num / 100 % 10 + 0x30);
+        tmp[1] = (unsigned char)((int)num / 1000 % 10 + 0x30);
+    }
 	for(i=0;i<4;i++)
 	{
 		if(tmp[i]=='0')

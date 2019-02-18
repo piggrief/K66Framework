@@ -102,4 +102,33 @@ typedef struct PIDControl
     void(*f_para_Refresh)(struct PIDControl* PID, float kp, float kd, float ki);
 }PIDTest;
 
+/// <summary>
+///设定整车运动速度（x、y轴平动速度和自转速度）
+///<para>example:  SetTargetSpeed_Car(&amp;PIDTest, 10, 15, 20);</para>
+///</summary>
+/// <param name="TargetSpeed">用来存储三个速度的结构体</param>
+/// <param name="Vx">x轴平动速度</param>
+/// <param name="Vy">y轴平动速度</param>
+/// <param name="W_yaw">自转角速度</param>
+void SetTargetSpeed_Car(struct RunSpeed* TargetSpeed, float Vx, float Vy, float W_yaw);
+
+/// <summary>
+///根据整车的运动状态来计算每个麦轮需要输出的速度值
+///<para>example:  CalTargetSpeed_EachWheel(&amp;TargetSpeed);</para>
+///</summary>
+/// <param name="TargetSpeed">车整体的三个运动速度结构体</param>
+void CalTargetSpeed_EachWheel(struct RunSpeed* TargetSpeed);
+
+///<summary>根据四个控制量ControlValue来输出四个电机的占空比</summary>
+void MotorOutput(float * ControlValue);
+
+///<summary>四个编码器初始化</summary>
+void EncoderMeasure_Init(void);
+
+///<summary>获得第index个轮子的转速</summary>
+void GetSpeed(int index);
+
+///<summary>速度计数清零</summary>
+void SpeedClean(void);
+
 #endif

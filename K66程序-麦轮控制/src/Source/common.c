@@ -11,6 +11,7 @@
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"
 #include "common.h"
+#include "core_cm4.h";
 
 //-------------------------------------------------------------------------*
 //函数名: stop                                                             *
@@ -64,29 +65,30 @@ void write_vtor (int vtor)
 //-------------------------------------------------------------------------*
 void enable_irq (int irq)
 {
-  /*  int div;
+    NVIC_EnableIRQ(irq);
+    //int div;
 
-    //确定irq号为有效的irq号
-    if (irq > 91)	irq=91;
+    ////确定irq号为有效的irq号
+    //if (irq > 91)	irq=91;
 
-    //确定对应的NVICISER
-    div = irq/32;
+    ////确定对应的NVICISER
+    //div = irq/32;
 
-     switch (div)
-    {
-    	case 0x0:
-              NVICICPR0 = 1 << (irq%32);
-              NVICISER0 = 1 << (irq%32);
-              break;
-    	case 0x1:
-              NVICICPR1 = 1 << (irq%32);
-              NVICISER1 = 1 << (irq%32);
-              break;
-    	case 0x2:
-              NVICICPR2 = 1 << (irq%32);
-              NVICISER2 = 1 << (irq%32);
-              break;
-    } */
+    // switch (div)
+    //{
+    //	case 0x0:
+    //          NVICICPR0 = 1 << (irq%32);
+    //          NVICISER0 = 1 << (irq%32);
+    //          break;
+    //	case 0x1:
+    //          NVICICPR1 = 1 << (irq%32);
+    //          NVICISER1 = 1 << (irq%32);
+    //          break;
+    //	case 0x2:
+    //          NVICICPR2 = 1 << (irq%32);
+    //          NVICISER2 = 1 << (irq%32);
+    //          break;
+    //} 
 }
 
 //-------------------------------------------------------------------------*
@@ -98,6 +100,7 @@ void enable_irq (int irq)
 //-------------------------------------------------------------------------*
 void disable_irq (int irq)
 {
+    NVIC_DisableIRQ(irq);
  /*   int div;
 
     //确定irq号为有效的irq号
@@ -130,6 +133,7 @@ void disable_irq (int irq)
 //-------------------------------------------------------------------------*
 void set_irq_priority (int irq, int prio)
 {
+    NVIC_SetPriority(irq, prio);
  /*   uint8 *prio_reg;
 
     //确定irq号和优先级有效

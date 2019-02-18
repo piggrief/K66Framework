@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\software\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序\settings\LQ_K66FX_LPTMR.Debug.general.xcl" --backend -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序\settings\LQ_K66FX_LPTMR.Debug.driver.xcl" 
+"D:\software\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\settings\LQ_K66FX_LPTMR.Debug.general.xcl" --backend -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\settings\LQ_K66FX_LPTMR.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\software\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序\settings\LQ_K66FX_LPTMR.Debug.general.xcl" "--debug_file=%~1" --backend -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序\settings\LQ_K66FX_LPTMR.Debug.driver.xcl" 
+"D:\software\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\settings\LQ_K66FX_LPTMR.Debug.general.xcl" "--debug_file=%~1" --backend -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-麦轮控制\settings\LQ_K66FX_LPTMR.Debug.driver.xcl" 
 
 @echo off 
 :end
