@@ -143,15 +143,17 @@ void MotorOutput(float * ControlValue)
         }
     }
 }
+long temp_Speed[4] = { 0 };
+long SpeedCount[4] = { 0 };
 //编码器测速用的DMA通道号
 DMA_CHn Encoder_DMAChannel[4] = { DMA_CH5, DMA_CH6, DMA_CH7, DMA_CH8 };
 //编码器测速用的步进脉冲Port端口
-PTXn_e  Encoder_PORT[4] = { PTA5, PTA6, PTA7, PTA8 };
+PTXn_e  Encoder_PORT[4] = { PTC5, PTD12, PTA26, PTE27 };
 //编码器测速用的旋转方向Port总端口
-# define EncoderDirectionPort PTA
+GPIO_Type* EncoderDirectionPort[4] = { PTC, PTD, PTA, PTE };
 //编码器测速用的旋转方向Port端口索引
-int Encoder_PORTIndex_Direction[4] = { 9, 10, 11, 12 };
-PTXn_e Encoder_Direction[4] = {PTA9, PTA10, PTA11, PTA12};
+int Encoder_PORTIndex_Direction[4] = { 7, 13, 27, 28 };
+PTXn_e Encoder_Direction[4] = {PTC7, PTD13, PTA27, PTE28};
 
 ///<summary>四个编码器初始化</summary>
 void EncoderMeasure_Init(void)
@@ -159,14 +161,15 @@ void EncoderMeasure_Init(void)
     int i = 0;
     for (i = 0; i < 4; i++)
     {
-        GPIO_Init(EncoderDirectionPort, Encoder_PORTIndex_Direction[i], GPI, 0);
-        DMA_Count_Init(Encoder_DMAChannel[i], Encoder_PORT[i], 0x7FFF, DMA_falling_up_keepon);
-        
+        GPIO_Init(EncoderDirectionPort[i], Encoder_PORTIndex_Direction[i], GPI, 0);
+        DMA_Count_Init(Encoder_DMAChannel[i], Encoder_PORT[i], 65535, DMA_rising_down);
+
+        SpeedCount[i] = 0;
+        temp_Speed[i] = 0;
     }
 }
 
-uint16 temp_Speed[4] = {0};
-uint32 SpeedCount[4] = { 0 };
+
 //四个轮子反转时的旋转方向IO
 u8 Flag_Reverse[4] = { 0, 0, 0, 0 };
 
@@ -186,6 +189,7 @@ void GetSpeed(int index)
     SpeedCount[index] += temp_Speed[index];
 
     DMA_Count_Reset(Encoder_DMAChannel[index]);
+
 }
 
 ///<summary>速度计数清零</summary>

@@ -758,7 +758,7 @@ void FTM_Input_init(FTM_Type * ftmn, FTM_CHn_e ch, FTM_Input_cfg cfg)
     FTM_STATUS_REG(ftmn)  = 0x00;               //清中断标志位
 
     //开启输入捕捉中断
-    //enable_irq(62 + ftmn);
+    //enable_irq(62 + FTM3_BASE);
 }
 
 
@@ -864,7 +864,7 @@ void FTM2_interrupt(void)
         //FTM_IRQ_EN(FTM2, CHn); //开启输入捕捉中断
     }
 }
-
+extern uint16 temp_Speed[4];
 void FTM3_interrupt(void)
 {
     uint8 s = FTM3_STATUS;             //读取捕捉和比较状态
@@ -877,7 +877,7 @@ void FTM3_interrupt(void)
     {
         //FTM_IRQ_DIS(FTM2, CHn);     //禁止输入捕捉中断
         /*     用户任务       */
-
+        temp_Speed[CHn]++;
         /*********************/
         //FTM_IRQ_EN(FTM2, CHn); //开启输入捕捉中断
 
@@ -889,11 +889,32 @@ void FTM3_interrupt(void)
     {
         //FTM_IRQ_EN(FTM2, CHn); //开启输入捕捉中断
         /*     用户任务       */
-
-
+        temp_Speed[CHn]++;
         /*********************/
         //不建议在这里开启输入捕捉中断
         //FTM_IRQ_EN(FTM2, CHn); //开启输入捕捉中断
     }
+    CHn = 2;
+    if (s & (1 << CHn))
+    {
+        //FTM_IRQ_EN(FTM2, CHn); //开启输入捕捉中断
+        /*     用户任务       */
+        temp_Speed[CHn]++;
+        /*********************/
+        //不建议在这里开启输入捕捉中断
+        //FTM_IRQ_EN(FTM2, CHn); //开启输入捕捉中断
+    }
+
+    CHn = 3;
+    if (s & (1 << CHn))
+    {
+        //FTM_IRQ_EN(FTM2, CHn); //开启输入捕捉中断
+        /*     用户任务       */
+        temp_Speed[CHn]++;
+        /*********************/
+        //不建议在这里开启输入捕捉中断
+        //FTM_IRQ_EN(FTM2, CHn); //开启输入捕捉中断
+    }
+
 }
 

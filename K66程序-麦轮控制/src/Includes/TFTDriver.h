@@ -10,10 +10,10 @@
 //#define DC_PIN		PTB18	//液晶命令位硬件定义
 //#define REST_PIN	PTB19 //液晶复位引脚定义
 
-#define DC(x)   	GPIO_Ctrl(PTB,18,x);
-#define REST(x) 	GPIO_Ctrl(PTB,19,x);
-#define DCInit		GPIO_Init(PTB,18,GPO,1);
-#define RESTInit	GPIO_Init(PTB,19,GPO,1);
+#define DC(x)   	GPIO_Ctrl(PTE,5,x);
+#define REST(x) 	GPIO_Ctrl(PTE,3,x);
+#define DCInit		GPIO_Init(PTE,5,GPO,1);
+#define RESTInit	GPIO_Init(PTE,3,GPO,1);
 
 //-------常用颜色----------
 #define RED     	0XF800    //红色

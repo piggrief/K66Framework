@@ -40,8 +40,8 @@ extern UART_MemMapPtr UARTN[UART_MAX];
 #define UART2_RX    PTD2        //PTD2
 #define UART2_TX    PTD3        //PTD3
 
-#define UART3_RX    PTC16       //PTB10、PTC16、PTE5
-#define UART3_TX    PTC17       //PTB11、PTC17、PTE4
+#define UART3_RX    PTB10       //PTB10、PTC16、PTE5
+#define UART3_TX    PTB11       //PTB11、PTC17、PTE4
 
 #define UART4_RX    PTE25       //PTC14、PTE25
 #define UART4_TX    PTE24       //PTC15、PTE24

@@ -19,6 +19,8 @@ LPTMR延时功能演示：1S钟板载LED(PTE26)闪烁
 修改历史：
 ******************************************************************************************************/
 
+
+
 #include "include.h" 
 extern uint32 SpeedCount[4];
 
@@ -32,7 +34,7 @@ void main(void)
    /*******************GPIO***************************/
    //LED_Init();                  //LED初始化    
    LCD_Init();
-   //TFT_init(SPI_1, SPIn_PCS0);
+   TFT_init(SPI_1, SPIn_PCS0);
    //MT9V032_Init();
 
    EncoderMeasure_Init();
@@ -49,9 +51,8 @@ void main(void)
    EnableInterrupts;
    //dsp_single_colour(RED);
    //UART_Put_Str(UART_3, "33333333\n");
-
+   UART_Init(UART_3, 115200);
    //LPTMR_delay_ms(5000);
-
 
    //FTM_PWM_Duty(FTM0, FTM_CH0, 58000);
    //FTM_PWM_Duty(FTM0, FTM_CH1, 0);//58000
@@ -78,13 +79,15 @@ void main(void)
 	   FTM_PWM_Duty(FTM0, FTM_CH6, 0);
 	   FTM_PWM_Duty(FTM0, FTM_CH7, 0);
 	  //dsp_single_colour(RED);
-
+       //UART_Put_Buff(UART_3, "Hello!", 6);
+       //LPTMR_delay_ms(500);
       //LED_Ctrl(LED3, RVS);      //LED指示程序运行状态  
    }
 }
-int Count = 0;
+
 void PIT0_Interrupt()
 {
+    int i = 0;
 	//count_1ms++;
 	//if (count_1ms >= 500)
 	//{
@@ -93,7 +96,10 @@ void PIT0_Interrupt()
 	//	TFT_showint16(0, 0, Count, BLACK, WHITE);
 	//	TFT_showstr(0, 20, "S", BLACK, WHITE);
 	//}
-    GetSpeed(1);
+    for (i = 1; i < 5; i++)
+    {
+        GetSpeed(i);
+    }
 
   PIT_Flag_Clear(PIT0);       //清中断标志位
 

@@ -171,11 +171,11 @@ void DMA_Count_Init(DMA_CHn CHn, PTXn_e ptxn, u32 count, DMA_Count_cfg cfg)
     DMA_NBYTES_MLNO(CHn) =   DMA_NBYTES_MLNO_NBYTES(BYTEs); // 通道每次传输字节数，这里设置为BYTEs个字节。注：值为0表示传输4GB */
 
     /* 配置 DMA 传输结束后的操作 */
-    DMA_SLAST(CHn)      =   -count;                              //调整  源地址的附加值,主循环结束后恢复  源地址
+    DMA_SLAST(CHn)      =   0;                              //调整  源地址的附加值,主循环结束后恢复  源地址
     DMA_DLAST_SGA(CHn)  =   0;                                  //调整目的地址的附加值,主循环结束后恢复目的地址或者保持地址
     DMA_CSR(CHn)        =   (0
                              | DMA_CSR_DREQ_MASK            //主循环结束后停止硬件请求
-                             | DMA_CSR_INTMAJOR_MASK        //主循环结束后产生中断
+                             //| DMA_CSR_INTMAJOR_MASK        //主循环结束后产生中断
                             );
 
     /* 配置 DMA 触发源 */
@@ -195,7 +195,7 @@ void DMA_Count_Init(DMA_CHn CHn, PTXn_e ptxn, u32 count, DMA_Count_cfg cfg)
 
     /* 开启中断 */
     DMA_EN(CHn);                                    //使能通道CHn 硬件请求
-    DMA_IRQ_EN(CHn);                                //允许DMA通道传输
+    //DMA_IRQ_EN(CHn);                                //允许DMA通道传输
 }
 
 /**************************************************************************                             野火嵌入式开发工作室
