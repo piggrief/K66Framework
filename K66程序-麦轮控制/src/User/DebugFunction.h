@@ -32,5 +32,8 @@ void SEND(float a,float b,float c,float d);
 /// <param name="data_high">要显示的数据的范围的上限</param>
 /// <param name="WhetherClear">刷新时刻点之后是否清屏，1表示清屏，0表示否</param>
 void LCD_ShowGraphs(float data, float t_refresh, float data_low, float data_high, int WhetherClear);
-
+/*===================================================================
+功能：串口发送数据用于Matlab数据处理(整数)
+===================================================================*/
+void DATA_SEND(long num);
 #endif
