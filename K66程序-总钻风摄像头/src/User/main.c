@@ -30,7 +30,7 @@ void main(void)
     int i = 0, j = 0;
    DisableInterrupts;           //关闭中断
    PLL_Init(PLL200);            //初始化PLL为200M,总线为40M  
-//      GPIO_Init(PTC,8,GPI,1);
+//     GPIO_Init(PTC,8,GPI,1);
 //     GPIO_Init(PTC,9,GPI,1);
 //     GPIO_Init(PTC,10,GPI,1);
 //     GPIO_Init(PTC,11,GPI,1);

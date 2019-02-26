@@ -53,4 +53,6 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
     #include "LQ12864.h"
     //#include "LQnRF24L01.h"
     #include "MecanumWheelControl.h"
+#include "AttitudeCalculation.h"
+#include "DebugFunction.h"
 #endif

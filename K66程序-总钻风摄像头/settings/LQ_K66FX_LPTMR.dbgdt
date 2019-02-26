@@ -969,7 +969,7 @@
                     <item>image</item>
                     <item>abg</item>
                     <item>bbg</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

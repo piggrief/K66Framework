@@ -54,4 +54,6 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
     //#include "LQnRF24L01.h"
     //#include "SEEKFREE_MT9V032.h"
     #include "MecanumWheelControl.h"
+    # include "AttitudeCalculation.h"
+# include "DebugFunction.h"
 #endif

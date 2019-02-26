@@ -6,8 +6,6 @@
 
 --plugin="D:\software\IAR Systems\Embedded Workbench 8.1\arm\bin\armbat.dll" 
 
---rtc_enable 
-
 --device_macro="D:\software\IAR Systems\Embedded Workbench 8.1\arm\config\debugger\NXP\Kxx.dmac" 
 
 --device_macro="D:\software\IAR Systems\Embedded Workbench 8.1\arm\config\debugger\NXP\K6x_Trace.dmac" 
