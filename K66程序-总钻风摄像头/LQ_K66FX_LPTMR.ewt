@@ -2545,10 +2545,10 @@
         <group>
             <name>MT9V032</name>
             <file>
-                <name>$PROJ_DIR$\src\SEEKFREE\SEEKFREE_MT9V032.c</name>
+                <name>$PROJ_DIR$\src\User\SEEKFREE_MT9V032.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\src\SEEKFREE\SEEKFREE_MT9V032.h</name>
+                <name>$PROJ_DIR$\src\User\SEEKFREE_MT9V032.h</name>
             </file>
         </group>
     </group>
@@ -2610,12 +2610,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\src\User\main.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\src\User\OV7620.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\src\User\OV7620.h</name>
         </file>
     </group>
 </project>

@@ -35,7 +35,7 @@ typedef struct RunSpeed
     float XSpeed;   //x轴(左右)平动速度
     float YSpeed;   //y轴(前后)平动速度
     float YawSpeed; //yaw轴转动的角速度
-};
+}RunSpeed_Now;
 
 typedef enum
 {

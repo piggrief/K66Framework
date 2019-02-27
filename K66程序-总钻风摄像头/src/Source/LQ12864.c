@@ -742,27 +742,27 @@ void LCD_ClrDot(unsigned char x)
 	LCD_WrCmd((unsigned char)((x&0x0f)|0x00));
 	LCD_WrDat(0x00);
 } 
-void Draw_Road(void)
-{ 	
-  int i = 0, j = 0,temp=0;
-	for(i=0;i<56;i+=8)
-	{
-	  	LCD_Set_Pos(24,i/8);
-	  	for(j=0;j<80;j++) 
-	  	{ 
-	  	  temp=0;
-	  	  if(Copy_Image[0+i][j]) temp|=0x01;
-	  	  if(Copy_Image[1+i][j]) temp|=0x02;
-	  	  if(Copy_Image[2+i][j]) temp|=0x04;
-	  	  if(Copy_Image[3+i][j]) temp|=0x08;
-	  	  if(Copy_Image[4+i][j]) temp|=0x10;
-	  	  if(Copy_Image[5+i][j]) temp|=0x20;
-	  	  if(Copy_Image[6+i][j]) temp|=0x40;
-	  	  if(Copy_Image[7+i][j]) temp|=0x80;
-	  	  LCD_WrDat(temp); 	  	  	  	  
-	  	}
-	}           
-}
+//void Draw_Road(void)
+//{ 	
+//  int i = 0, j = 0,temp=0;
+//	for(i=0;i<56;i+=8)
+//	{
+//	  	LCD_Set_Pos(24,i/8);
+//	  	for(j=0;j<80;j++) 
+//	  	{ 
+//	  	  temp=0;
+//	  	  if(Copy_Image[0+i][j]) temp|=0x01;
+//	  	  if(Copy_Image[1+i][j]) temp|=0x02;
+//	  	  if(Copy_Image[2+i][j]) temp|=0x04;
+//	  	  if(Copy_Image[3+i][j]) temp|=0x08;
+//	  	  if(Copy_Image[4+i][j]) temp|=0x10;
+//	  	  if(Copy_Image[5+i][j]) temp|=0x20;
+//	  	  if(Copy_Image[6+i][j]) temp|=0x40;
+//	  	  if(Copy_Image[7+i][j]) temp|=0x80;
+//	  	  LCD_WrDat(temp); 	  	  	  	  
+//	  	}
+//	}           
+//}
 void Draw_Frame(void)
 { 	
     LCD_Set_Pos(23,0);

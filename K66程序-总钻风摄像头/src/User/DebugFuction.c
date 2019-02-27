@@ -56,7 +56,7 @@ void OutPut_Data(void)
   databuf[8] = CRC16%256;
   databuf[9] = CRC16/256;
   
-  UART_Put_Buff(CRC_Uart_Port, databuf, 10);
+  UART_Put_Buff(CRC_Uart_Port, (char *)(databuf), 10);
 }
 /// <summary>
 ///给虚拟示波器发送a,b,c,d取整之后的值
@@ -80,41 +80,41 @@ void SEND(float a,float b,float c,float d)
 /*===================================================================
 功能：串口发送数据用于Matlab数据处理
 ===================================================================*/
-void DATA_SEND(long num)
-{
-    int weishu = 0;
-    long num_buff = num;
-    long buff = 1;
-    int index = 0;
-
-    if (num < 0)
-    {
-        UART_Put_Buff(CRC_Uart_Port, '-', 1);
-        num = -num;
-    }
-
-    if (num_buff == 0)
-    {
-        weishu = 1;
-        buff = 10;
-    }
-
-    while (num_buff != 0)
-    {
-        num_buff /= 10;
-        weishu++;
-        buff *= 10;
-    }
-    buff /= 10;
-
-    for (index = 0; index < weishu; index++)
-    {
-        UART_Put_Buff(CRC_Uart_Port, ((num / buff) % 10) + '0', 1);
-
-        buff /= 10;
-    }
-    UART_Put_Buff(CRC_Uart_Port, ' ', 1);
-}
+//void DATA_SEND(long num)
+//{
+//    int weishu = 0;
+//    long num_buff = num;
+//    long buff = 1;
+//    int index = 0;
+//
+//    if (num < 0)
+//    {
+//        UART_Put_Buff(CRC_Uart_Port, "-", 1);
+//        num = -num;
+//    }
+//
+//    if (num_buff == 0)
+//    {
+//        weishu = 1;
+//        buff = 10;
+//    }
+//
+//    while (num_buff != 0)
+//    {
+//        num_buff /= 10;
+//        weishu++;
+//        buff *= 10;
+//    }
+//    buff /= 10;
+//
+//    for (index = 0; index < weishu; index++)
+//    {
+//        UART_Put_Buff(CRC_Uart_Port, ((num / buff) % 10) + '0', 1);
+//
+//        buff /= 10;
+//    }
+//    UART_Put_Buff(CRC_Uart_Port, ' ', 1);
+//}
 
 /*************************************************************/
 /*****************OLED调试部分************/

@@ -24,7 +24,7 @@ extern void LCD_Rectangle(unsigned char x1,unsigned char y1,unsigned char x2,uns
 extern void Draw_LQLogo(void);
 extern void Draw_LibLogo(void);
 extern void Draw_BMP(unsigned char x0,unsigned char y0,unsigned char x1,unsigned char y1,unsigned char * bmp); 
-extern void Draw_Road(void);
+//extern void Draw_Road(void);
 void Draw_Frame(void);
 #endif
 

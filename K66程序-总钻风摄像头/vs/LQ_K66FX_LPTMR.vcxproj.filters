@@ -2,76 +2,82 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
 		<Filter Include="源文件\Driver">
-			<UniqueIdentifier>{2ee70f88-7df0-4fa7-7037-d8c98196e5fb}</UniqueIdentifier>
+			<UniqueIdentifier>{5d7eb86d-1ba7-491e-795c-c541c10db2cf}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\ADC">
-			<UniqueIdentifier>{092ec31c-9111-4118-62d0-3524047e6ff8}</UniqueIdentifier>
+			<UniqueIdentifier>{56d23898-25f9-4bde-751c-f50d2f7cddb4}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\DMA">
-			<UniqueIdentifier>{d9ce4d3a-df3a-42b6-4456-c5e03da720ba}</UniqueIdentifier>
+			<UniqueIdentifier>{3c33714f-c984-4f7c-49fe-b790831be30e}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\FTM">
-			<UniqueIdentifier>{f16c81fd-2f26-4613-6377-227011a0e6d0}</UniqueIdentifier>
+			<UniqueIdentifier>{43343d81-ab0a-4bcf-5100-3804a20e3033}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\GPIO">
-			<UniqueIdentifier>{b4920e48-c1a1-4c98-7107-14c2da7271b1}</UniqueIdentifier>
+			<UniqueIdentifier>{8ab28f77-7bf4-4fbf-46a4-669373c404c3}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\IIC">
-			<UniqueIdentifier>{10054214-c2de-4e9e-457d-3773c91e75a7}</UniqueIdentifier>
+			<UniqueIdentifier>{19f0c640-b5f8-4de0-5cb1-3b71817e6a37}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\LPTMR">
-			<UniqueIdentifier>{63f5e6dd-2560-4bb5-5491-50ef70427aa5}</UniqueIdentifier>
+			<UniqueIdentifier>{f401643d-0733-4571-5a88-171a71f8abb6}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\PIT">
-			<UniqueIdentifier>{eaaca24b-40a7-4081-7057-e15ff07fa811}</UniqueIdentifier>
+			<UniqueIdentifier>{b3f70f88-b6e2-4f3e-6921-89b4e7486082}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\PLL">
-			<UniqueIdentifier>{4aea1d15-7491-4e7b-76a8-ba0fd360c58e}</UniqueIdentifier>
+			<UniqueIdentifier>{6d82d0f7-0fec-414f-7643-03e7051c7186}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\RTC">
-			<UniqueIdentifier>{18271650-9887-4168-5621-4119856f8a1d}</UniqueIdentifier>
+			<UniqueIdentifier>{df65d131-7f2d-4e0d-6898-2880aaabf0e3}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\SPI">
-			<UniqueIdentifier>{61c58a1a-286c-47d0-7e1a-518e31816d77}</UniqueIdentifier>
+			<UniqueIdentifier>{9eff5d6a-af54-4d84-64f3-b64030892956}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\Systick">
-			<UniqueIdentifier>{54e6c591-c68a-417a-4674-97a7add3ad78}</UniqueIdentifier>
+			<UniqueIdentifier>{6ce48b86-be8c-4eaf-6d83-9a867f899790}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\TFT1.44">
-			<UniqueIdentifier>{1bed0bec-a00d-470d-7e77-4f9d1e1a21ea}</UniqueIdentifier>
+			<UniqueIdentifier>{44f3509f-106b-4ef4-7dc6-fd98094c27d6}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\UART">
-			<UniqueIdentifier>{a9040d25-0795-4264-4b63-339b6769ae13}</UniqueIdentifier>
+			<UniqueIdentifier>{9b20e311-7266-43d8-5f78-2980d7ffd248}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\Vectors">
-			<UniqueIdentifier>{49a4f810-fd1a-4726-48a5-032eb5877363}</UniqueIdentifier>
+			<UniqueIdentifier>{b88f4993-d7a9-4dcd-79d1-a8523f23df95}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Driver\WDOG">
-			<UniqueIdentifier>{9cd14246-d907-4bc5-7d73-872546375316}</UniqueIdentifier>
+			<UniqueIdentifier>{01a78fdb-ae98-4c7a-7127-cba66a25dc6e}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\header">
-			<UniqueIdentifier>{8465e2d3-373c-4b1f-5ab5-8688a1169ea6}</UniqueIdentifier>
+			<UniqueIdentifier>{57471dcb-b6cf-438c-6b62-661b956fc690}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Include">
-			<UniqueIdentifier>{6dfd9abc-9056-442f-6c7d-02e1e5afc63e}</UniqueIdentifier>
+			<UniqueIdentifier>{e5d763d2-7145-4249-5b5b-73edb4808313}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\SEEKFREE">
-			<UniqueIdentifier>{79cd7432-cc28-40c9-5b4e-5df4d45f2e63}</UniqueIdentifier>
+			<UniqueIdentifier>{c19a5bb2-2ce7-403d-5133-3c79d6c62caf}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\SEEKFREE\MT9V032">
-			<UniqueIdentifier>{d613b2e0-bb62-4ec6-7979-b953361c3240}</UniqueIdentifier>
+			<UniqueIdentifier>{ea1f5b0c-bc5f-4e75-7390-e93765d5f645}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\Start up">
-			<UniqueIdentifier>{c003b6b4-b1ff-42fc-5076-55268de04867}</UniqueIdentifier>
+			<UniqueIdentifier>{98d27da6-f2ed-4a26-7fba-060988bb8e40}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\User">
-			<UniqueIdentifier>{418ddf47-7f38-46be-776d-b11c4ed4de04}</UniqueIdentifier>
+			<UniqueIdentifier>{26c64be5-2412-4a5a-6792-baa39cf1ea16}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\User\Debug">
+			<UniqueIdentifier>{b49975c1-d716-41c1-74e9-274d52a1218c}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件\User\MecanumWheelControl">
-			<UniqueIdentifier>{7e21c784-32db-421b-542e-b1f69eb06afd}</UniqueIdentifier>
+			<UniqueIdentifier>{52cdfe26-3e0a-4e49-77b0-7e2c878eb377}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\User\Sensor">
+			<UniqueIdentifier>{45fed98e-62aa-4afc-4bcf-e967a68574db}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="源文件">
-			<UniqueIdentifier>{94c28efb-58f3-416a-60fb-b42a95b54980}</UniqueIdentifier>
+			<UniqueIdentifier>{d050e1e4-e850-4f2e-43a5-be806677fab0}</UniqueIdentifier>
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -123,7 +129,7 @@
 		<ClCompile Include="..\src\Source\common.c">
 			<Filter>源文件\Include</Filter>
 		</ClCompile>
-		<ClCompile Include="..\src\SEEKFREE\SEEKFREE_MT9V032.c">
+		<ClCompile Include="..\src\User\SEEKFREE_MT9V032.c">
 			<Filter>源文件\SEEKFREE\MT9V032</Filter>
 		</ClCompile>
 		<ClCompile Include="..\src\Project_Setting\Startup\start.c">
@@ -141,11 +147,14 @@
 		<ClCompile Include="..\src\User\main.c">
 			<Filter>源文件\User</Filter>
 		</ClCompile>
-		<ClCompile Include="..\src\User\OV7620.c">
-			<Filter>源文件\User</Filter>
+		<ClCompile Include="..\src\User\DebugFuction.c">
+			<Filter>源文件\User\Debug</Filter>
 		</ClCompile>
 		<ClCompile Include="..\src\User\MecanumWheelControl.c">
 			<Filter>源文件\User\MecanumWheelControl</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\User\AttitudeCalculation.c">
+			<Filter>源文件\User\Sensor</Filter>
 		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
@@ -218,7 +227,7 @@
 		<ClInclude Include="..\src\User\include.h">
 			<Filter>源文件\Include</Filter>
 		</ClInclude>
-		<ClInclude Include="..\src\SEEKFREE\SEEKFREE_MT9V032.h">
+		<ClInclude Include="..\src\User\SEEKFREE_MT9V032.h">
 			<Filter>源文件\SEEKFREE\MT9V032</Filter>
 		</ClInclude>
 		<ClInclude Include="..\src\Includes\LQ12864.h">
@@ -230,11 +239,14 @@
 		<ClInclude Include="..\src\Includes\LQLED.h">
 			<Filter>源文件\User</Filter>
 		</ClInclude>
-		<ClInclude Include="..\src\User\OV7620.h">
-			<Filter>源文件\User</Filter>
+		<ClInclude Include="..\src\User\DebugFunction.h">
+			<Filter>源文件\User\Debug</Filter>
 		</ClInclude>
 		<ClInclude Include="..\src\User\MecanumWheelControl.h">
 			<Filter>源文件\User\MecanumWheelControl</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\User\AttitudeCalculation.h">
+			<Filter>源文件\User\Sensor</Filter>
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>

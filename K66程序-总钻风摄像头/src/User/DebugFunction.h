@@ -35,5 +35,5 @@ void LCD_ShowGraphs(float data, float t_refresh, float data_low, float data_high
 /*===================================================================
 功能：串口发送数据用于Matlab数据处理(整数)
 ===================================================================*/
-void DATA_SEND(long num);
+//void DATA_SEND(long num);
 #endif

@@ -25,6 +25,7 @@ LPTMR延时功能演示：1S钟板载LED(PTE26)闪烁
 int count_1ms = 0;
 extern int16 GET_CFG[9 - 1][2];
 extern uint8 image[120][188];
+
 void main(void) 
 {   
     int i = 0, j = 0;
@@ -41,7 +42,7 @@ void main(void)
 //     
    //PIT_Init(PIT0, 1);
    /*******************GPIO***************************/
-   //LED_Init();                  //LED初始化    
+   LED_Init();                  //LED初始化    
    TFT_init(SPI_1, SPIn_PCS0);
    //MT9V032_Init();
 
@@ -78,7 +79,18 @@ void main(void)
    }
    while (1)
    {
-       displayimage032(image[0]);
+       if (ImageDealState_Now == Image_CollectFinish)
+       {
+           ImageDealState_Now = Image_Dealing;
+           LED_Ctrl(LED3, ON);      //LED指示程序运行状态  
+
+           displayimage032(image[0]);
+
+           ImageDealState_Now = Image_DealingFinsh;
+       }
+       else
+           LED_Ctrl(LED3, OFF);      //LED指示程序运行状态  
+
 	   //FTM_PWM_Duty(FTM0, FTM_CH0, 0);
 	   //FTM_PWM_Duty(FTM0, FTM_CH1, 0);
 	   //FTM_PWM_Duty(FTM0, FTM_CH2, 0);
@@ -86,7 +98,6 @@ void main(void)
 
 	  //dsp_single_colour(RED);
 
-      //LED_Ctrl(LED3, RVS);      //LED指示程序运行状态  
    }
 }
 int Count = 0;
