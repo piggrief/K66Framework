@@ -50,6 +50,10 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define FTM2_QDPHA  PTA10       //PTA10、PTB18
 #define FTM2_QDPHB  PTA11       //PTA11、PTB19
 
+#define FTM0_PRECISON 10000u     //定义占空比精度，100即精度为1%，1000u则精度为0.1%，用于占空比 duty 形参传入，即占空比为 duty/FTM_PRECISON
+#define FTM1_PRECISON 10000u     //定义占空比精度，100即精度为1%，1000u则精度为0.1%，用于占空比 duty 形参传入，即占空比为 duty/FTM_PRECISON
+#define FTM2_PRECISON 100000u     //定义占空比精度，100即精度为1%，1000u则精度为0.1%，用于占空比 duty 形参传入，即占空比为 duty/FTM_PRECISON
+
 /**********************************  FTM(引脚复用) ***************************************/
 
 
@@ -79,8 +83,9 @@ typedef enum
 #define FTM_IRQ_EN(FTMn,CHn)        FTM_CnSC_REG(FTMN[FTMn],CHn) |= FTM_CnSC_CHIE_MASK       //开启 FTMn_CHn 中断
 #define FTM_IRQ_DIS(FTMn,CHn)       FTM_CnSC_REG(FTMN[FTMn],CHn) &= ~FTM_CnSC_CHIE_MASK      //关闭 FTMn_CHn 中断
 /*********************** PWM功能函数 **************************/
-void FTM_PWM_Init(FTM_Type * ftmn, FTM_CHn_e ch, u16 mod, u16 cv);
-void FTM_PWM_Duty(FTM_Type * ftmn, FTM_CHn_e ch, u16 duty);
+//void FTM_PWM_Init(FTM_Type * ftmn, FTM_CHn_e ch, u16 mod, u16 cv);
+void FTM_PWM_Init(FTM_Type * ftmn, FTM_CHn_e ch, u32 freq, u32 duty);
+void FTM_PWM_Duty(FTM_Type * ftmn, FTM_CHn_e ch, u32 duty);
 
 /*********************** 输入捕捉及中断功能函数 **************************/
 void FTM_Input_init(FTM_Type * ftmn, FTM_CHn_e ch, FTM_Input_cfg cfg);

@@ -103,7 +103,7 @@ struct PIDControl WheelControl[4];//四个轮子的PID控制数组
 /// <param name="Vx">x轴平动速度</param>
 /// <param name="Vy">y轴平动速度</param>
 /// <param name="W_yaw">自转角速度</param>
-void SetTargetSpeed_Car(struct RunSpeed* TargetSpeed, float Vx, float Vy, float W_yaw)
+void SetTargetSpeed_Car(struct RunSpeed * TargetSpeed, float Vx, float Vy, float W_yaw)
 {
     TargetSpeed->XSpeed = Vx;
     TargetSpeed->YSpeed = Vy;
@@ -114,7 +114,7 @@ void SetTargetSpeed_Car(struct RunSpeed* TargetSpeed, float Vx, float Vy, float 
 ///<para>example:  CalTargetSpeed_EachWheel(&amp;TargetSpeed);</para>
 ///</summary>
 /// <param name="TargetSpeed">车整体的三个运动速度结构体</param>
-void CalTargetSpeed_EachWheel(struct RunSpeed* TargetSpeed)
+void CalTargetSpeed_EachWheel(struct RunSpeed * TargetSpeed)
 {
     ///O-长方形麦轮底盘的逆运动学模型
     ///用底盘运动状态解算四个轮子应有的速度
@@ -198,4 +198,40 @@ void SpeedClean(void)
     int i = 0;
     for (i = 0; i < 4; i++)
         SpeedCount[i] = 0;
+}
+
+struct RunSpeed RS_Now;
+int Remote_Speed = 1000;
+void SetSpeed_FromRemote(RemoteCMDMode mode)
+{
+    float ControlValue_Openloop[4];
+    switch (mode)
+    {
+    case Left_Left:
+        SetTargetSpeed_Car(&RS_Now, Remote_Speed, 0, 0);
+        break;
+    case Left_Right:
+        SetTargetSpeed_Car(&RS_Now, -Remote_Speed, 0, 0);
+        break;
+    case Left_Up:
+        SetTargetSpeed_Car(&RS_Now, 0, Remote_Speed, 0);
+        break;
+    case Left_Down:
+        SetTargetSpeed_Car(&RS_Now, 0, -Remote_Speed, 0);
+        break;
+    case Left_Return0:
+        SetTargetSpeed_Car(&RS_Now, 0, 0, 0);
+        break;
+    default:
+        SetTargetSpeed_Car(&RS_Now, 0, 0, 0);
+        break;
+    }
+
+    CalTargetSpeed_EachWheel(&RS_Now);
+
+    for (int i = 0; i < 4; i++)
+    {
+        ControlValue_Openloop[i] = WheelControl[i].TargetValue;
+    }
+    MotorOutput(ControlValue_Openloop);
 }

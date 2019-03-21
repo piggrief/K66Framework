@@ -46,6 +46,8 @@ extern void     LPTMR_delay_us(uint16 us);      //延时(us)
 extern void     LPTMR_timing_ms(uint16 ms);     //定时(ms)
 extern void     LPTMR_timing_us(uint16 ms);     //定时(us)
 
+extern int32 LPTMR_TimeCount_us;
+extern int32 LPTMR_TimeCount_ms;
 /*        用于计时           */
 extern void     LPTMR_time_start_ms(void);      //开始计时(ms)
 extern uint32   LPTMR_time_get_ms(void);        //获取计时时间 

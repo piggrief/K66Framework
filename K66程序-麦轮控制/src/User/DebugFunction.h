@@ -36,4 +36,50 @@ void LCD_ShowGraphs(float data, float t_refresh, float data_low, float data_high
 功能：串口发送数据用于Matlab数据处理(整数)
 ===================================================================*/
 void DATA_SEND(long num);
+
+# define Remote_Uart_Port UART_0
+
+typedef enum
+{
+    Left_Left,
+    Left_Right,
+    Left_Up,
+    Left_Down,
+    Left_Return0,
+    Right_Left,
+    Right_Right,
+    Right_Up,
+    Right_Down,
+    Right_Return0,
+    Start
+}RemoteCMDMode;
+/// <summary>
+///接受遥控指令程序，应放入对应的串口中断内
+///</summary>
+void ReceiveCMD_Remote();
+/// <summary>
+///初始化遥控器的串口
+///</summary>
+void RemoteInit();
+
+
+typedef enum
+{
+    Press,
+    NotPress
+}ButtonStatus;//按键的状态，Press为按下,NotPress为弹起
+
+extern ButtonStatus Button1;//PTE12
+extern ButtonStatus Button2;//PTE11
+extern ButtonStatus Button3;//PTE10
+///<summary>按键初始化</summary>
+void ButtonInit();
+///<summary>按键扫描中断</summary>
+void ButtonScan_interrupt();
+/// <summary>
+///按键菜单程序，用于参数设定等功能，放于主函数的主要功能前
+///<para>注：一定要放在TFT初始化后，另外其他有中断的模块初始化都必须放在这个函数后面</para>
+///</summary>
+void ButtonMenu();
+
 #endif

@@ -1,9 +1,9 @@
-"D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-总钻风摄像头\src\SEEKFREE\SEEKFREE_MT9V032.c"
+"D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-总钻风摄像头\src\User\SEEKFREE_MT9V032.c"
 -std=c11
 -ferror-limit=0
 -fbracket-depth=512
 -I
-D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-总钻风摄像头\src\SEEKFREE
+D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-总钻风摄像头\src\User
 -I
 D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-总钻风摄像头\src\Includes
 -I

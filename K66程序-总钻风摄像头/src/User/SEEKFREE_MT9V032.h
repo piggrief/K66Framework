@@ -112,8 +112,19 @@ void   VSYNC(void);
 void   camera_init(void);
 void   seekfree_sendimg_032(void);
 void   row_finished(void);
+void sendimg(void);
 
-
+# define SumList_Height ROW
+# define SumList_Width COL
+/// <summary>
+///DBGB的改进型Wallner二值化算法，参数为S和T
+///<para>example:  ImageBinary_DBGB(image, BinaryImage, SumList_Width / 8, 15);</para>
+///</summary>
+/// <param name="image">原图像数组，不会被篡改</param>
+/// <param name="BinaryImage">二值化图像数组</param>
+/// <param name="S">参数S，为二值化窗的宽度，该窗为正方形</param>
+/// <param name="T">参数T，类似为像素二值化的阈值</param>
+void ImageBinary_DBGB(uint8 image[SumList_Height][SumList_Width], uint8 BinaryImage[SumList_Height][SumList_Width], int S, int T);
 
 #endif
 

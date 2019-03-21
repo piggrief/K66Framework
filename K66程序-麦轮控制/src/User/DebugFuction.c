@@ -89,7 +89,7 @@ void DATA_SEND(long num)
 
     if (num < 0)
     {
-        UART_Put_Buff(CRC_Uart_Port, '-', 1);
+        UART_Put_Buff(CRC_Uart_Port, "-", 1);
         num = -num;
     }
 
@@ -109,11 +109,11 @@ void DATA_SEND(long num)
 
     for (index = 0; index < weishu; index++)
     {
-        UART_Put_Buff(CRC_Uart_Port, ((num / buff) % 10) + '0', 1);
+        //UART_Put_Buff(CRC_Uart_Port, ((num / buff) % 10) + '0', 1);
 
         buff /= 10;
     }
-    UART_Put_Buff(CRC_Uart_Port, ' ', 1);
+    UART_Put_Buff(CRC_Uart_Port, " ", 1);
 }
 
 /*************************************************************/
@@ -159,4 +159,223 @@ void LCD_ShowGraphs(float data, float t_refresh, float data_low, float data_high
 
     LCD_PutPixel(ShowX, ShowY);
     Axis_t++;
+}
+
+/*************************************************************/
+/*****************遥控部分************/
+/*************************************************************/
+/// <summary>
+///初始化遥控器的串口
+///</summary>
+void RemoteInit()
+{
+    UART_Init(Remote_Uart_Port, 9600);
+    UART_Irq_En(Remote_Uart_Port);
+}
+int ReceiveIndex = 0;
+char ReceiveBuff[3] = {0};
+unsigned char StartReceive = 0;
+RemoteCMDMode RunMode;//遥控模式
+/// <summary>
+///接受遥控指令程序，应放入对应的串口中断内
+///</summary>
+void ReceiveCMD_Remote()
+{
+    char buff = 0;
+    buff = UART_Get_Char(Remote_Uart_Port);
+
+    if (buff == 0xFF && StartReceive == 0)
+    {
+        StartReceive = 1;
+        return;
+    }
+    else
+    {
+      if(StartReceive == 0)
+        	ReceiveIndex = 0;
+    }
+    if (StartReceive == 1)
+    {
+        if (ReceiveIndex < 3)
+        {
+            ReceiveBuff[ReceiveIndex] = buff;
+            ReceiveIndex++;
+        }
+        else
+        {
+            if (buff == 0xFF)
+            {
+                StartReceive = 0;
+		ReceiveIndex = 0;
+                if (ReceiveBuff[0] == 0x00)//左摇杆
+                {
+                    switch (ReceiveBuff[1])
+                    {
+                    case 0x00:
+                        RunMode = Left_Return0;
+                        break;
+                    case 0x01:
+                        RunMode = Left_Up;
+                        break;
+                    case 0x02:
+                        RunMode = Left_Down;
+                        break;
+                    case 0x03:
+                        RunMode = Left_Left;
+                        break;
+                    case 0x04:
+                        RunMode = Left_Right;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                else if (ReceiveBuff[0] == 0x35)//左摇杆
+                {
+                    switch (ReceiveBuff[1])
+                    {
+                    case 0x00:
+                        RunMode = Right_Return0;
+                        break;
+                    case 0x01:
+                        RunMode = Right_Up;
+                        break;
+                    case 0x02:
+                        RunMode = Right_Down;
+                        break;
+                    case 0x03:
+                        RunMode = Right_Left;
+                        break;
+                    case 0x04:
+                        RunMode = Right_Right;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                else if (ReceiveBuff[0] == 0xAA)
+                {
+                    RunMode = Start;
+                }
+            }
+        }
+    }
+
+}
+///<summary>按键初始化</summary>
+void ButtonInit()
+{
+    EXTI_Init(PTE, 10, either);
+    EXTI_Init(PTE, 11, either);
+    EXTI_Init(PTE, 12, either);
+}
+ButtonStatus Button[3] = { NotPress, NotPress, NotPress };//PTE12,PTE11,PTE10
+
+///<summary>按键扫描中断</summary>
+void ButtonScan_interrupt()
+{
+    //Key1
+    int n = 10;
+    u8 keybuff = 0;
+    if ((PORTE_ISFR & (1 << n)))
+    {
+        PORTE_ISFR |= (1 << n);
+        //用户自行添加中断内程序
+        keybuff = GPIO_Get(PTE10);
+        if (keybuff == 0)
+        {
+            Button[2] = Press;
+        }
+        else
+        {
+            Button[2] = NotPress;
+        }
+        TFT_showint8(0, 2, Button[2], BLACK, WHITE);
+    }
+    n = 11;
+    if ((PORTE_ISFR & (1 << n)))
+    {
+        PORTE_ISFR |= (1 << n);
+        //用户自行添加中断内程序
+        keybuff = GPIO_Get(PTE11);
+        if (keybuff == 0)
+        {
+            Button[1] = Press;
+        }
+        else
+        {
+            Button[1] = NotPress;
+        }
+        TFT_showint8(0, 1, Button[1], BLACK, WHITE);
+    }
+    n = 12;
+    if ((PORTE_ISFR & (1 << n)))
+    {
+        PORTE_ISFR |= (1 << n);
+        //用户自行添加中断内程序
+        keybuff = GPIO_Get(PTE12);
+        if (keybuff == 0)
+        {
+            Button[0] = Press;
+        }
+        else
+        {
+            Button[0] = NotPress;
+        }
+        TFT_showint8(0, 0, Button[0], BLACK, WHITE);
+    }
+}
+
+int ButtonOnceBuffFlag[3] = { 0 };//按键按下一次缓存标志
+int ButtonOnceFlag[3] = { 0 };//按键按下一次的标志
+int QuitSetFlag = 0;
+/// <summary>
+///按键菜单程序，用于参数设定等功能，放于主函数的主要功能前
+///<para>注：一定要放在TFT初始化后，另外其他有中断的模块初始化都必须放在这个函数后面</para>
+///</summary>
+void ButtonMenu()
+{
+    ButtonInit();
+    EnableInterrupts;
+    while (1)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (Button[i] == Press)
+            {
+                ButtonOnceBuffFlag[i] = 1;
+            }
+            if ((Button[i] == NotPress) && (ButtonOnceBuffFlag[i] == 1))
+            {
+                ButtonOnceFlag[i] = 1;
+                ButtonOnceBuffFlag[i] = 0;
+            }
+        }
+
+        if (ButtonOnceFlag[0] == 1)
+        {
+            ButtonOnceFlag[0] = 0;
+            /* 在此编写按下按键1的处理程序 */
+
+        }
+        if (ButtonOnceFlag[1] == 1)
+        {
+            ButtonOnceFlag[0] = 0;
+            /* 在此编写按下按键2的处理程序 */
+
+        }
+        if (ButtonOnceFlag[2] == 1)
+        {
+            ButtonOnceFlag[0] = 0;
+            /* 在此编写按下按键3的处理程序 */
+            QuitSetFlag = 1;
+        }
+        if (QuitSetFlag == 1)
+        {
+            dsp_single_colour(WHITE);
+            TFT_showstr(0, 0, "QuitButtonSet", RED, WHITE);
+            DisableInterrupts;
+            break;
+        }
+    }
 }

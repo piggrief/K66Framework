@@ -11,10 +11,10 @@
               TFT接线定义：
 					------------------------------------ 
 						模块管脚            单片机管脚
-						SCL                 B11
-						SDA                 B16
-						RES                 B19
-						DC				    B18
+						SCL                 E2
+						SDA                 E1
+						RES                 E3
+						DC				    E5
 						CS                  E4           
 						BL                  悬空 
 					------------------------------------ 
@@ -32,10 +32,10 @@
 //#define DC_PIN		PTB18	//液晶命令位硬件定义
 //#define REST_PIN	PTB19 //液晶复位引脚定义
 
-#define DC(x)   	GPIO_Ctrl(PTB,18,x);
-#define REST(x) 	GPIO_Ctrl(PTB,19,x);
-#define DCInit		GPIO_Init(PTB,18,GPO,1);
-#define RESTInit	GPIO_Init(PTB,19,GPO,1);
+#define DC(x)   	GPIO_Ctrl(PTE,5,x);
+#define REST(x) 	GPIO_Ctrl(PTE,3,x);
+#define DCInit		GPIO_Init(PTE,5 ,GPO,1);
+#define RESTInit	GPIO_Init(PTE,3,GPO,1);
 
 //-------常用颜色----------
 #define RED     	0XF800    //红色
@@ -68,7 +68,7 @@ void TFT_showint16(uint16 x, uint16 y, int16 dat, int PenColor, int BackColor);
 void TFT_showuint16(uint16 x, uint16 y, uint16 dat, int PenColor, int BackColor);
 void TFT_showimage(const unsigned char *p);
 void TFT_showimage_all(const unsigned char *p, int Size_x, int Size_y);
-void TFT_showimage_gray(const unsigned char p[40][200], int SizeX_Image, int SizeY_Image, int SizeX_Show, int SizeY_Show);
+void TFT_showimage_gray(const unsigned char p[120][188], int SizeX_Image, int SizeY_Image, int SizeX_Show, int SizeY_Show);
 void displayimage032(uint8 *p);
 
 extern const uint8 tft_ascii[95][16];

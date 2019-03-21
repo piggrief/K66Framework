@@ -42,6 +42,27 @@ void PIT_Init(PITn pitn, u32 cnt)
 
     NVIC_EnableIRQ((IRQn_Type)(pitn + 48));			                                //开接收引脚的IRQ中断
 }
+void PIT_Init_us(PITn pitn, u32 cnt)
+{
+    //PIT 用的是 Bus Clock 总线频率
+
+    /* 开启时钟*/
+    SIM_SCGC6 |= SIM_SCGC6_PIT_MASK;                            //使能PIT时钟
+
+    /* PIT模块控制 PIT Module Control Register (PIT_MCR) */
+    PIT_MCR &= ~(PIT_MCR_MDIS_MASK | PIT_MCR_FRZ_MASK);      //使能PIT定时器时钟 ，调试模式下继续运行
+
+    /* 定时器加载值设置 Timer Load Value Register (PIT_LDVALn) */
+    PIT_LDVAL(pitn) = cnt * 40;                                          //设置溢出中断时间
+
+    //定时时间到了后，TIF 置 1 。写1的时候就会清0
+    PIT_Flag_Clear(pitn);                                             //清中断标志位
+
+    /* 定时器控制寄存器 Timer Control Register (PIT_TCTRL0) */
+    PIT_TCTRL(pitn) |= (PIT_TCTRL_TEN_MASK | PIT_TCTRL_TIE_MASK);   //使能 PITn定时器,并开PITn中断
+
+    NVIC_EnableIRQ((IRQn_Type)(pitn + 48));			                                //开接收引脚的IRQ中断
+}
 
 
 

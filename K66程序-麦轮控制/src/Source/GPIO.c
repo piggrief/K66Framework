@@ -232,22 +232,11 @@ void PORTD_Interrupt()
       /* 用户自行添加中断内程序 */
   }
 }
-
+int EEE_count = 0;
 void PORTE_Interrupt()
 {
   int n;
-  n=0;
-  if((PORTE_ISFR & (1<<n)))
-  {
-      PORTE_ISFR |= (1<<n);
-      //用户自行添加中断内程序 
-  }
-  n=1;
-  if((PORTE_ISFR & (1<<n)))
-  {
-      PORTE_ISFR |= (1<<n);
-      //用户自行添加中断内程序 
-  }
+  ButtonScan_interrupt();
 }
 
 

@@ -39,6 +39,7 @@ typedef struct RunSpeed
 
 typedef enum
 {
+    OpenloopControl,
     P_Control,
     PD_Control,
     PI_Control,

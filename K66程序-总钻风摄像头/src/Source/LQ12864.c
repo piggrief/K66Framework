@@ -696,28 +696,88 @@ void LCD_PrintU16(unsigned char x,unsigned char y,unsigned int num)
 	LCD_P6x8Str(x,y,tmp);
 	
 }
-void LCD_PrintFloat(unsigned char x,unsigned char y,float num)
+void LCD_PrintInt5(unsigned char x, unsigned char y, int num)
 {
-	unsigned char tmp[6],i;
-	tmp[5]=0;
-	num *= 10;
+    unsigned char tmp[7], i;
+    tmp[6] = 0;
+    if (num < 0)
+    {
+        tmp[0] = '-';
+        num *= -1;
+    }
+    else
+        tmp[0] = ' ';
+
+    tmp[5] = (unsigned char)(num % 10 + 0x30);
+    tmp[4] = (unsigned char)(num / 10 % 10 + 0x30);
+    tmp[3] = (unsigned char)(num / 100 % 10 + 0x30);
+    tmp[2] = (unsigned char)(num / 1000 % 10 + 0x30);
+    tmp[1] = (unsigned char)(num / 10000 % 10 + 0x30);
+
+    LCD_P6x8Str(x, y, tmp);
+}
+void LCD_PrintInt4(unsigned char x, unsigned char y, int num)
+{
+    unsigned char tmp[6], i;
+    tmp[5] = 0;
+    if (num < 0)
+    {
+        tmp[0] = '-';
+        num *= -1;
+    }
+    else
+        tmp[0] = ' ';
+
+    tmp[4] = (unsigned char)(num % 10 + 0x30);
+    tmp[3] = (unsigned char)(num / 10 % 10 + 0x30);
+    tmp[2] = (unsigned char)(num / 100 % 10 + 0x30);
+    tmp[1] = (unsigned char)(num / 1000 % 10 + 0x30);
+
+    LCD_P6x8Str(x, y, tmp);
+}
+void LCD_PrintInt3(unsigned char x, unsigned char y, int num)
+{
+    unsigned char tmp[5], i;
+    tmp[4] = 0;
+    if (num < 0)
+    {
+        tmp[0] = '-';
+        num *= -1;
+    }
+    else
+        tmp[0] = ' ';
+
+    tmp[3] = (unsigned char)(num % 10 + 0x30);
+    tmp[2] = (unsigned char)(num / 10 % 10 + 0x30);
+    tmp[1] = (unsigned char)(num / 100 % 10 + 0x30);
+
+    LCD_P6x8Str(x, y, tmp);
+}
+
+void LCD_PrintFloat_31(unsigned char x,unsigned char y,float num)
+{
+	unsigned char tmp[7],i;
+    tmp[6] = 0;
+    num *= 10;
 	if(num>0)
 	{
 		tmp[0]='+';
-		tmp[4]=(unsigned char)((int)num%10+0x30);
-		tmp[3]=(unsigned char)((int)num/10%10+0x30);
-		tmp[2]=(unsigned char)((int)num/100%10+0x30);
-		tmp[1]=(unsigned char)((int)num/1000%10+0x30);
+        tmp[5] = (unsigned char)((int)num % 10 + 0x30);
+        tmp[4] = '.';
+        tmp[3] = (unsigned char)((int)num / 10 % 10 + 0x30);
+        tmp[2] = (unsigned char)((int)num / 100 % 10 + 0x30);
+        tmp[1] = (unsigned char)((int)num / 1000 % 10 + 0x30);
 	}
 	else
 	{
 		tmp[0]='-';
 		num=-num;
-		tmp[4]=(unsigned char)((int)num%10+0x30);
-		tmp[3]=(unsigned char)((int)num/10%10+0x30);
-		tmp[2]=(unsigned char)((int)num/100%10+0x30);
-		tmp[1]=(unsigned char)((int)num/1000%10+0x30);
-	}
+        tmp[5] = (unsigned char)((int)num % 10 + 0x30);
+        tmp[4] = '.';
+        tmp[3] = (unsigned char)((int)num / 10 % 10 + 0x30);
+        tmp[2] = (unsigned char)((int)num / 100 % 10 + 0x30);
+        tmp[1] = (unsigned char)((int)num / 1000 % 10 + 0x30);
+    }
 	for(i=0;i<4;i++)
 	{
 		if(tmp[i]=='0')
@@ -794,4 +854,66 @@ void Draw_Frame(void)
     LCD_WrDat(0xFF);
     LCD_Set_Pos(104,6);
     LCD_WrDat(0xFF);
+}
+
+uint8 OLED_GRAM[128][8];
+
+void OLED_Refresh_Gram(void)
+{
+    uint8 i, n;
+    for (i = 0; i<8; i++)
+    {
+        LCD_WrCmd(0xb0 + i);
+        LCD_WrCmd(0x00);
+        LCD_WrCmd(0x10);
+        for (n = 0; n<128; n++)
+            LCD_WrDat(OLED_GRAM[n][i]);
+    }
+}
+
+
+void OLED_DrawPoint(uint8 x, uint8 y, uint8 t)
+{
+    uint8 pos, bx, temp = 0;
+    if (x>127 || y>63)return;
+    pos = 7 - y / 8;
+    bx = y % 8;
+    temp = 1 << (7 - bx);
+    if (t)OLED_GRAM[x][pos] |= temp;
+    else OLED_GRAM[x][pos] &= ~temp;
+
+}
+/// <summary>
+///OLED显示二值化图像
+///<para>example:  OLED_ShowImage(128,64,120,188,10,image);</para>
+///</summary>
+/// <param name="ShowSizeX">OLED显示区域大小的X值</param>
+/// <param name="ShowSizeY">OLED显示区域大小的Y值</param>
+/// <param name="ImageSizeHeight">待显示图像的高度</param>
+/// <param name="ImageSizeWidth">待显示图像的宽度</param>
+void OLED_ShowImage(int ShowSizeX, int ShowSizeY, int ImageSizeHeight, int ImageSizeWidth, int Gate_To2, unsigned char imagebuff[ROW][COL])
+{
+    uint8 H_buff = 0;
+    uint8 W_buff = 0;
+    uint8 temp = 0;
+    //x 127  y 63
+    if (ShowSizeX > 127 || ShowSizeY > 63 || ShowSizeX < 1 || ShowSizeY < 1)
+    {
+        LCD_P6x8Str(0, 0, "SizeError");
+        return;
+    }
+    for (int x = 0; x < ShowSizeX; x++)
+    {
+        for (int y = 0; y < ShowSizeY; y++)
+        {
+            H_buff = y * (ImageSizeHeight - 1) / (ShowSizeY - 1);
+            W_buff = x * (ImageSizeWidth - 1) / (ShowSizeX - 1);
+            if (imagebuff[H_buff][W_buff] > Gate_To2)
+                temp = 1;
+            else
+                temp = 0;
+            OLED_DrawPoint(x, y, temp);
+        }
+    }
+    OLED_Refresh_Gram();
 }

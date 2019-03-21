@@ -13,6 +13,9 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"
 #include "Lptmr.h"
 
+int32 LPTMR_TimeCount_us;
+int32 LPTMR_TimeCount_ms;
+
 void time_delay_ms(u16 ms)
 {
   LPTMR_delay_ms(ms);

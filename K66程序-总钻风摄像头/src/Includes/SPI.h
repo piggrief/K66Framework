@@ -34,8 +34,8 @@ extern uint32 bus_clk_M;//单位MHZ
 #define SPI0_PCS5   PTB23       // PTB23                    ALT3
 
 
-#define SPI1_SCK    PTB11       // PTE2、PTB11、            全部都是 ALT2
-#define SPI1_SOUT   PTB16       // PTE1、PTB16、            全部都是 ALT2
+#define SPI1_SCK    PTE2       // PTE2、PTB11、            全部都是 ALT2
+#define SPI1_SOUT   PTE1       // PTE1、PTB16、            全部都是 ALT2
 #define SPI1_SIN    PTB17       // PTE3、PTB17、            全部都是 ALT2
 
 #define SPI1_PCS0   PTE4        // PTE4、PTB10、            全部都是 ALT2
