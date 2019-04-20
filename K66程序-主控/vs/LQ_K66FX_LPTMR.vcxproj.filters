@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Filter Include="源文件\Driver">
+			<UniqueIdentifier>{25049aba-0d7e-4c71-6453-9e486b106613}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\ADC">
+			<UniqueIdentifier>{62f3550c-0d16-4378-7b79-51ccda601b1b}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\DMA">
+			<UniqueIdentifier>{68194b56-6304-4565-581a-5f3da6486296}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\FTM">
+			<UniqueIdentifier>{c8a7b9ed-a8f8-47a9-4a06-f620ff4c50d1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\GPIO">
+			<UniqueIdentifier>{35ff3add-d6b0-408b-58cb-5393137ee134}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\IIC">
+			<UniqueIdentifier>{2695b068-7d26-44d3-77e8-49058577d422}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\LPTMR">
+			<UniqueIdentifier>{6242ea01-d320-4b6c-6b93-0206c40b14cd}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\PIT">
+			<UniqueIdentifier>{d2fa880e-4754-4abd-6e02-45a7ed3843fc}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\PLL">
+			<UniqueIdentifier>{e9588744-1966-4b50-6fd1-fd3547ff6930}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\RTC">
+			<UniqueIdentifier>{41049b02-7931-485d-4803-9d5a2dd3e676}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\SPI">
+			<UniqueIdentifier>{e3544152-369c-4079-531a-d8effaf97de6}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\Systick">
+			<UniqueIdentifier>{0f40048a-d915-40a6-4ae2-8b1ffc3536c3}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\TFT1.44">
+			<UniqueIdentifier>{a5596963-61cc-43b2-68c2-57fcb446ccad}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\UART">
+			<UniqueIdentifier>{1f6088d4-6b70-400e-741d-a4dbcdd2c126}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\Vectors">
+			<UniqueIdentifier>{d4901fc0-b0e0-4b72-78e8-67cf5c2493d1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Driver\WDOG">
+			<UniqueIdentifier>{93194eed-fb0b-4b6a-4d59-2a56d0174659}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\header">
+			<UniqueIdentifier>{1c8a3844-70ec-46f1-78f4-9836319efdf9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Include">
+			<UniqueIdentifier>{3ea2e891-0707-4881-6592-e97c99301e4b}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\Start up">
+			<UniqueIdentifier>{cb249a4f-a46f-45a8-50f6-3697207c8f17}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\User">
+			<UniqueIdentifier>{08b7ce8d-2b3a-40f5-4e43-ecec00dd576b}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\User\Debug">
+			<UniqueIdentifier>{e3e13db0-7e35-46be-6862-9ec9bbaab2e6}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\User\image_deal">
+			<UniqueIdentifier>{545a0cf4-c876-44ca-5cd0-cd3fff2d3637}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\User\MecanumWheelControl">
+			<UniqueIdentifier>{6a77ffaa-dcb6-4f34-5514-546309d70575}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\User\MPU6050">
+			<UniqueIdentifier>{adb93e45-5ba5-4cc4-6c64-463620a980d9}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\User\SEEKFREE">
+			<UniqueIdentifier>{5e8cb3b9-4eb8-4cc1-5cc7-cad3dab81257}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件\User\Sensor">
+			<UniqueIdentifier>{47a69f7f-f876-45f8-5a64-d9726da7bd67}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="源文件">
+			<UniqueIdentifier>{7a3a816e-9e63-44e4-7f40-da53d1743565}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="..\src\Source\ADC.c">
+			<Filter>源文件\Driver\ADC</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\DMA.c">
+			<Filter>源文件\Driver\DMA</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\FTM.c">
+			<Filter>源文件\Driver\FTM</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\GPIO.c">
+			<Filter>源文件\Driver\GPIO</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\I2C.c">
+			<Filter>源文件\Driver\IIC</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\LPTMR.c">
+			<Filter>源文件\Driver\LPTMR</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\PIT.c">
+			<Filter>源文件\Driver\PIT</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\PLL.c">
+			<Filter>源文件\Driver\PLL</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\RTC.c">
+			<Filter>源文件\Driver\RTC</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\SPI.c">
+			<Filter>源文件\Driver\SPI</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\Systick.c">
+			<Filter>源文件\Driver\Systick</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\TFTDriver.c">
+			<Filter>源文件\Driver\TFT1.44</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\UART.c">
+			<Filter>源文件\Driver\UART</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\vectors.c">
+			<Filter>源文件\Driver\Vectors</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\wdog.c">
+			<Filter>源文件\Driver\WDOG</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\common.c">
+			<Filter>源文件\Include</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Project_Setting\Startup\start.c">
+			<Filter>源文件\Start up</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\LQ12864.c">
+			<Filter>源文件\User</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\LQKEY.c">
+			<Filter>源文件\User</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\Source\LQLED.c">
+			<Filter>源文件\User</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\User\main.c">
+			<Filter>源文件\User</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\User\DebugFuction.c">
+			<Filter>源文件\User\Debug</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\User\image_deal.c">
+			<Filter>源文件\User\image_deal</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\User\MecanumWheelControl.c">
+			<Filter>源文件\User\MecanumWheelControl</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\User\MPU6050Drive.c">
+			<Filter>源文件\User\MPU6050</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\User\SEEKFREE_MT9V032.c">
+			<Filter>源文件\User\SEEKFREE</Filter>
+		</ClCompile>
+		<ClCompile Include="..\src\User\AttitudeCalculation.c">
+			<Filter>源文件\User\Sensor</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="..\src\Includes\ADC.h">
+			<Filter>源文件\Driver\ADC</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\DMA.h">
+			<Filter>源文件\Driver\DMA</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\FTM.h">
+			<Filter>源文件\Driver\FTM</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\GPIO.h">
+			<Filter>源文件\Driver\GPIO</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\GPIO_Cfg.h">
+			<Filter>源文件\Driver\GPIO</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\I2C.h">
+			<Filter>源文件\Driver\IIC</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\Lptmr.h">
+			<Filter>源文件\Driver\LPTMR</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\PIT.h">
+			<Filter>源文件\Driver\PIT</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\PLL.h">
+			<Filter>源文件\Driver\PLL</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\RTC.h">
+			<Filter>源文件\Driver\RTC</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\SPI.h">
+			<Filter>源文件\Driver\SPI</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\Systick.h">
+			<Filter>源文件\Driver\Systick</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\TFTDriver.h">
+			<Filter>源文件\Driver\TFT1.44</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\UART.h">
+			<Filter>源文件\Driver\UART</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\vectors.h">
+			<Filter>源文件\Driver\Vectors</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\wdog.h">
+			<Filter>源文件\Driver\WDOG</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Libs\arm_common_tables.h">
+			<Filter>源文件\header</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Libs\arm_const_structs.h">
+			<Filter>源文件\header</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Libs\arm_math.h">
+			<Filter>源文件\header</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Libs\core_cm4.h">
+			<Filter>源文件\header</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Libs\MK66F18.h">
+			<Filter>源文件\header</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\common.h">
+			<Filter>源文件\Include</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\User\include.h">
+			<Filter>源文件\Include</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\LQ12864.h">
+			<Filter>源文件\User</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\LQKEY.h">
+			<Filter>源文件\User</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\Includes\LQLED.h">
+			<Filter>源文件\User</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\User\DebugFunction.h">
+			<Filter>源文件\User\Debug</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\User\image_deal.h">
+			<Filter>源文件\User\image_deal</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\User\MecanumWheelControl.h">
+			<Filter>源文件\User\MecanumWheelControl</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\User\MPU6050Drive.h">
+			<Filter>源文件\User\MPU6050</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\User\SEEKFREE_MT9V032.h">
+			<Filter>源文件\User\SEEKFREE</Filter>
+		</ClInclude>
+		<ClInclude Include="..\src\User\AttitudeCalculation.h">
+			<Filter>源文件\User\Sensor</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\src\Project_Setting\Startup\crt0.s">
+			<Filter>源文件\Start up</Filter>
+		</None>
+	</ItemGroup>
+</Project>
