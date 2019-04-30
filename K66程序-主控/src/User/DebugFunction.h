@@ -64,7 +64,10 @@ void ReceiveCMD_Remote();
 ///</summary>
 void RemoteInit();
 extern RemoteCMDMode RunMode;
-
+//#define Remote_UseDigitalReceive
+#ifndef Remote_UseDigitalReceive
+void GetRemoteCMDData(void);
+#endif
 typedef enum
 {
     Press,

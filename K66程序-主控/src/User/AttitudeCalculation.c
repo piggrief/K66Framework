@@ -208,3 +208,16 @@ float GetAngle_FromAcc(float Ax, float Ay, float Az)
   
   return Yaw;
 }
+
+float dt = 0.0193;
+float angle_GYRO_x = 0;
+float angle_GYRO_y = 0;
+float angle_GYRO_z = 0;
+void GetAngle_FromGYRO(float Gx, float Gy, float Gz)
+{
+    angle_GYRO_x += 0.068 * Gx * dt;
+    angle_GYRO_y += 0.07 * Gy * dt;
+    angle_GYRO_z += 0.07 * Gz * dt;
+
+
+}

@@ -85,7 +85,7 @@ void Get_Gyro(struct GYROData * GYRO_Data);
 void Get_Offset(struct AccelData * Accel_Data, struct GYROData * GYRO_Data);
 int MPU6050DMP_Init();
 extern int dmp_read_fifo(short *gyro, short *accel, long *quat,
-    unsigned long *timestamp, short *sensors, unsigned char *more);
+unsigned long *timestamp, short *sensors, unsigned char *more);
 
 
 #endif

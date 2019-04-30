@@ -176,6 +176,7 @@ int ReceiveIndex = 0;
 char ReceiveBuff[3] = {0};
 unsigned char StartReceive = 0;
 RemoteCMDMode RunMode;//遥控模式
+#ifdef Remote_UseDigitalReceive
 /// <summary>
 ///接受遥控指令程序，应放入对应的串口中断内
 ///</summary>
@@ -192,20 +193,20 @@ void ReceiveCMD_Remote()
     {
       if(StartReceive == 0)
        ReceiveIndex = 0;
-}
-if (StartReceive == 1)
-{
-    if (ReceiveIndex < 3)
-    {
-        ReceiveBuff[ReceiveIndex] = buff;
-        ReceiveIndex++;
     }
-    else
+    if (StartReceive == 1)
     {
-        if (buff == 0xFF)
+        if (ReceiveIndex < 3)
         {
-            StartReceive = 0;
-            ReceiveIndex = 0;
+            ReceiveBuff[ReceiveIndex] = buff;
+            ReceiveIndex++;
+        }
+        else
+        {
+            if (buff == 0xFF)
+            {
+                StartReceive = 0;
+                ReceiveIndex = 0;
                 if (ReceiveBuff[0] == 0x00)//左摇杆
                 {
                     switch (ReceiveBuff[1])
@@ -261,7 +262,119 @@ if (StartReceive == 1)
     }
 
 }
+#else
+typedef enum
+{
+    Sleep,
+    SendLeftCMD,
+    ReceivingLeftCMD,
+    ReceivedLeftCMD,
+    SendRightCMD,
+    ReceivingRightCMD,
+    ReceivedRightCMD
+}Remote_State;
+Remote_State Remote_CMD_ReceiveStatus = Sleep;
+typedef struct
+{
+    uint8 Left_X;
+    uint8 Left_Y;
+    uint8 Right_X;
+    uint8 Right_Y;
+}ReceiveCMDData;
+ReceiveCMDData RemoteData;
+long left_count = 0;
+long right_count = 0;
+void GetRemoteCMDData(void)
+{
+    if (Remote_CMD_ReceiveStatus == Sleep)
+    {
+        Remote_CMD_ReceiveStatus = SendLeftCMD;
+        Remote_CMD_ReceiveStatus = ReceivingLeftCMD;
 
+        UART_Put_Char(Remote_Uart_Port, 0xBB);
+    }
+    if (Remote_CMD_ReceiveStatus == ReceivingLeftCMD)
+    {
+        left_count++;
+    }
+    else
+    {
+        left_count = 0;
+    }
+    if (Remote_CMD_ReceiveStatus == ReceivingRightCMD)
+    {
+        right_count++;
+    }
+    else
+    {
+        right_count = 0;
+    }
+
+    if (left_count > 1000 || right_count > 1000)
+    {
+        left_count = 0;
+        right_count = 0;
+        Remote_CMD_ReceiveStatus = Sleep;
+    }
+}
+/// <summary>
+///接受遥控指令程序，应放入对应的串口中断内
+///</summary>
+void ReceiveCMD_Remote()
+{
+    char buff = 0;
+    buff = UART_Get_Char(Remote_Uart_Port);
+    if (buff == 0xFF && StartReceive == 0)
+    {
+        StartReceive = 1;
+        return;
+    }
+    else
+    {
+        if (StartReceive == 0)
+            ReceiveIndex = 0;
+    }
+    if (StartReceive == 1)
+    {
+        if (ReceiveIndex < 3)
+        {
+            ReceiveBuff[ReceiveIndex] = buff;
+            ReceiveIndex++;
+        }
+        else
+        {
+            if (buff == 0xFF)
+            {
+                StartReceive = 0;
+                ReceiveIndex = 0;
+                if (ReceiveBuff[0] == 0xBB)//左摇杆
+                {
+                    if (Remote_CMD_ReceiveStatus == ReceivingLeftCMD)
+                    {
+                        RemoteData.Left_X = ReceiveBuff[1];
+                        RemoteData.Left_Y = ReceiveBuff[2];
+                        Remote_CMD_ReceiveStatus = ReceivedLeftCMD;
+                        UART_Put_Char(Remote_Uart_Port, 0xCC);
+                        Remote_CMD_ReceiveStatus = ReceivingRightCMD;
+                    }
+                    
+                }
+                else if (ReceiveBuff[0] == 0xCC)//右摇杆
+                {
+                    if (Remote_CMD_ReceiveStatus == ReceivingRightCMD)
+                    {
+                        RemoteData.Right_X = ReceiveBuff[1];
+                        RemoteData.Right_Y = ReceiveBuff[2];
+                        Remote_CMD_ReceiveStatus = ReceivedRightCMD;
+                        Remote_CMD_ReceiveStatus = Sleep;
+                    }
+                }
+            }
+        }
+    }
+
+}
+#endif
 ///<summary>按键初始化</summary>
 void ButtonInit()
 {
@@ -326,6 +439,7 @@ void ButtonScan_interrupt()
     }
 }
 
+float Battery_V = 0;
 int ButtonOnceBuffFlag[3] = { 0 };//按键按下一次缓存标志
 int ButtonOnceFlag[3] = { 0 };//按键按下一次的标志
 int QuitSetFlag = 0;
@@ -336,6 +450,7 @@ int QuitSetFlag = 0;
 void ButtonMenu()
 {
     ButtonInit();
+    TFT_showstr(0, 0, "Please Press!", RED, WHITE);
     EnableInterrupts;
     while (1)
     {
@@ -377,6 +492,8 @@ void ButtonMenu()
             DisableInterrupts;
             break;
         }
+        Battery_V = GetBatteryVoltage(7.0);
+        LCD_ShowBatteryVoltage(0, 0, Battery_V);
     }
 }
 

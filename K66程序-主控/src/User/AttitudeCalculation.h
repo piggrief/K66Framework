@@ -6,5 +6,6 @@
 
 float my_atan(float x, float y);
 float GetAngle_FromAcc(float Ax, float Ay, float Az);
+void GetAngle_FromGYRO(float Gx, float Gy, float Gz);
 
 #endif

@@ -24,14 +24,14 @@ FTM_Type *FTMType_Use[4] = {FTMType_Use1, FTMType_Use2, FTMType_Use3, FTMType_Us
 ///<summary>电机通道初始化</summary>
 void Motor_init(void)
 {
-    FTM_PWM_Init(FTMType_Use1, FTMChannel_Use_W1_1, 100000, 0);
-    FTM_PWM_Init(FTMType_Use1, FTMChannel_Use_W1_2, 100000, 0);
-    FTM_PWM_Init(FTMType_Use2, FTMChannel_Use_W2_1, 100000, 0);
-    FTM_PWM_Init(FTMType_Use2, FTMChannel_Use_W2_2, 100000, 0);
-    FTM_PWM_Init(FTMType_Use3, FTMChannel_Use_W3_1, 100000, 0);
-    FTM_PWM_Init(FTMType_Use3, FTMChannel_Use_W3_2, 100000, 0);
-    FTM_PWM_Init(FTMType_Use4, FTMChannel_Use_W4_1, 100000, 0);
-    FTM_PWM_Init(FTMType_Use4, FTMChannel_Use_W4_2, 100000, 0);
+    FTM_PWM_Init(FTMType_Use1, FTMChannel_Use_W1_1, 120000, 0);
+    FTM_PWM_Init(FTMType_Use1, FTMChannel_Use_W1_2, 120000, 0);
+    FTM_PWM_Init(FTMType_Use2, FTMChannel_Use_W2_1, 120000, 0);
+    FTM_PWM_Init(FTMType_Use2, FTMChannel_Use_W2_2, 120000, 0);
+    FTM_PWM_Init(FTMType_Use3, FTMChannel_Use_W3_1, 120000, 0);
+    FTM_PWM_Init(FTMType_Use3, FTMChannel_Use_W3_2, 120000, 0);
+    FTM_PWM_Init(FTMType_Use4, FTMChannel_Use_W4_1, 120000, 0);
+    FTM_PWM_Init(FTMType_Use4, FTMChannel_Use_W4_2, 120000, 0);
 }
 
 ///<summary>对应PIDControl结构体内的f_Constructor</summary>
@@ -237,7 +237,7 @@ void SpeedClean(void)
 struct RunSpeed RS_Now;
 ///<summary>远程遥控程序</summary>
 extern RemoteCMDMode RunMode;
-int Remote_Speed = 180;    
+int Remote_Speed = 50;    
 float ControlValue_Closeloop[4];
 float ControlValue_Start[4] = { 0 };
 void SetSpeed_FromRemote(RemoteCMDMode mode)
@@ -311,15 +311,15 @@ void Series_Control(float deviation)
     SetTargetSpeed_Car(&RS_Now, 0, 0, 0);
   else
   {
-    if(deviation == -94)
-    SetTargetSpeed_Car(&RS_Now, 0, 0, 80);
-    else
-    SetTargetSpeed_Car(&RS_Now, 0, 330, GetPIDControlValue(&Car_Speed_Rotate, PD_Control, deviation));
+    //if(deviation == -94)
+    //SetTargetSpeed_Car(&RS_Now, 0, 0, 80);
+    //else
+      SetTargetSpeed_Car(&RS_Now, RS_Now.XSpeed, RS_Now.YSpeed, GetPIDControlValue(&Car_Speed_Rotate, PD_Control, deviation));
   }
     CalTargetSpeed_EachWheel(&RS_Now);
     for (int i = 0; i < 4; i++)
     {
         ControlValue_Closeloop[i] = GetPIDControlValue(&WheelControl[i], PID_Control, Speed_get[i]); 
     }
-      MotorOutput(ControlValue_Closeloop);
+    MotorOutput(ControlValue_Closeloop);
 }

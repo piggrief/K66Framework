@@ -515,11 +515,7 @@ void UART3_IRQHandler(void)
 {
     s8 data[20];
 
-    //接收一个字节数据并回发
-       
-    sprintf(data,"你发送的数据为：%c\n",UART_Get_Char (UART_3));
-    
-    UART_Put_Buff(UART_3,data,20);      //就发送出去
+	ReceiveCMD_Remote();
 }
 
 void UART4_IRQHandler(void)
