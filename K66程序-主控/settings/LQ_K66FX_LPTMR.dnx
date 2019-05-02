@@ -19,7 +19,7 @@
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
     </JLinkDriver>
     <DebugChecksum>
-        <Checksum>3311317992</Checksum>
+        <Checksum>2189550705</Checksum>
     </DebugChecksum>
     <CodeCoverage>
         <Enabled>_ 0</Enabled>
@@ -68,6 +68,10 @@
         <FreqHi>0</FreqHi>
         <MultiCoreRunAll>1</MultiCoreRunAll>
     </Simulator>
+    <struct_types>
+        <Fmt0>ReceiveCMDData-Left_X	3	0</Fmt0>
+        <Fmt1>ReceiveCMDData-Left_Y	3	0</Fmt1>
+    </struct_types>
     <watch_formats>
         <Fmt0>{W}42:abg	3	0</Fmt0>
         <Fmt1>{W}42:bbg	3	0</Fmt1>

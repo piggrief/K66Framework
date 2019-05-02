@@ -215,8 +215,8 @@ float angle_GYRO_y = 0;
 float angle_GYRO_z = 0;
 void GetAngle_FromGYRO(float Gx, float Gy, float Gz)
 {
-    angle_GYRO_x += 0.068 * Gx * dt;
-    angle_GYRO_y += 0.07 * Gy * dt;
+    //angle_GYRO_x += 0.068 * Gx * dt;
+    //angle_GYRO_y += 0.07 * Gy * dt;
     angle_GYRO_z += 0.07 * Gz * dt;
 
 

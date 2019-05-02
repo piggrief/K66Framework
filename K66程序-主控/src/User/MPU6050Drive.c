@@ -213,8 +213,8 @@ void Get_Gyro(struct GYROData * GYRO_Data)
 //    GYRO_Data->X = (GetData(GYRO_XOUT_H) - GYRO_Data->Offset_X)* 0.0609756097560976;
 //    GYRO_Data->Y = (GetData(GYRO_YOUT_H) - GYRO_Data->Offset_Y)* 0.0609756097560976;
 //    GYRO_Data->Z = (GetData(GYRO_ZOUT_H) - GYRO_Data->Offset_Z)* 0.0609756097560976;
-    GYRO_Data->X = (GetData(GYRO_XOUT_H) - GYRO_Data->Offset_X);
-    GYRO_Data->Y = (GetData(GYRO_YOUT_H) - GYRO_Data->Offset_Y);
+    //GYRO_Data->X = (GetData(GYRO_XOUT_H) - GYRO_Data->Offset_X);
+    //GYRO_Data->Y = (GetData(GYRO_YOUT_H) - GYRO_Data->Offset_Y);
     GYRO_Data->Z = (GetData(GYRO_ZOUT_H) - GYRO_Data->Offset_Z);
 }
 

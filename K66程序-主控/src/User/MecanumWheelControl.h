@@ -132,6 +132,13 @@ void SetTargetSpeed_Car(struct RunSpeed* TargetSpeed, float Vx, float Vy, float 
 ///</summary>
 /// <param name="TargetSpeed">车整体的三个运动速度结构体</param>
 void CalTargetSpeed_EachWheel(struct RunSpeed* TargetSpeed);
+/// <summary>
+///根据每个轮子的速度计算整车的运动状态
+///<para>example:  CalWholeSpeed(&TargetSpeed, EachWheelSpeed);</para>
+///</summary>
+/// <param name="TargetSpeed">车整体的三个运动速度结构体</param>
+/// <param name="EachWheelSpeed">四个轮子的采集速度</param>
+void CalWholeSpeed(struct RunSpeed * TargetSpeed, uint32 * EachWheelSpeed);
 
 
 
@@ -157,4 +164,5 @@ void SetSpeed_FromRemote(RemoteCMDMode mode);
 void PID_Speedloop_init( float *P_set, float *D_set, float *I_set, float I_Limit_Set, float MaxOutput_Set, float *DeadBand_Set);
 void PID_locationloop_init( float P_set, float D_set, float I_set, float I_Limit_Set, float MaxOutput_Set, float DeadBand_Set);
 void Series_Control(float deviation);
+void SetSpeed_FromRemote_Analog(uint8 XSpeed, uint8 YSpeed, uint8 ASpeed);
 #endif

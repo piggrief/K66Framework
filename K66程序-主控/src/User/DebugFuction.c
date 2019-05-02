@@ -164,6 +164,14 @@ void LCD_ShowGraphs(float data, float t_refresh, float data_low, float data_high
 /*************************************************************/
 /*****************遥控部分************/
 /*************************************************************/
+typedef struct
+{
+    uint8 Left_X;
+    uint8 Left_Y;
+    uint8 Right_X;
+    uint8 Right_Y;
+}ReceiveCMDData;
+ReceiveCMDData RemoteData;
 /// <summary>
 ///初始化遥控器的串口
 ///</summary>
@@ -171,6 +179,10 @@ void RemoteInit()
 {
     UART_Init(Remote_Uart_Port, 9600);
     UART_Irq_En(Remote_Uart_Port);
+    RemoteData.Left_X = 127;
+    RemoteData.Left_Y = 127;
+    RemoteData.Right_X = 127;
+    RemoteData.Right_Y = 127;
 }
 int ReceiveIndex = 0;
 char ReceiveBuff[3] = {0};
@@ -274,14 +286,7 @@ typedef enum
     ReceivedRightCMD
 }Remote_State;
 Remote_State Remote_CMD_ReceiveStatus = Sleep;
-typedef struct
-{
-    uint8 Left_X;
-    uint8 Left_Y;
-    uint8 Right_X;
-    uint8 Right_Y;
-}ReceiveCMDData;
-ReceiveCMDData RemoteData;
+
 long left_count = 0;
 long right_count = 0;
 void GetRemoteCMDData(void)
@@ -310,12 +315,17 @@ void GetRemoteCMDData(void)
         right_count = 0;
     }
 
-    if (left_count > 1000 || right_count > 1000)
+    if (left_count > 800 || right_count > 800)
     {
         left_count = 0;
         right_count = 0;
         Remote_CMD_ReceiveStatus = Sleep;
     }
+}
+void ControlCar_FromAnalog(void)
+{
+    SetSpeed_FromRemote_Analog(RemoteData.Left_Y, RemoteData.Left_X,0);
+
 }
 /// <summary>
 ///接受遥控指令程序，应放入对应的串口中断内
@@ -353,9 +363,10 @@ void ReceiveCMD_Remote()
                     {
                         RemoteData.Left_X = ReceiveBuff[1];
                         RemoteData.Left_Y = ReceiveBuff[2];
-                        Remote_CMD_ReceiveStatus = ReceivedLeftCMD;
-                        UART_Put_Char(Remote_Uart_Port, 0xCC);
-                        Remote_CMD_ReceiveStatus = ReceivingRightCMD;
+                        Remote_CMD_ReceiveStatus = Sleep;
+                        //Remote_CMD_ReceiveStatus = ReceivedLeftCMD;
+                        //UART_Put_Char(Remote_Uart_Port, 0xCC);
+                        //Remote_CMD_ReceiveStatus = ReceivingRightCMD;
                     }
                     
                 }

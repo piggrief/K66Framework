@@ -11,9 +11,9 @@
 # ifndef _DEBUGFUNCTION_H_
 # define _DEBUGFUNCTION_H_
 
-# define CRC_Uart_Port UART_3
+# define CRC_Uart_Port UART_0
 # define Series_Uart_Port UART_4
-# define Remote_Uart_Port UART_0
+# define Remote_Uart_Port UART_3
 /// <summary>
 ///给虚拟示波器发送a,b,c,d取整之后的值
 ///<para>example:  SEND(a,b,c,d);</para>
@@ -67,6 +67,7 @@ extern RemoteCMDMode RunMode;
 //#define Remote_UseDigitalReceive
 #ifndef Remote_UseDigitalReceive
 void GetRemoteCMDData(void);
+void ControlCar_FromAnalog(void);
 #endif
 typedef enum
 {

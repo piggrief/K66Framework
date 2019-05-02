@@ -158,6 +158,18 @@ void CalTargetSpeed_EachWheel(struct RunSpeed * TargetSpeed)
     WheelControl[2].TargetValue = TargetSpeed->YSpeed - TargetSpeed->XSpeed - TargetSpeed->YawSpeed;
     WheelControl[3].TargetValue = TargetSpeed->YSpeed + TargetSpeed->XSpeed + TargetSpeed->YawSpeed;
 }
+/// <summary>
+///根据每个轮子的速度计算整车的运动状态
+///<para>example:  CalWholeSpeed(&TargetSpeed, EachWheelSpeed);</para>
+///</summary>
+/// <param name="TargetSpeed">车整体的三个运动速度结构体</param>
+/// <param name="EachWheelSpeed">四个轮子的采集速度</param>
+void CalWholeSpeed(struct RunSpeed * TargetSpeed, uint32 * EachWheelSpeed)
+{
+    TargetSpeed->XSpeed = 0.5*(EachWheelSpeed[3] - EachWheelSpeed[0]);
+    TargetSpeed->YSpeed = 0.5*(EachWheelSpeed[1] + EachWheelSpeed[0]);
+    TargetSpeed->YawSpeed = 0.5*(EachWheelSpeed[3] - EachWheelSpeed[1]);
+}
 //PID结构体内缺乏一个范用的的设定目标的函数
 
 ///<summary>根据四个控制量ControlValue来输出四个电机的占空比</summary>
@@ -178,9 +190,9 @@ void MotorOutput(float * ControlValue)
         }
     }
 }
-long temp_Speed[4] = { 0 };
-long SpeedCount[4] = { 0 };
-long Speed_get[4] = { 0 };
+float temp_Speed[4] = { 0 };
+float SpeedCount[4] = { 0 };
+float Speed_get[4] = { 0 };
 //编码器测速用的DMA通道号
 DMA_CHn Encoder_DMAChannel[4] = { DMA_CH7, DMA_CH8, DMA_CH5, DMA_CH6 };
 //编码器测速用的步进脉冲Port端口
@@ -280,6 +292,14 @@ void SetSpeed_FromRemote(RemoteCMDMode mode)
     MotorOutput(ControlValue_Closeloop);
 }
 
+void SetSpeed_FromRemote_Analog(uint8 XSpeed, uint8 YSpeed, uint8 ASpeed)
+{
+    float rate_XSpeed = 1;
+    float rate_YSpeed = 1;
+    float rate_ASpeed = 0;
+
+    SetTargetSpeed_Car(&RS_Now, rate_XSpeed*(XSpeed - 127), rate_YSpeed*(YSpeed - 127), rate_ASpeed*ASpeed);
+}
 
 ///<summary>速度环初始化函数</summary>
 void PID_Speedloop_init( float *P_set, float *D_set, float *I_set, float I_Limit_Set, float MaxOutput_Set, float *DeadBand_Set)
