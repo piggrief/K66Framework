@@ -28,6 +28,11 @@ typedef enum PITn
 
 /*********************** PIT功能函数 **************************/
 void PIT_Init(PITn, u32 cnt);                                            //初始化PITn，并设置定时时间(单位为bus时钟周期)
+void pit_time_start(PITn pitn);
+uint32 pit_time_get(PITn pitn);
+#define pit_time_get_ms(PITn)   (pit_time_get(PITn)/bus_clk_M/1000) 
+void pit_close(PITn pitn);
+
 void PIT0_Interrupt();
 void PIT1_Interrupt();
 void PIT2_Interrupt();

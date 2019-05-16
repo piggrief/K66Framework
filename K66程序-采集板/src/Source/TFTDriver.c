@@ -520,7 +520,7 @@ void TFT_showimage_gray(const unsigned char p[40][200], int SizeX_Image, int Siz
 //  @since      v1.0
 //  Sample usage:              
 //-------------------------------------------------------------------------------------------------------------------
-void displayimage032(uint8 *p, int Gate_To2)
+void displayimage032(uint8 *p, int Gate_lower, int Gate_upper)
 {
     int i, j;
 
@@ -534,11 +534,15 @@ void displayimage032(uint8 *p, int Gate_To2)
         {
             //temp = *(p + i*120 / 120 * 188 + (188 - 1) - j*(188 - 1) / (160 - 1));//读取像素点
 			temp = *(p + (122-i)*120 / 120 * 188 + (188 - 1) - j*(188 - 1) / (160 - 1));//读取像素点
-//            
-//			if (temp <= Gate_To2)
-//				temp = 0x00;
-//			else
-//				temp = 0xff;     //关二值化
+//          
+            if(Gate_lower <= 0)
+            {}
+            else{
+                if (temp < Gate_lower || temp > Gate_upper)
+                        temp = 0x00;
+                else
+                        temp = 0xff;     //关二值化
+            }
             color = (0x001f & ((temp) >> 3)) << 11;
             color = color | (((0x003f)&((temp) >> 2)) << 5);
             color = color | (0x001f & ((temp) >> 3));

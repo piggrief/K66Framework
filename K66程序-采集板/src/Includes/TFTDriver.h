@@ -71,7 +71,7 @@ void TFT_showuint16(uint16 x, uint16 y, uint16 dat, int PenColor, int BackColor)
 void TFT_showimage(const unsigned char *p);
 void TFT_showimage_all(const unsigned char *p, int Size_x, int Size_y);
 void TFT_showimage_gray(const unsigned char p[40][200], int SizeX_Image, int SizeY_Image, int SizeX_Show, int SizeY_Show);
-void displayimage032(uint8 *p, int Gate_To2);
+void displayimage032(uint8 *p, int , int);
 
 extern const uint8 tft_ascii[95][16];
 extern const uint8  asc2_1608[1520];

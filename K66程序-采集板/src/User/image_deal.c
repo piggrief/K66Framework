@@ -17,11 +17,10 @@
 #define Height              ROW
 #define Wide                COL
 
-
 uint8 top_row;
 uint8 bottom_row;
 uint8 low_row;
-uint8 row1;
+int row;
 uint8 First_Find[ROW];
 uint8 Left[ROW];
 float Mid[ROW];
@@ -37,11 +36,13 @@ float Mid_temp;
 float Right_temp;
 float temp_piancha;
 float average_piancha;
-float true_row;
-float temp_radius;
-float distance;
+//int length[5] = {0};
+uint8 arrl_flag = 0;
+//int true_row;
+int distance;
 float temp_distance = 0;
-float r = -1.8744; // 距离系数
+//int arrl[5];
+//float r = -1.8744; // 距离系数
 
 /***************************快速中值化滤波**********************************/
 /*void MedianFilter()
@@ -129,7 +130,7 @@ void Reset()
 int flag_all = 1;
 void find_light()
 {
-	for (int i = 15; i < ROW;i+=2)
+	for (int i = 15; i < ROW;i++)
 		{
 			for (int j = 1; j < COL; j+=2)//j++
 			{
@@ -143,12 +144,10 @@ void find_light()
 						top_row = i;
 						find_loop_flag = 0;
 						First_Find[i] = j;
-
-                                                flag_all = 1;
+                        flag_all = 1;
 						return ;
 					}
 				}
-
 			}
 		}
 	if (found_flag == 0)
@@ -165,7 +164,7 @@ void mid_findlight()
 	int i, j, k;
 	if (found_flag == 1)
 	{
-		for (i = top_row + 1; i < ROW; i++)
+		for (i = top_row; i < ROW; i++)
 		{
 			for (j = 1; j < COL; j++)
 			{
@@ -185,7 +184,7 @@ void mid_findlight()
 				Left[i] = 0;
 				Left_Flag[i] = 1;
 			}
-			for (k = First_Find[i - 1]; k < COL; k++)
+			for (k = First_Find[i - 1]; k > 0; k--)
 			{
 				if (image[i][k] > ThreasHold)
 				{
@@ -206,26 +205,32 @@ void mid_findlight()
 			if (Left_Flag[i] == 1 && Right_Flag[i] == 1)
 			{
 				Mid_Flag[i] = 1;
-				Mid[i] = (Left[i] + Right[i]) / 2;
-				bottom_row = i;
+				Mid[i] = (Left[i] + Right[i]) / 2;				
+                                bottom_row = i;
 			}
 			if (image[i + 1][First_Find[i]] < ThreasHold && image[i + 1][First_Find[i + 2]] < ThreasHold)
-                            break;
+            {
+                //bottom_row = i-1;
+                break;
+            }
 		}
 /****************************************
 					   计算偏差
 *****************************************/
-		   
+		    
         	for (int i = top_row; i <= bottom_row-1; i++)
 	        {   
-		    	if (Mid[i] > Mid[i + 1])
-		    	{
-			    	Mid_temp = Mid[i + 1];
-			    	Mid[i + 1] = Mid[i];
-			    	Mid[i] = Mid_temp;
-		        }
+				for (int j = top_row;j <= bottom_row - i - 1;j++)
+				{
+					if (Mid[j] > Mid[j + 1])
+					{
+						Mid_temp = Mid[j + 1];
+						Mid[j + 1] = Mid[j];
+						Mid[j] = Mid_temp;
+					}
+				}
  	         }
-			average_piancha = Mid[bottom_row];//- 94;
+			average_piancha = Mid[top_row+1];//- 94;
 		//	temp_piancha = average_piancha;
 		    if (average_piancha == 0)//-94)
 			{
@@ -261,56 +266,39 @@ void calculate_distance()
 				}
 			}
 		}
-		true_row = k;
-		distance = r * true_row + 94.5167;//回归直线计算得出
-		/*if (abs(distance - temp_distance) > 10)
-		{
-			distance = temp_distance;
-		}
-		else
-		{
-			temp_distance = distance;
-		}*
+		distance = k;
+		//distance = r * row + 94.5167;//回归直线计算得出
     }
 }
-/*		temp_radius = radius;
-		if (radius == 0)
-		{
-			radius = temp_radius;
-		}
-		else
-			temp_radius = radius;
+/*void calculate_distance()
+{
+	int i, temp_true_row;
+	calculate_true_row();
+	for (i = 1; i <= 5; i++)
+	{
+		true_row[i] = row;
 	}
-	if (find_loop_flag == 1)
-      {
-		radius = temp_radius;
-	    temp_radius = radius;
-		return;
-      }
-}
-*/
-	//	radius1 = bottom_row - top_row;
-		//distance = r * radius;
-	//	if (average_piancha == 0)//-94)
-		//{
-	//		average_piancha = temp_piancha;
-	//	}
-	//	else
-	//		temp_piancha = average_piancha;
-//	}
-
-	//if (find_loop_flag == 1)
-	//{
-	//	average_piancha = temp_piancha;
-	//	temp_piancha = average_piancha;
-		//distance = temp_distance;
-		//temp_distance = distance;
-
-
-	//	return;
-	//   }
-        }
-}
+	for (i = 1; i <= 4; i++)
+	{
+		if (true_row[i] > true_row[i + 1])
+		{
+			temp_true_row = true_row[i + 1];
+			true_row[i + 1] = true_row[i];
+			true_row[i] = temp_true_row;
+		}
+	}
+	distance = r * true_row[5] + 94.5167;//回归直线计算得出
+}*/
+/*float Fiter_float(float num, float*queue, int*weighted, int num_q)
+{
+	int i = 0;
+	for (i = num_q - 1; i > 0; i--)
+	{
+		queue[i] = queue[i - 1];
+	}
+	queue[0] = num;
+	return Weighted_Avg_float(queue, weighted, num_q);
+}*/
 
 /****************************************
 			   重复找灯
@@ -321,14 +309,209 @@ void find_loop()
 	{
 		find_light;
 	}
-	if (light_delay_flag > 3)
+	if (light_delay_flag > 2  || distance > 30 && light_delay_flag > 1)
 	{
 		light_flag = 0;//灯灭标志
 		find_loop_flag = 0;
 		light_delay_flag = 0;
         average_piancha = 0;
 		temp_piancha = 0;
-		true_row = 0;
-                flag_all = 0;
+		row = 0;
+        flag_all = 0;
+		/*for (int i = 0; i <= 4; i++)
+		{
+			length[i] = 0;
+		}*/
 	}
+}
+
+/**/
+/*void zhan()
+{
+	if (arrl_flag != 5)
+	{
+		length[arrl_flag] = true_row;
+		arrl_flag++;
+		return;
+	}
+	else
+	{
+		int k = 0;
+		for( k = 0;k < 4;k++)
+		{
+			length[k] = length[k + 1];
+		}
+		length[k] = true_row;
+	}
+
+}
+void dis()
+{
+	for (int i = 0; i <= 4; i++)
+	{
+		arrl[i] = length[i];
+	}
+	for (int i = 0; i < 4; i++)
+	{
+                if (arrl[i] > arrl[i + 1])
+                {
+                        temp_distance = arrl[i + 1];
+                        arrl[i + 1] = arrl[i];
+                        arrl[i] = temp_distance;
+                }
+	}
+                 distance = arrl[4];
+}*/
+
+typedef enum
+{
+    Light_Disappear,//灯不见了
+    Light_On,//灯亮
+    Light_Off//灯灭
+}LookLight_Status;
+
+LookLight_Status LightStatus = Light_Disappear;
+
+# define BoardWidthThreshold 4
+# define JumpThreshold 35
+# define StartLookLine 10
+# define EndLookLine 90//不包含这个值
+
+int LeftLine[EndLookLine - StartLookLine];
+int RightLine[EndLookLine - StartLookLine];
+float MidLine[EndLookLine - StartLookLine];
+
+int LastMidLine = 0;
+uint8 flag_LookedLeftLine = 0;
+uint8 flag_LookedRightLine = 0;
+
+///寻线程序，主要用于寻找图像中的左右边线
+void LookLine(uint8 imagebuff[120][188])
+{
+    flag_LookedLeftLine = 0;
+    flag_LookedRightLine = 0;
+
+    for (int i = StartLookLine, LineIndex = 0; i < EndLookLine; i++, LineIndex++)
+    {
+        for (int j = 0; j < Wide - BoardWidthThreshold; j++)
+        {
+            if ((imagebuff[i][j + BoardWidthThreshold] - imagebuff[i][j]) > JumpThreshold)
+            {
+                LeftLine[LineIndex] = j;
+                flag_LookedLeftLine = 1;
+                break;
+            }
+        }
+        if (flag_LookedLeftLine == 1)
+        {
+            for (int j = LeftLine[i]; j < Wide - BoardWidthThreshold; j++)
+            {
+                if (imagebuff[i][j] - (imagebuff[i][j + BoardWidthThreshold]) > JumpThreshold)
+                {
+                    RightLine[LineIndex] = j;
+                    flag_LookedRightLine = 1;
+                    break;
+                }
+            }
+        }
+        else//全黑行
+        {
+            LeftLine[i] = -1;
+            RightLine[i] = -1;
+        }
+    }
+}
+
+# define LightDisappearCountThreshold 4
+uint8 Count_LightOff = 0;
+///更新灯亮状态
+void RenewLightStatus(int MidLineNum)
+{
+    if (LightStatus == Light_Disappear)
+    {
+        if (MidLineNum > 2)
+        {
+            LightStatus = Light_On;
+            Count_LightOff = 0;
+        }
+    }
+    else if (LightStatus == Light_On)
+    {
+        if (MidLineNum <= 0)
+        {
+            LightStatus = Light_Off;
+        }
+    }
+    else
+    {
+        if (MidLineNum > 0)
+        {
+            LightStatus = Light_On;
+            Count_LightOff = 0;
+        }
+        else
+        {
+            Count_LightOff++;
+            if (Count_LightOff >= LightDisappearCountThreshold)
+            {
+                LightStatus = Light_Disappear;
+                Count_LightOff = 0;
+            }
+        }
+    }
+}
+
+int Num_MidLine = 0;
+int LastNum_MidLine = 0;
+float Temp_Error = 0;
+float Now_Error = 0;
+int Mid_MidLine = 0;
+float Sum_WhiteBlock = 0;
+float LastSum_WhiteBlock = 0;
+
+float Size_SumMid = 0;
+///计算偏差
+void CalError()
+{
+    Temp_Error = Now_Error;
+    LastSum_WhiteBlock = Sum_WhiteBlock;
+    LastNum_MidLine = Num_MidLine;
+    float MidSum = 0;
+    int MidLineIndex = 0;
+    Sum_WhiteBlock = 0;
+    
+    for (int i = 0; i < EndLookLine - StartLookLine; i++)
+    {
+        if (LeftLine[i] >= 0 && RightLine[i] >= 0)
+        {
+            MidLine[MidLineIndex] = 0.5 * (LeftLine[i] + RightLine[i]);
+            //MidSum += MidLine[MidLineIndex];
+            MidLineIndex++;
+            Sum_WhiteBlock += (RightLine[i] - LeftLine[i]);
+        }
+    }
+    Num_MidLine = MidLineIndex;
+        
+    RenewLightStatus(Num_MidLine);
+
+    if (LightStatus == Light_Disappear)
+    {
+        Now_Error = 0;
+    }
+    else if (LightStatus == Light_On)
+    {
+        Mid_MidLine = Num_MidLine / 3.0;
+        if(Mid_MidLine > Num_MidLine)
+          Mid_MidLine = Num_MidLine;
+        if(Mid_MidLine < 0)
+          Mid_MidLine = 0;
+        Now_Error = MidLine[Mid_MidLine]; // MidSum / MidLineIndex;
+        Size_SumMid = Sum_WhiteBlock* 10.0 / Num_MidLine / 3.5;
+    }
+    else
+    {
+        Now_Error = Temp_Error;
+        Num_MidLine = LastNum_MidLine;
+        Sum_WhiteBlock = LastSum_WhiteBlock;
+    }
 }

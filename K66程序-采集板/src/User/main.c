@@ -33,7 +33,7 @@ extern float temp_piancha;
 extern uint8 light_flag;
 extern uint8 light_delay_flag;
 extern uint8 find_loop_flag;
-extern float true_row;
+float true_row;
 extern float distance;
 extern float radius1;
 extern uint8 row1;
@@ -52,56 +52,67 @@ float Max_output = 9500;
 float Data_Test[21] = { 0 };
 float Weight_FIR1[21] = { 0, -0.0007, -0.0015, 0.0006, 0.0092, 0.0269, 0.0534, 0.0852, 0.1158, 0.1380, 0.1461
     , 0.1380, 0.1158, 0.0852, 0.0534, 0.0269, 0.0092, 0.0006, -0.0015, -0.0007, 0 };
-    int32 ttt = 0;
+int32 ttt = 0;
 
-    extern int time;
-    extern uint32 SpeedCount[4];
+uint8 LastImage[120][188];
+uint8 ImageMinus[120][188];
 
-    void Init_All();
+extern int time;
+extern uint32 SpeedCount[4];
+uint32 TimeMeassure = 0;
+void Init_All();
 
-    
-    
-    
-    
-      
-    
-    
-    
-    
-    
-    
-    
-    void main(void)
+void main(void)
+{
+    int minusresult = 0;
+    Init_All();
+    pit_time_start(PIT1);
+
+    //PID_Speedloop_init(P_Set, D_Set, I_Set, I_limit, Max_output, DeadBand_Set);//80, 0, 0.1, 100000, 9500, 0
+    //PID_locationloop_init(1, 0.5, 0, 0, 60, 0);
+    while (1)
     {
-        Init_All();
-        //PID_Speedloop_init(P_Set, D_Set, I_Set, I_limit, Max_output, DeadBand_Set);//80, 0, 0.1, 100000, 9500, 0
-        //PID_locationloop_init(1, 0.5, 0, 0, 60, 0);
-        while (1)
+        if (ImageDealState_Now == Image_CollectFinish)
         {
-            if (ImageDealState_Now == Image_CollectFinish)
-            {
-                ImageDealState_Now = Image_Dealing;
-            LED_Ctrl(LED3, ON);      //LED指示程序运行状态  
-	        //MedianFilter();未定义状态
-	        //displayimage032(image[0], ThreasHold);//二值化被注释了
-            //OLED_ShowImage(128, 64, 120, 188, ThreasHold, image);
-	        Reset();
-	        find_light();
-	        mid_findlight();
-		calculate_distance();
-	        find_loop();
-        
-            //seekfree_sendimg_032();   串口发送     
-            Deviation_Sendout = (uint8)average_piancha;
-            UART_Put_Char(UART_4, Deviation_Sendout);
-            TFT_showint8(0,0, average_piancha, BLACK, WHITE);
-	    TFT_showint8(0,9, true_row, BLACK,WHITE);
+            TimeMeassure = pit_time_get_ms(PIT1);
+            ImageDealState_Now = Image_Dealing;
+            LED_Ctrl(LED3, RVS);      //LED指示程序运行状态 
             
+            /*图像差运算*/
+//            for (int i = 0; i < ROW; i++)
+//            {
+//                for (int j = 0; j < COL; j++)
+//                {
+//                    minusresult = image[i][j] - LastImage[i][j];
+//                    if (minusresult > 0)
+//                    {
+//                      /*二值化*/
+//                      if(minusresult >= 12 && minusresult <= 28)
+//                          ImageMinus[i][j] = 255;
+//                      else
+//                          ImageMinus[i][j] = 0;
+//                    }
+//                    else
+//                        ImageMinus[i][j] = 0;
+//                    LastImage[i][j] = image[i][j];
+//                    
+//                }
+//            }
+	   //MedianFilter();未定义状态
+            //displayimage032(image[0], 0,28);//二值化被注释了
+            LookLine(image);
+            CalError();
+            //seekfree_sendimg_032();   串口发送     
+            Deviation_Sendout = (uint8)Now_Error;
+            UART_Put_Char(UART_4, 0xFF);
+            UART_Put_Char(UART_4, Deviation_Sendout);
+            UART_Put_Char(UART_4, (uint8)Size_SumMid);
+            UART_Put_Char(UART_4, 0xFF);            
+            //TFT_showint8(0,0, (int8)(Now_Error), BLACK, WHITE);
+	    //TFT_showint8(0,9, true_row, BLACK,WHITE);
+            pit_time_start(PIT1);
             ImageDealState_Now = Image_DealingFinsh;
         }
-        else
-            LED_Ctrl(LED3, OFF);      //LED指示程序运行状态  
-        //LCD_PrintFloat_31(0,0,Series_deviation_received);
     }
 }
 
@@ -109,7 +120,7 @@ float Weight_FIR1[21] = { 0, -0.0007, -0.0015, 0.0006, 0.0092, 0.0269, 0.0534, 0
 void Init_All()
 {
     DisableInterrupts;           //关闭中断
-    PLL_Init(PLL200);            //初始化PLL为200M,总线为40M  
+    PLL_Init(PLL230);            //初始化PLL为200M,总线为40M  
 
     /*******************GPIO***************************/
     LED_Init();                  //LED初始化    

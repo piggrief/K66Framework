@@ -128,7 +128,7 @@ void PLL_Init(clk_option opt)
     ///设置系统分频器
     //MCG=PLL, core = MCG,  
     SIM_CLKDIV1 =  SIM_CLKDIV1_OUTDIV1(0)    //core = MCG
-                 | SIM_CLKDIV1_OUTDIV2(4)    //bus = MCG/5=40M,
+                 | SIM_CLKDIV1_OUTDIV2(1)    //4 bus = MCG/5=40M,
                  | SIM_CLKDIV1_OUTDIV3(2)    //FlexBus = MCG/(2+1)
                  | SIM_CLKDIV1_OUTDIV4(7);   //Flash clock= MCG/8
 
@@ -148,7 +148,7 @@ void PLL_Init(clk_option opt)
 
 
     core_clk_M= 50 * ( pll_vdiv+16 )/2/(pll_prdiv+1);
-    bus_clk_M =core_clk_M/5;   
+    bus_clk_M =core_clk_M/2; ///5  
 
     
  /*

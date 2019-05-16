@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -43,8 +43,6 @@
     </ClCompile>
     <ClCompile Include="..\src\Source\common.c">
     </ClCompile>
-    <ClCompile Include="..\src\SEEKFREE\SEEKFREE_MT9V032.c">
-    </ClCompile>
     <ClCompile Include="..\src\Project_Setting\Startup\start.c">
     </ClCompile>
     <ClCompile Include="..\src\Source\LQ12864.c">
@@ -61,9 +59,10 @@
     </ClCompile>
     <ClCompile Include="..\src\User\MecanumWheelControl.c">
     </ClCompile>
+    <ClCompile Include="..\src\User\SEEKFREE_MT9V032.c">
+    </ClCompile>
     <ClCompile Include="..\src\User\AttitudeCalculation.c">
     </ClCompile>
-    <ClCompile Include="..\src\User\SEEKFREE_MT9V032.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Includes\ADC.h">
@@ -112,8 +111,6 @@
     </ClInclude>
     <ClInclude Include="..\src\User\include.h">
     </ClInclude>
-    <ClInclude Include="..\src\SEEKFREE\SEEKFREE_MT9V032.h">
-    </ClInclude>
     <ClInclude Include="..\src\Includes\LQ12864.h">
     </ClInclude>
     <ClInclude Include="..\src\Includes\LQKEY.h">
@@ -126,19 +123,19 @@
     </ClInclude>
     <ClInclude Include="..\src\User\MecanumWheelControl.h">
     </ClInclude>
+    <ClInclude Include="..\src\User\SEEKFREE_MT9V032.h">
+    </ClInclude>
     <ClInclude Include="..\src\User\AttitudeCalculation.h">
     </ClInclude>
-    <ClInclude Include="..\src\User\SEEKFREE_MT9V032.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\Project_Setting\Startup\crt0.s">
     </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E047F139-F975-4641-5F31-A27FA785F2BD}</ProjectGuid>
+    <ProjectGuid>{BCB65E72-E769-4EC5-7968-650312B87E6C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LQ_K66FX_LPTMR</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -155,9 +152,8 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>
-      </PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\94364\Desktop\信标\K66Framework\K66程序-总钻风摄像头\src\SEEKFREE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ARM_MATH_CM4
+</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -181,12 +177,6 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props">
   </Import>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <PlatformToolset>v141</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <PlatformToolset>v141</PlatformToolset>
-  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props">
   </Import>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets">
