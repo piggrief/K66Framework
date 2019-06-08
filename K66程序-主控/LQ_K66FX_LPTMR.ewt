@@ -2588,6 +2588,18 @@
             </file>
         </group>
         <group>
+            <name>MPU9250</name>
+            <file>
+                <name>$PROJ_DIR$\src\User\MPU9250.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\src\User\MPU9250.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\src\User\MPU9250_reg.h</name>
+            </file>
+        </group>
+        <group>
             <name>SEEKFREE</name>
             <file>
                 <name>$PROJ_DIR$\src\User\SEEKFREE_MT9V032.c</name>
@@ -2603,6 +2615,15 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\src\User\AttitudeCalculation.h</name>
+            </file>
+        </group>
+        <group>
+            <name>TSL1402</name>
+            <file>
+                <name>$PROJ_DIR$\src\User\TSL1402.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\src\User\TSL1402.h</name>
             </file>
         </group>
         <file>

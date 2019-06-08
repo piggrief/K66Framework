@@ -49,7 +49,8 @@
 
 //#include "headfile.h"
 
-
+//# define UseTwoCamera
+   
 #define COL     188//图像宽度   范围1-752     K60采集不允许超过188
 #define ROW     120//图像高度	范围1-480
 
@@ -77,12 +78,13 @@ typedef enum
 }CMD;
 
 extern uint8 mt9v032_finish_flag;  //一场图像采集完成标志位
-extern uint8 image[ROW][COL];      //内部使用
+extern uint8 image_1[ROW][COL];      //内部使用
 
 
 //引脚配置
 
-#define MT9V032_COF_UART    UART_3 //配置摄像头所使用到的串口     
+#define MT9V032_COF_UART_1    UART_3 //配置摄像头所使用到的串口     
+#define MT9V032_COF_UART_2    UART_0 //配置摄像头所使用到的串口     
 
 
 //--------------------------------------------------------------------------------------------------
@@ -90,12 +92,19 @@ extern uint8 image[ROW][COL];      //内部使用
 //        比如使用的是PTA这组的引脚那么将这两个修改为PORTA_IRQn、PORTA_ISFR即可
 //        且务必在对应的中断函数中调用VSYNC函数
 //--------------------------------------------------------------------------------------------------
-#define MT9V032_PCLK                PTB22                            	//摄像头像素时钟
+#define MT9V032_PCLK_1                PTB22                            	//摄像头像素时钟
         
-#define MT9V032_VSYNC               PTB                            	//摄像头场同步信号
-#define MT9V032_VSYNC_CHANNEL       23                               //MT9V032_VSYNC对应引脚的引脚号 PTC6   -->     6
-#define MT9V032_INTERRUPT_NUNBERS   PORTB_IRQn                      //中断编号
-#define MT9V032_INTERRUPT_ISFR      PORTB->ISFR                     //中断标志位
+#define MT9V032_VSYNC_1               PTB                            	//摄像头场同步信号
+#define MT9V032_VSYNC_CHANNEL_1       23                               //MT9V032_VSYNC对应引脚的引脚号 PTC6   -->     6
+#define MT9V032_INTERRUPT_NUNBERS_1   PORTB_IRQn                      //中断编号
+#define MT9V032_INTERRUPT_ISFR_1      PORTB->ISFR                     //中断标志位
+
+#define MT9V032_PCLK_2                PTA29                            	//摄像头像素时钟
+
+#define MT9V032_VSYNC_2               PTA                            	//摄像头场同步信号
+#define MT9V032_VSYNC_CHANNEL_2        28                               //MT9V032_VSYNC对应引脚的引脚号 PTC6   -->     6
+#define MT9V032_INTERRUPT_NUNBERS_2   PORTA_IRQn                      //中断编号
+#define MT9V032_INTERRUPT_ISFR_2      PORTA->ISFR                     //中断标志位
 
 //--------------------------------------------------------------------------------------------------
 //        摄像头数据接口
@@ -105,21 +114,30 @@ extern uint8 image[ROW][COL];      //内部使用
 //		  可以选择0、1、2、3，分别对应的是	该端口的X0-X7，X8-X15，X16-X23，X24-X31(这里x代表的是第一个字母，比如现在的就是C8-C15)
 //--------------------------------------------------------------------------------------------------
 
-#define MT9V032_DATAPORT 		PTC_BYTE0_IN	                //DMA数据口
+#define MT9V032_DATAPORT_1 		PTC_BYTE0_IN	                //DMA数据口
+#define MT9V032_DATAPORT_2 		PTB_BYTE0_IN	                //DMA数据口
 
 typedef enum
 {
-    Image_Collecting,
-    Image_CollectFinish,
-    Image_Dealing,
-    Image_DealingFinsh
+    Image1_Collecting,
+    Image1_CollectFinish,
+    Image1_Dealing,
+    Image2_Collecting,
+    Image2_CollectFinish,
+    Image2_Dealing,
+    Image_DealingFinish
 }ImageDealState;
 
 extern ImageDealState ImageDealState_Now;
+extern uint8   image_1[ROW][COL];      //图像数组
+extern uint8   image_2[ROW][COL];      //图像数组
+
 
 void   mt9v032_cof_uart_interrupt(void);
-void   VSYNC(void);
-void   camera_init(void);
+void   VSYNC_1(void);
+void   VSYNC_2(void);
+void   camera_init_1(void);
+void   camera_init_2(void);
 void   seekfree_sendimg_032(void);
 void   row_finished(void);
 void sendimg(void);

@@ -54,9 +54,10 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
     //#include "LQnRF24L01.h"
     #include "SEEKFREE_MT9V032.h"
 # include "MPU6050Drive.h"
-    
+# include "MPU9250.h"    
     # include "AttitudeCalculation.h"
 # include "DebugFunction.h"
 # include "image_deal.h"
 #include "MecanumWheelControl.h"
+#include "TSL1402.h"
 #endif

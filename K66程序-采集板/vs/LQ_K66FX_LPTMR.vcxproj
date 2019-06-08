@@ -133,7 +133,7 @@
     </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{BCB65E72-E769-4EC5-7968-650312B87E6C}</ProjectGuid>
+    <ProjectGuid>{31CB047E-356B-4FEA-5A77-0234D40A18A7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LQ_K66FX_LPTMR</RootNamespace>
   </PropertyGroup>

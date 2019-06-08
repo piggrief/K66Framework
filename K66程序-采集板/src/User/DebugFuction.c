@@ -261,27 +261,30 @@ if (StartReceive == 1)
     }
 
 }
-
+TFTShowMode NowTFTShowMode = NotShow;
 ///<summary>按键初始化</summary>
 void ButtonInit()
 {
-    EXTI_Init(PTE, 10, either);
-    EXTI_Init(PTE, 11, either);
-    EXTI_Init(PTE, 12, either);
+    EXTI_Init(PTE, 0, either);
+    //set_irq_priority(PORTB_IRQn, 2);
+    //EXTI_Init(PTE, 11, either);
+    //EXTI_Init(PTE, 12, either);
 }
 ButtonStatus Button[3] = { NotPress, NotPress, NotPress };//PTE12,PTE11,PTE10
-
+int ButtonOnceBuffFlag[3] = { 0 };//按键按下一次缓存标志
+int ButtonOnceFlag[3] = { 0 };//按键按下一次的标志
+int QuitSetFlag = 0;
 ///<summary>按键扫描中断</summary>
 void ButtonScan_interrupt()
 {
     //Key1
-    int n = 10;
+    int n = 0;
     u8 keybuff = 0;
     if ((PORTE_ISFR & (1 << n)))
     {
         PORTE_ISFR |= (1 << n);
         //用户自行添加中断内程序
-        keybuff = GPIO_Get(PTE10);
+        keybuff = GPIO_Get(PTE0);
         if (keybuff == 0)
         {
             Button[2] = Press;
@@ -290,7 +293,18 @@ void ButtonScan_interrupt()
         {
             Button[2] = NotPress;
         }
-        TFT_showint8(0, 2, Button[2], BLACK, WHITE);
+        if (Button[2] == Press)
+        {
+            ButtonOnceBuffFlag[2] = 1;
+        }
+        if ((Button[2] == NotPress) && (ButtonOnceBuffFlag[2] == 1))
+        {
+            NowTFTShowMode++;
+            if(NowTFTShowMode > 2)
+              NowTFTShowMode = 0;
+            ButtonOnceFlag[2] = 1;
+            ButtonOnceBuffFlag[2] = 0;
+        }
     }
     n = 11;
     if ((PORTE_ISFR & (1 << n)))
@@ -306,7 +320,6 @@ void ButtonScan_interrupt()
         {
             Button[1] = NotPress;
         }
-        TFT_showint8(0, 1, Button[1], BLACK, WHITE);
     }
     n = 12;
     if ((PORTE_ISFR & (1 << n)))
@@ -322,13 +335,10 @@ void ButtonScan_interrupt()
         {
             Button[0] = NotPress;
         }
-        TFT_showint8(0, 0, Button[0], BLACK, WHITE);
     }
 }
 
-int ButtonOnceBuffFlag[3] = { 0 };//按键按下一次缓存标志
-int ButtonOnceFlag[3] = { 0 };//按键按下一次的标志
-int QuitSetFlag = 0;
+
 /// <summary>
 ///按键菜单程序，用于参数设定等功能，放于主函数的主要功能前
 ///<para>注：一定要放在TFT初始化后，另外其他有中断的模块初始化都必须放在这个函数后面</para>
@@ -355,7 +365,8 @@ void ButtonMenu()
         if (ButtonOnceFlag[0] == 1)
         {
             ButtonOnceFlag[0] = 0;
-            /* 在此编写按下按键1的处理程序 */
+            /* 在此编写按下按键1的处理序/ */
+
 
         }
         if (ButtonOnceFlag[1] == 1)
@@ -383,6 +394,6 @@ void ButtonMenu()
 ///<summary>串级通信初始化</summary>
 void Series_Sendout_init(void)
 {
-    UART_Init(Series_Uart_Port, 115200);
+    UART_Init(Series_Uart_Port, 115200);//921600
     //UART_Irq_En(Series_Uart_Port);
 }

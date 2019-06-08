@@ -61,9 +61,13 @@
     </ClCompile>
     <ClCompile Include="..\src\User\MPU6050Drive.c">
     </ClCompile>
+    <ClCompile Include="..\src\User\MPU9250.c">
+    </ClCompile>
     <ClCompile Include="..\src\User\SEEKFREE_MT9V032.c">
     </ClCompile>
     <ClCompile Include="..\src\User\AttitudeCalculation.c">
+    </ClCompile>
+    <ClCompile Include="..\src\User\TSL1402.c">
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +131,15 @@
     </ClInclude>
     <ClInclude Include="..\src\User\MPU6050Drive.h">
     </ClInclude>
+    <ClInclude Include="..\src\User\MPU9250.h">
+    </ClInclude>
+    <ClInclude Include="..\src\User\MPU9250_reg.h">
+    </ClInclude>
     <ClInclude Include="..\src\User\SEEKFREE_MT9V032.h">
     </ClInclude>
     <ClInclude Include="..\src\User\AttitudeCalculation.h">
+    </ClInclude>
+    <ClInclude Include="..\src\User\TSL1402.h">
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +147,7 @@
     </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AD3191E5-390D-4442-4F25-EEDE71C6C039}</ProjectGuid>
+    <ProjectGuid>{62DE854D-ED3B-4F4C-721F-77224F35418D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LQ_K66FX_LPTMR</RootNamespace>
   </PropertyGroup>

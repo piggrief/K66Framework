@@ -462,22 +462,25 @@ void TFT_showimage(const unsigned char *p)
 //  @since      v1.0
 //  Sample usage:          
 //-------------------------------------------------------------------------------------------------------------------
-void TFT_showimage_all(const unsigned char *p, int Size_x, int Size_y)
+void TFT_showimage_all(const unsigned char p[120][188], int Size_Height, int Size_Width)
 {
 	uint8 i, j;
-	unsigned char picH, picL;
+	unsigned int temp;
 	unsigned int color;
 
 	//dsp_single_colour(WHITE); //清屏  
 
-	Lcd_SetRegion(0, 0, Size_x - 1, Size_y - 1);
-	for (i = 0; i < Size_y; i++)
+	Lcd_SetRegion(0, 0, 127 - 1, 159 - 1);
+	for (i = 0; i < 127; i++)
 	{
-		for (j = 0; j < Size_x; j++)
+		for (j = 0; j < 159; j++)
 		{
-			picL = *(p + (i*Size_x + j) * 2);	//数据低位在前
-			picH = *(p + (i*Size_x + j) * 2 + 1);
-			color = picH << 8 | picL;
+			temp = p[(uint8)(j * Size_Width / 158.0)][(uint8)((Size_Height - i - 1)*Size_Height / 126.0)];
+                         //temp = 0x00;
+			color = (0x001f & ((temp) >> 3)) << 11;
+			color = color | (((0x003f)&((temp) >> 2)) << 5);
+			color = color | (0x001f & ((temp) >> 3));
+                        
 			LCD_WriteData_16Bit(color);
 		}
 	}
@@ -493,7 +496,7 @@ void TFT_DrawPoint(uint16 x, uint16 y, int PointColor)
 //  @since      v1.0
 //  Sample usage:          
 //-------------------------------------------------------------------------------------------------------------------
-void TFT_showimage_gray(const unsigned char p[40][200], int SizeX_Image, int SizeY_Image, int SizeX_Show, int SizeY_Show)
+void TFT_showimage_gray(const unsigned char p[120][188], int SizeX_Image, int SizeY_Image, int SizeX_Show, int SizeY_Show)
 {
 	uint8 i, j;
 	unsigned int temp;
@@ -523,7 +526,6 @@ void TFT_showimage_gray(const unsigned char p[40][200], int SizeX_Image, int Siz
 void displayimage032(uint8 *p, int Gate_lower, int Gate_upper)
 {
     int i, j;
-
     uint16 color = 0;
     uint16 temp = 0;
 
@@ -539,9 +541,9 @@ void displayimage032(uint8 *p, int Gate_lower, int Gate_upper)
             {}
             else{
                 if (temp < Gate_lower || temp > Gate_upper)
-                        temp = 0x00;
+                        temp = 0xff;
                 else
-                        temp = 0xff;     //关二值化
+                        temp = 0x00;     //关二值化
             }
             color = (0x001f & ((temp) >> 3)) << 11;
             color = color | (((0x003f)&((temp) >> 2)) << 5);
@@ -551,6 +553,41 @@ void displayimage032(uint8 *p, int Gate_lower, int Gate_upper)
     }
 }
 
+void TFTDrawLine(uint8 startx, uint8 starty, uint8 endx, uint8 endy, uint8 LineWidth, uint16 LineColor)
+{
+    int8 startxbuff = startx, startybuff = starty;
+    uint8 endxbuff = endx, endybuff = endy;
+
+    if (endx == startx)//竖线
+    {
+        startxbuff = startx - LineWidth;
+        if (startxbuff < 0)
+            startxbuff = 0;
+    }
+    else if (endy == starty)//横线
+    {
+        startybuff = starty - LineWidth;
+        if (startybuff < 0)
+            startybuff = 0;
+    }
+       
+    Lcd_SetRegion(startxbuff, startybuff, endxbuff, endybuff);
+    for (int i = 0; i <= endxbuff - startxbuff; i++)
+    {
+        for (int j = 0; j <= endybuff - startybuff; j++)
+        {
+            LCD_WriteData_16Bit(LineColor);
+        }
+    }
+}
+
+void TFTDrawRectangle(uint8 startx, uint8 starty, uint8 height, uint8 width ,uint8 LineWidth, uint16 LineColor)
+{
+    TFTDrawLine(startx, starty, startx, starty + height, LineWidth, LineColor);
+    TFTDrawLine(startx, starty + height, startx+width, starty + height, LineWidth, LineColor);
+    TFTDrawLine(startx, starty, startx+width, starty, LineWidth, LineColor);
+    TFTDrawLine(startx + width, starty, startx+width, starty + height, LineWidth, LineColor);
+}
 //-------------------------------------------------------------------------------------------------------------------
 //字体部分
 //-------------------------------------------------------------------------------------------------------------------

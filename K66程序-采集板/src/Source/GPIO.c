@@ -166,27 +166,23 @@ void EXTI_Init(GPIO_Type * port, u8 n, exti_cfg cfg)
 /******************************************************************
                       gpio外部中断函数
                       内容自行添加
-*****************************************************************/
+******************************************************************/
+extern void VSYNC_2(void);
 void PORTA_Interrupt()
 {
   int n;
-  n=0;
+  n=28;
   if((PORTA_ISFR & (1<<n)))
   {
       PORTA_ISFR |= (1<<n);
       // 用户自行添加中断内程序 
-  }
-  n=1;
-  if((PORTA_ISFR & (1<<n)))
-  {
-      PORTA_ISFR |= (1<<n);
-      // 用户自行添加中断内程序 
+      VSYNC_2();
   }
 }
 
 
 
-
+extern void VSYNC_1(void);
 void PORTB_Interrupt()
 {
   int n;
@@ -202,10 +198,9 @@ void PORTB_Interrupt()
   {
       PORTB_ISFR |= (1<<n);
       /* 用户自行添加中断内程序 */
-      VSYNC();
+      VSYNC_1();
   }
 }
-extern void VSYNC(void);
 void PORTC_Interrupt()
 {
   int n;
@@ -236,13 +231,6 @@ void PORTD_Interrupt()
 
 void PORTE_Interrupt()
 {
-  int n;
-  n=0;
-  if((PORTE_ISFR & (1<<n)))
-  {
-      PORTE_ISFR |= (1<<n);
-      //用户自行添加中断内程序 
-  }
   ButtonScan_interrupt();
 }
 

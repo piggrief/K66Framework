@@ -324,7 +324,8 @@ void GetRemoteCMDData(void)
 }
 void ControlCar_FromAnalog(void)
 {
-    SetSpeed_FromRemote_Analog(RemoteData.Left_Y, RemoteData.Left_X,0);
+    //SetSpeed_FromRemote_Analog(RemoteData.Left_Y, RemoteData.Left_X,0);
+    SetSpeed_FromRemote_Analog(127, RemoteData.Left_X,0);
 
 }
 /// <summary>

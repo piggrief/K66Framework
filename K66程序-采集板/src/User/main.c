@@ -23,8 +23,8 @@ LPTMR延时功能演示：1S钟板载LED(PTE26)闪烁
 
 //主函数
 int count_1ms = 0;
-extern int16 GET_CFG[9 - 1][2];
-extern uint8 image[120][188];
+extern int16 GET_CFG_1[9 - 1][2];
+extern int16 GET_CFG_2[9 - 1][2];
 extern float average_piancha;
 extern uint8 Left_Flag[ROW];
 extern uint8 found_flag;
@@ -62,60 +62,88 @@ extern uint32 SpeedCount[4];
 uint32 TimeMeassure = 0;
 void Init_All();
 
+uint8 testbuff=0;
+uint8 ImageSizeToTFTSize(uint8 ImageSize, uint8 IfWidth);
 void main(void)
 {
     int minusresult = 0;
+    NowTFTShowMode = ShowImage_2;
     Init_All();
-    pit_time_start(PIT1);
-
+    
     //PID_Speedloop_init(P_Set, D_Set, I_Set, I_limit, Max_output, DeadBand_Set);//80, 0, 0.1, 100000, 9500, 0
     //PID_locationloop_init(1, 0.5, 0, 0, 60, 0);
     while (1)
     {
-        if (ImageDealState_Now == Image_CollectFinish)
+        if (ImageDealState_Now == Image1_CollectFinish)
         {
-            TimeMeassure = pit_time_get_ms(PIT1);
-            ImageDealState_Now = Image_Dealing;
-            LED_Ctrl(LED3, RVS);      //LED指示程序运行状态 
+            ImageDealState_Now = Image1_Dealing;
             
-            /*图像差运算*/
-//            for (int i = 0; i < ROW; i++)
-//            {
-//                for (int j = 0; j < COL; j++)
-//                {
-//                    minusresult = image[i][j] - LastImage[i][j];
-//                    if (minusresult > 0)
-//                    {
-//                      /*二值化*/
-//                      if(minusresult >= 12 && minusresult <= 28)
-//                          ImageMinus[i][j] = 255;
-//                      else
-//                          ImageMinus[i][j] = 0;
-//                    }
-//                    else
-//                        ImageMinus[i][j] = 0;
-//                    LastImage[i][j] = image[i][j];
-//                    
-//                }
-//            }
-	   //MedianFilter();未定义状态
-            //displayimage032(image[0], 0,28);//二值化被注释了
-            LookLine(image);
-            CalError();
-            //seekfree_sendimg_032();   串口发送     
-            Deviation_Sendout = (uint8)Now_Error;
-            UART_Put_Char(UART_4, 0xFF);
-            UART_Put_Char(UART_4, Deviation_Sendout);
-            UART_Put_Char(UART_4, (uint8)Size_SumMid);
-            UART_Put_Char(UART_4, 0xFF);            
-            //TFT_showint8(0,0, (int8)(Now_Error), BLACK, WHITE);
-	    //TFT_showint8(0,9, true_row, BLACK,WHITE);
-            pit_time_start(PIT1);
-            ImageDealState_Now = Image_DealingFinsh;
+            LED_Ctrl(LED3, RVS);      //LED指示程序运行状态
+            if(NowTFTShowMode == ShowImage_1)
+            {
+              TFT_showuint8(0,0,1,WHITE,BLACK);
+              displayimage032(image_1[0], 0,80);
+            }
+            //TFT_showuint8(0,0,ImageDeal_Camera1.Now_Error,WHITE, BLACK);
+            //TFT_showuint8(0,1,ImageDeal_Camera1.Num_EffectiveMidLine,WHITE, BLACK);
+            
+	    //MedianFilter();未定义状态
+            LookLine(&ImageDeal_Camera1, image_1);
+            CalError(&ImageDeal_Camera1);
+            //seekfree_sendimg_032();   串口发送            
+            //testbuff = image_1[ImageDeal_Camera1.TopLineIndex + 1][ImageDeal_Camera1.LeftLine[ImageDeal_Camera1.TopLineIndex + 1]];
+            #ifndef UseTwoCamera
+            ImageDealState_Now =  Image_DealingFinish;     
+            #endif
+            
+            //TimeMeassure = pit_time_get_ms(PIT1);
+            //pit_time_start(PIT1);
         }
+#ifdef UseTwoCamera
+        if(ImageDealState_Now == Image2_CollectFinish)
+        {
+            ImageDealState_Now = Image2_Dealing;
+            
+            if(NowTFTShowMode == ShowImage_2)
+            {
+              TFT_showuint8(0,0,2,WHITE,BLACK);
+              displayimage032(image_2[0], 0,80);
+              TFTDrawRectangle(127-95, 80
+                  , 15, 20, 2, RED);
+              //TFTDrawRectangle(80.0/ 120.0 * 188.0,60.0*(188.0 - 1.0) / (160.0 - 1.0),10*(188.0 - 1.0) / (160.0 - 1.0),10/ 120.0 * 188.0,2,RED);
+              CalRegionGrayMinMax(image_2, 95*119/122, 80*159/187, 20*119/122, 15*159/187);
+              //seekfree_sendimg_032();   //串口发送     
+
+            }
+            LED_Ctrl(LED2, RVS);      //LED指示程序运行状态 
+            
+	   //MedianFilter();未定义状态
+           // LookLine(&ImageDeal_Camera2, image_2);
+            //CalError(&ImageDeal_Camera2);
+//            Deviation_Sendout = (uint8)ImageDeal_Camera1.Now_Error;
+//            UART_Put_Char(UART_4, 0xFF);
+//            UART_Put_Char(UART_4, Deviation_Sendout);
+//            UART_Put_Char(UART_4, (uint8)ImageDeal_Camera1.Num_EffectiveMidLine);
+//            Deviation_Sendout = (uint8)ImageDeal_Camera2.Now_Error;
+//            UART_Put_Char(UART_4, Deviation_Sendout);
+//            UART_Put_Char(UART_4, (uint8)ImageDeal_Camera2.Num_EffectiveMidLine);            
+//            UART_Put_Char(UART_4, 0xFF); 
+        }
+#endif        
     }
 }
 
+uint8 ImageSizeToTFTSize(uint8 ImageSize, uint8 IfWidth)
+{
+    if (IfWidth)
+    {
+        return ImageSize * (159.0 / 187.0);
+    }
+    else
+    {
+        return ImageSize * (121.0 / 119);
+    }
+}
 
 void Init_All()
 {
@@ -124,29 +152,26 @@ void Init_All()
 
     /*******************GPIO***************************/
     LED_Init();                  //LED初始化    
-    TFT_init(SPI_0, SPIn_PCS0);
+    TFT_init(SPI_1, SPIn_PCS0);
     LCD_Init();
-    //ButtonMenu();
-    UART_Init(UART_3, 115200);
+    ButtonInit();
+    UART_Init(UART_3, 256000);
     //EncoderMeasure_Init();
     //RemoteInit();
     Series_Sendout_init();
 
     //PIT_Init(PIT0, 1);
     EnableInterrupts;
-
+    
     TFT_showstr(0, 0, "Initing!", BLACK, WHITE);
-    camera_init();
+    camera_init_1();
+    //camera_init_2();
+    
     TFT_showstr(0, 0, "Success!", BLACK, WHITE);
     dsp_single_colour(0xffff);//全白
-//    for (int i = 0; i < ROW; i++)
-//    {
-//        for (int j = 0; j < COL; j++)
-//        {
-//            image[i][j] = 0xff;
-//        }
-//    }
-
+    
+    ImageDealStructInit(&ImageDeal_Camera1);
+    ImageDealStructInit(&ImageDeal_Camera2);
 
 }
 

@@ -83,5 +83,13 @@ void ButtonScan_interrupt();
 ///<para>注：一定要放在TFT初始化后，另外其他有中断的模块初始化都必须放在这个函数后面</para>
 ///</summary>
 void ButtonMenu();
+
+typedef enum
+{
+  ShowImage_1,
+  ShowImage_2,
+  NotShow
+}TFTShowMode;
+extern TFTShowMode NowTFTShowMode;
 void Series_Sendout_init(void);
 #endif

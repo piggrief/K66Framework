@@ -19,7 +19,7 @@
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
     </JLinkDriver>
     <DebugChecksum>
-        <Checksum>2189550705</Checksum>
+        <Checksum>3579141547</Checksum>
     </DebugChecksum>
     <CodeCoverage>
         <Enabled>_ 0</Enabled>
@@ -72,6 +72,9 @@
         <Fmt0>ReceiveCMDData-Left_X	3	0</Fmt0>
         <Fmt1>ReceiveCMDData-Left_Y	3	0</Fmt1>
     </struct_types>
+    <array_types>
+        <Fmt0>uint8[128]	3	0</Fmt0>
+    </array_types>
     <watch_formats>
         <Fmt0>{W}42:abg	3	0</Fmt0>
         <Fmt1>{W}42:bbg	3	0</Fmt1>
@@ -165,13 +168,15 @@
         <mode>0</mode>
     </DisassembleMode>
     <Breakpoints2>
-        <Count>0</Count>
+        <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\User\MPU9250.c}.59.2" 0 0 1 "" 0 "" 0</Bp0>
+        <Count>1</Count>
     </Breakpoints2>
     <Aliases>
         <A0>_ "C:\Users\94364\Desktop\信标\K66Framework\K66程序-总钻风摄像头\src\User\main.c" "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-整合\src\User\main.c"</A0>
         <A1>_ "C:\Users\94364\Desktop\新建文件夹 (3)\K66Framework\K66程序-总钻风摄像头\src\Project_Setting\Startup\crt0.s" ""</A1>
         <A2>_ "C:\Users\94364\Desktop\新建文件夹 (3)\K66Framework\K66程序-总钻风摄像头\src\Source\PLL.c" ""</A2>
-        <Count>3</Count>
+        <A3>_ "D:\Smart Car\K66Framework-2.0.0\K66程序-整合\src\Project_Setting\Startup\crt0.s" ""</A3>
+        <Count>4</Count>
         <SuppressDialog>0</SuppressDialog>
     </Aliases>
 </settings>

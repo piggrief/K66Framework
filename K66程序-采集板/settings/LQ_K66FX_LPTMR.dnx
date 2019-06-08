@@ -19,7 +19,7 @@
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
     </JLinkDriver>
     <DebugChecksum>
-        <Checksum>179058097</Checksum>
+        <Checksum>1735217591</Checksum>
     </DebugChecksum>
     <CodeCoverage>
         <Enabled>_ 0</Enabled>
@@ -68,6 +68,35 @@
         <FreqHi>0</FreqHi>
         <MultiCoreRunAll>1</MultiCoreRunAll>
     </Simulator>
+    <Jet>
+        <JetConnSerialNo>97969900</JetConnSerialNo>
+        <JetConnFoundProbes />
+        <PrevWtdReset>Core</PrevWtdReset>
+        <OnlineReset>Software</OnlineReset>
+        <DisableInterrupts>0</DisableInterrupts>
+        <LeaveRunning>0</LeaveRunning>
+        <MultiCoreRunAll>0</MultiCoreRunAll>
+    </Jet>
+    <PlDriver>
+        <FirstRun>0</FirstRun>
+        <MemConfigValue>C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\CONFIG\debugger\NXP\MK66FX1M0xxx18.ddf</MemConfigValue>
+    </PlDriver>
+    <ArmDriver>
+        <EnableCache>1</EnableCache>
+    </ArmDriver>
+    <SWOManager>
+        <SamplingDivider>8192</SamplingDivider>
+        <OverrideClock>0</OverrideClock>
+        <CpuClock>579746</CpuClock>
+        <SwoClock>2637180971</SwoClock>
+        <DataLogMode>0</DataLogMode>
+        <ItmPortsEnabled>63</ItmPortsEnabled>
+        <ItmTermIOPorts>1</ItmTermIOPorts>
+        <ItmLogPorts>0</ItmLogPorts>
+        <ItmLogFile>$PROJ_DIR$\ITM.log</ItmLogFile>
+        <PowerForcePC>1</PowerForcePC>
+        <PowerConnectPC>1</PowerConnectPC>
+    </SWOManager>
     <PowerLog>
         <Title_0>I0</Title_0>
         <Symbol_0>0 4 0</Symbol_0>
@@ -113,42 +142,17 @@
         <Probe0>I0</Probe0>
         <ProbeSetup0>2 1 1 2 0 0</ProbeSetup0>
     </PowerProbe>
-    <Jet>
-        <JetConnSerialNo>97969900</JetConnSerialNo>
-        <JetConnFoundProbes />
-        <PrevWtdReset>Core</PrevWtdReset>
-        <OnlineReset>Software</OnlineReset>
-        <DisableInterrupts>0</DisableInterrupts>
-        <LeaveRunning>0</LeaveRunning>
-        <MultiCoreRunAll>0</MultiCoreRunAll>
-    </Jet>
-    <PlDriver>
-        <FirstRun>0</FirstRun>
-        <MemConfigValue>C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\CONFIG\debugger\NXP\MK66FX1M0xxx18.ddf</MemConfigValue>
-    </PlDriver>
-    <ArmDriver>
-        <EnableCache>1</EnableCache>
-    </ArmDriver>
-    <SWOManager>
-        <SamplingDivider>8192</SamplingDivider>
-        <OverrideClock>0</OverrideClock>
-        <CpuClock>0</CpuClock>
-        <SwoClock>0</SwoClock>
-        <DataLogMode>0</DataLogMode>
-        <ItmPortsEnabled>63</ItmPortsEnabled>
-        <ItmTermIOPorts>1</ItmTermIOPorts>
-        <ItmLogPorts>0</ItmLogPorts>
-        <ItmLogFile>$PROJ_DIR$\ITM.log</ItmLogFile>
-        <PowerForcePC>1</PowerForcePC>
-        <PowerConnectPC>1</PowerConnectPC>
-    </SWOManager>
+    <struct_types>
+        <Fmt0>RegionImageInfo-MaxGray	3	0</Fmt0>
+        <Fmt1>RegionImageInfo-MeanGray	3	0</Fmt1>
+        <Fmt2>RegionImageInfo-MinGray	3	0</Fmt2>
+    </struct_types>
     <array_types>
         <Fmt0>uint8[188]	3	0</Fmt0>
     </array_types>
     <watch_formats>
-        <Fmt0>{W}42:ImageDealState_Now	3	0</Fmt0>
-        <Fmt1>{W}42:abg	3	0</Fmt1>
-        <Fmt2>{W}42:bbg	3	0</Fmt2>
+        <Fmt0>{W}42:abg	3	0</Fmt0>
+        <Fmt1>{W}42:bbg	3	0</Fmt1>
     </watch_formats>
     <Trace1>
         <Enabled>0</Enabled>
@@ -206,7 +210,7 @@
         <mode>0</mode>
     </DisassembleMode>
     <Breakpoints2>
-        <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\Source\UART.c}.489.2" 0 0 1 "" 0 "" 0</Bp0>
+        <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\Source\UART.c}.497.5" 0 0 1 "" 0 "" 0</Bp0>
         <Count>1</Count>
     </Breakpoints2>
     <Aliases>

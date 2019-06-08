@@ -480,14 +480,14 @@ void UART_Irq_Dis(UARTn_e uratn)
 
 
 
-void UART0_IRQHandler(void)
-{
-    s8 data[20];
-
-    //接收一个字节数据并回发
-       
-	ReceiveCMD_Remote();
-}
+//void UART0_IRQHandler(void)
+//{
+//    s8 data[20];
+//
+//    //接收一个字节数据并回发
+//       
+//	ReceiveCMD_Remote();
+//}
 void UART1_IRQHandler(void)
 {
     s8 data[20];

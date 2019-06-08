@@ -32,10 +32,10 @@
 //#define DC_PIN		PTB18	//液晶命令位硬件定义
 //#define REST_PIN	PTB19 //液晶复位引脚定义
 
-#define DC(x)   	GPIO_Ctrl(PTB,9,x);
-#define REST(x) 	GPIO_Ctrl(PTB,8,x);
-#define DCInit		GPIO_Init(PTB,9,GPO,1);
-#define RESTInit	GPIO_Init(PTB,8,GPO,1);
+#define DC(x)   	GPIO_Ctrl(PTE,6,x);
+#define REST(x) 	GPIO_Ctrl(PTE,8,x);
+#define DCInit		GPIO_Init(PTE,6,GPO,1);
+#define RESTInit	GPIO_Init(PTE,8,GPO,1);
 
 
 
@@ -69,9 +69,13 @@ void TFT_showuint8(uint16 x, uint16 y, uint8 dat, int PenColor, int BackColor);
 void TFT_showint16(uint16 x, uint16 y, int16 dat, int PenColor, int BackColor);
 void TFT_showuint16(uint16 x, uint16 y, uint16 dat, int PenColor, int BackColor);
 void TFT_showimage(const unsigned char *p);
-void TFT_showimage_all(const unsigned char *p, int Size_x, int Size_y);
-void TFT_showimage_gray(const unsigned char p[40][200], int SizeX_Image, int SizeY_Image, int SizeX_Show, int SizeY_Show);
+void TFT_showimage_all(const unsigned char p[120][188], int Size_Height, int Size_Width);
+void TFT_showimage_gray(const unsigned char p[120][188], int SizeX_Image, int SizeY_Image, int SizeX_Show, int SizeY_Show);
 void displayimage032(uint8 *p, int , int);
+
+void TFTDrawLine(uint8 startx, uint8 starty, uint8 endx, uint8 endy, uint8 LineWidth, uint16 LineColor);
+void TFTDrawRectangle(uint8 startx, uint8 starty, uint8 height, uint8 width ,uint8 LineWidth, uint16 LineColor);
+
 
 extern const uint8 tft_ascii[95][16];
 extern const uint8  asc2_1608[1520];
