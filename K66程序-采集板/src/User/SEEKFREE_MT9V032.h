@@ -119,14 +119,19 @@ extern uint8 image_1[ROW][COL];      //内部使用
 
 typedef enum
 {
+    Image1_Wait,
+    Image1_Dealing,
+    Image2_Wait,
+    Image2_Dealing
+}ImageDealState;
+
+typedef enum
+{
     Image1_Collecting,
     Image1_CollectFinish,
-    Image1_Dealing,
     Image2_Collecting,
-    Image2_CollectFinish,
-    Image2_Dealing,
-    Image_DealingFinish
-}ImageDealState;
+    Image2_CollectFinish
+}ImageCollectState;
 
 extern ImageDealState ImageDealState_Now;
 extern uint8   image_1[ROW][COL];      //图像数组

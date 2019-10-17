@@ -497,6 +497,96 @@ uint8 CheckImageEffective(uint8 ImageNow[ROW][COL], uint8 ImageTemp[ROW][COL], u
     }
 }
 
+/// <summary>
+/// 使用传统OTSU算法寻找二值化阈值
+/// </summary>
+/// <param name="OriginalImage">原图（灰度图）</param>
+/// <param name="Rate_Reduction">降维系数</param>
+/// <returns>找到的阈值</returns>
+unsigned int FindThreshold_OTSUNormal(uint8 Image[ROW][COL], int Rate_Reduction)
+{
+  unsigned int Threshold = 0;
+  
+  int Image_Width = COL;
+  int Image_Height = ROW;
+  
+  const int GrayScale = 256;//单通道图像总灰度256级
+  unsigned long pixCount[256] = {0};//每个灰度值所占像素个数
+  double pixSum= Image_Width * Image_Height;//图像总像素点
+  double pixPro[256] = {0};//每个灰度值所占总像素比例
+  
+  //统计每个灰度级中像素的个数
+  for (int i = 0; i < Image_Width; i += Rate_Reduction)
+  {
+    for (int j = 0; j < Image_Height; j += Rate_Reduction)
+    {
+      int Pixel = Image[i][j];
+      pixCount[Pixel]++;
+    }
+  }
+  
+  //计算每个像素在整幅图像中的比例
+  for (int i = 0; i < GrayScale; i++)
+    pixPro[i] = (double)(pixCount[i]) / pixSum;
+  
+  double deltaMax = 0;
+  
+  //遍历所有从0到255灰度级的阈值分割条件，测试哪一个的类间方差最大
+  for (int i = 0; i < GrayScale; i++)
+  {
+    double w0 = 0;
+    double w1 = 0;
+    double u0tmp = 0;
+    double u1tmp = 0;
+    double u0 = 0;
+    double u1 = 0;
+    double deltaTmp = 0;
+    
+    for (int j = 0; j < GrayScale; j++)
+    {
+      if (j <= i)//背景
+      {
+        w0 += pixPro[j];
+        u0tmp += j * pixPro[j]; 
+      }
+      else//前景
+      {
+        w1 += pixPro[j];
+        u1tmp += j * pixPro[j];
+      }
+    }
+    u0 = u0tmp / w0;
+    u1 = u1tmp / w1;
+    deltaTmp = (double)((w0 * w1 * (u0 - u1) * (u0 - u1))); //类间方差公式 g = w1 * w2 * (u1 - u2) ^ 2
+    if(deltaTmp > deltaMax) 
+    {
+      deltaMax = deltaTmp;
+      Threshold = (unsigned int)(i);  
+    } 
+  }
+  
+  return Threshold;
+}
+
+# define MaxRegionRangeSize 30
+int MaxColList[500];
+void CheckLikeMaxGray(uint8 Image[ROW][COL], int MaxGray)
+{
+  int k = 0;
+  memset(MaxColList, 0, sizeof(MaxColList));
+  for (int i = StartLookLine; i < EndLookLine; i++)
+  {
+    for (int j = 0; j < COL; j++)
+    {
+      if (Image[i][j] > MaxGray - MaxRegionRangeSize)
+      {
+        MaxColList[k] = j;
+        k++;
+      }
+    }
+  }
+}
+
 int MaxGray_1 = 0;
 int MaxRow_1 = 0;
 int MaxCol_1 = 0;
@@ -530,6 +620,7 @@ uint8 SunDeal_3(int index)
             {
                 MaxRow_1 = MaxRowBuff;
                 MaxCol_1 = MaxColBuff;
+                CheckLikeMaxGray(imageCha_1, MaxGray_1);
                 return 1;
             }
             return 0;

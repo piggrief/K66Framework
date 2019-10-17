@@ -90,15 +90,14 @@ void main(void)
     //PID_locationloop_init(1, 0.5, 0, 0, 60, 0);
     while (1)
     {
-        if (ImageDealState_Now == Image1_CollectFinish)
+        if (ImageDealState_Now == Image1_Dealing)
         {
-            ImageDealState_Now = Image1_Dealing;
-            
+            pit_time_start(PIT2);
             LED_Ctrl(LED3, RVS);      //LED指示程序运行状态
             if(NowTFTShowMode == ShowImage_1)
             {
               //TFT_showuint8(0,0,1,WHITE,BLACK);
-              displayimage032(image_1[0], 0,80, ROW, COL);
+              displayimage032(imageCha_1[0], 1,FindThreshold_OTSUNormal(imageCha_1, 2), ROW, COL);
             }
 
             
@@ -127,6 +126,7 @@ void main(void)
             }       
             
             
+            
 //            if (NowTFTShowMode == ShowImage_1)
 //            {
 //                  //TFT_showuint8(0, 0, MaxCol_1, WHITE, BLACK);
@@ -135,18 +135,17 @@ void main(void)
 //            }
 //            //seekfree_sendimg_032();   串口发送            
 //            //testbuff = image_1[ImageDeal_Camera1.TopLineIndex + 1][ImageDeal_Camera1.LeftLine[ImageDeal_Camera1.TopLineIndex + 1]];
-            DataSend();            
+//            DataSend();            
             #ifndef UseTwoCamera
             ImageDealState_Now =  Image_DealingFinish;     
             #endif
             
-
+          ImageDealState_Now = Image2_Wait;
+          TimeMeassure = pit_time_get_ms(PIT2);
         }
 #ifdef UseTwoCamera
-        if(ImageDealState_Now == Image2_CollectFinish)
+        if(ImageDealState_Now == Image2_Dealing)
         {
-            ImageDealState_Now = Image2_Dealing;
-            
             if(NowTFTShowMode == ShowImage_2)
             {
               //SunDeal_2();
@@ -179,8 +178,9 @@ void main(void)
             }
             LED_Ctrl(LED2, RVS);      //LED指示程序运行状态 
 
+            ImageDealState_Now = Image1_Wait;
             ////	   //MedianFilter();未定义状态
-            //DataSend();
+            DataSend();
         }
 #endif        
     }

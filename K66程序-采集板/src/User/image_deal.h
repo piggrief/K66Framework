@@ -87,6 +87,14 @@ typedef struct
 }RegionImageInfo;
 
 void CalRegionGrayMinMax(uint8 imagebuff[120][188], uint8 startx, uint8 starty, uint8 height, uint8 width);
+/// <summary>
+/// 使用传统OTSU算法寻找二值化阈值
+/// </summary>
+/// <param name="OriginalImage">原图（灰度图）</param>
+/// <param name="Rate_Reduction">降维系数</param>
+/// <returns>找到的阈值</returns>
+unsigned int FindThreshold_OTSUNormal(uint8 Image[ROW][COL], int Rate_Reduction);
+
 
 void SunDeal();
 void SunDeal_2();

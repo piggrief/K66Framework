@@ -19,7 +19,7 @@
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
     </JLinkDriver>
     <DebugChecksum>
-        <Checksum>3208822524</Checksum>
+        <Checksum>3302817</Checksum>
     </DebugChecksum>
     <CodeCoverage>
         <Enabled>_ 0</Enabled>
@@ -179,13 +179,6 @@
         <ShowTimeSum>1</ShowTimeSum>
         <SumSortOrder>0</SumSortOrder>
     </EventLog>
-    <DisassembleMode>
-        <mode>0</mode>
-    </DisassembleMode>
-    <Breakpoints2>
-        <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\Source\UART.c}.497.5" 0 0 1 "" 0 "" 0</Bp0>
-        <Count>1</Count>
-    </Breakpoints2>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
@@ -195,13 +188,6 @@
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </LogFile>
-    <Aliases>
-        <A0>_ "C:\Users\94364\Desktop\信标\K66Framework\K66程序-总钻风摄像头\src\User\main.c" "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-整合\src\User\main.c"</A0>
-        <A1>_ "C:\Users\94364\Desktop\新建文件夹 (3)\K66Framework\K66程序-总钻风摄像头\src\Project_Setting\Startup\crt0.s" ""</A1>
-        <A2>_ "C:\Users\94364\Desktop\新建文件夹 (3)\K66Framework\K66程序-总钻风摄像头\src\Source\PLL.c" ""</A2>
-        <Count>3</Count>
-        <SuppressDialog>0</SuppressDialog>
-    </Aliases>
     <DriverProfiling>
         <Enabled>0</Enabled>
         <Mode>1</Mode>
@@ -220,4 +206,18 @@
         <Probe0>I0</Probe0>
         <ProbeSetup0>2 1 1 2 0 0</ProbeSetup0>
     </PowerProbe>
+    <DisassembleMode>
+        <mode>0</mode>
+    </DisassembleMode>
+    <Breakpoints2>
+        <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\src\Source\UART.c}.497.5" 0 0 1 "" 0 "" 0</Bp0>
+        <Count>1</Count>
+    </Breakpoints2>
+    <Aliases>
+        <A0>_ "C:\Users\94364\Desktop\信标\K66Framework\K66程序-总钻风摄像头\src\User\main.c" "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-整合\src\User\main.c"</A0>
+        <A1>_ "C:\Users\94364\Desktop\新建文件夹 (3)\K66Framework\K66程序-总钻风摄像头\src\Project_Setting\Startup\crt0.s" ""</A1>
+        <A2>_ "C:\Users\94364\Desktop\新建文件夹 (3)\K66Framework\K66程序-总钻风摄像头\src\Source\PLL.c" ""</A2>
+        <Count>3</Count>
+        <SuppressDialog>0</SuppressDialog>
+    </Aliases>
 </settings>

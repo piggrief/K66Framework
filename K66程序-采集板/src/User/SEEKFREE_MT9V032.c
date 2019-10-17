@@ -41,6 +41,8 @@
 
 uint8   image_1[ROW][COL];      //图像数组
 uint8   image_2[ROW][COL];      //图像数组
+uint8   image_1buff[ROW][COL];      //图像数组
+uint8   image_2buff[ROW][COL];      //图像数组
 
 uint8   receive_1[3];
 uint8   receive_2[3];
@@ -49,7 +51,8 @@ uint8   receive_num_2 = 0;
 uint8   uart_receive_flag_1 = 1;
 uint8   uart_receive_flag_2 = 1;
 
-ImageDealState ImageDealState_Now = Image1_Collecting;
+ImageDealState ImageDealState_Now = Image1_Wait;
+ImageCollectState ImageCollectState_Now = Image2_CollectFinish;
 
 //需要配置到摄像头的数据
 int16 MT9V032_CFG_1[CONFIG_FINISH][2]=
@@ -383,7 +386,7 @@ void camera_init_1(void)
     //摄像头采集初始化
     DisableInterrupts;
     //DMA通道0初始化，PTC18触发源(默认上升沿)，源地址为C_IN_DATA(1)(PTC8-PTC15)，目的地址为：image，每次传输1Byte 传输完毕保持目的地址
-    DMA_PORTx2BUFF_Init(DMA_CH4, (void *)&MT9V032_DATAPORT_1, (void *)image_1, MT9V032_PCLK_1, DMA_BYTE1, COL*ROW, DMA_rising_up_keepon);
+    DMA_PORTx2BUFF_Init(DMA_CH4, (void *)&MT9V032_DATAPORT_1, (void *)image_1buff, MT9V032_PCLK_1, DMA_BYTE1, COL*ROW, DMA_rising_up_keepon);
 
     DMA_DIS(DMA_CH4);
     DMA_EN(DMA_CH4);
@@ -440,7 +443,7 @@ void camera_init_2(void)
     //摄像头采集初始化
     DisableInterrupts;
     //DMA通道0初始化，PTC18触发源(默认上升沿)，源地址为C_IN_DATA(1)(PTC8-PTC15)，目的地址为：image，每次传输1Byte 传输完毕保持目的地址
-    DMA_PORTx2BUFF_Init(DMA_CH5, (void *)&MT9V032_DATAPORT_2, (void *)image_2, MT9V032_PCLK_2, DMA_BYTE1, COL*ROW, DMA_rising_up_keepon);
+    DMA_PORTx2BUFF_Init(DMA_CH5, (void *)&MT9V032_DATAPORT_2, (void *)image_2buff, MT9V032_PCLK_2, DMA_BYTE1, COL*ROW, DMA_rising_up_keepon);
 
     DMA_DIS(DMA_CH5);
     //DMA_IRQ_CLEAN(DMA_CH5);
@@ -462,54 +465,60 @@ extern uint32 TimeMeassure;
 //-------------------------------------------------------------------------------------------------------------------
 void VSYNC_1(void)
 {
-    DMA_DIS(DMA_CH4);
-
-    if (ImageDealState_Now == Image1_Collecting)
+    if (ImageCollectState_Now == Image1_Collecting)
     {
-        TimeMeassure = pit_time_get_ms(PIT2);
-        ImageDealState_Now = Image1_CollectFinish;
+        DMA_DIS(DMA_CH4);
+        ImageCollectState_Now = Image1_CollectFinish;
+
+        if(ImageDealState_Now == Image1_Wait)
+        {
+          memcpy(image_1, image_1buff, ROW*COL);
+          ImageDealState_Now = Image1_Dealing;
+        }
     }
 
 #ifdef UseTwoCamera
-    if (ImageDealState_Now == Image2_Dealing)
+    if (ImageCollectState_Now == Image2_CollectFinish)
     {
-        ImageDealState_Now = Image1_Collecting;
-        pit_time_start(PIT2);
+        ImageCollectState_Now = Image1_Collecting;
+        //pit_time_start(PIT2);
         DMA0->TCD[DMA_CH4].BITER_ELINKNO |= DMA_BITER_ELINKNO_BITER(COL * ROW);
         DMA0->TCD[DMA_CH4].CITER_ELINKNO |= DMA_CITER_ELINKNO_CITER(COL * ROW);
-        DMA0->TCD[DMA_CH4].DADDR = (uint32)image_1;
+        DMA0->TCD[DMA_CH4].DADDR = (uint32)image_1buff;
         DMA_EN(DMA_CH4);
     }
 #else
-    if (ImageDealState_Now == Image_DealingFinish)
+    if (ImageCollectState_Now == Image_DealingFinish)
     {
-        ImageDealState_Now = Image1_Collecting;
+        ImageCollectState_Now = Image1_Collecting;
         DMA0->TCD[DMA_CH4].BITER_ELINKNO |= DMA_BITER_ELINKNO_BITER(COL * ROW);
         DMA0->TCD[DMA_CH4].CITER_ELINKNO |= DMA_CITER_ELINKNO_CITER(COL * ROW);
-        DMA0->TCD[DMA_CH4].DADDR = (uint32)image_1;
+        DMA0->TCD[DMA_CH4].DADDR = (uint32)image_1buff;
         DMA_EN(DMA_CH4);
     }    
 #endif
 }
 void VSYNC_2(void)
 {
-    //DMA_PORTx2BUFF_Init(DMA_CH4, (void *)&MT9V032_DATAPORT, (void *)image, MT9V032_PCLK, DMA_BYTE1, COL*ROW, DMA_rising_down_keepon);
-    DMA_DIS(DMA_CH5);
-    //DMA_IRQ_CLEAN(DMA_CH5);
-
-
-    if (ImageDealState_Now == Image2_Collecting)
+    if (ImageCollectState_Now == Image2_Collecting)
     {
+        DMA_DIS(DMA_CH5);
         //disable_irq(PORTA_IRQn);//关闭场中断
-        ImageDealState_Now = Image2_CollectFinish;
+        ImageCollectState_Now = Image2_CollectFinish;
+        
+        if(ImageDealState_Now == Image2_Wait)
+        {
+          memcpy(image_2, image_2buff, ROW*COL);
+          ImageDealState_Now = Image2_Dealing;
+        }
     }
 
-    if (ImageDealState_Now == Image1_Dealing)
+    if (ImageCollectState_Now == Image1_CollectFinish)
     {
-        ImageDealState_Now = Image2_Collecting;
+        ImageCollectState_Now = Image2_Collecting;
         DMA0->TCD[DMA_CH5].BITER_ELINKNO |= DMA_BITER_ELINKNO_BITER(COL * ROW);
         DMA0->TCD[DMA_CH5].CITER_ELINKNO |= DMA_CITER_ELINKNO_CITER(COL * ROW);
-        DMA0->TCD[DMA_CH5].DADDR = (uint32)image_2;
+        DMA0->TCD[DMA_CH5].DADDR = (uint32)image_2buff;
         //DMA_IRQ_EN(DMA_CH5);
         DMA_EN(DMA_CH5);
     }
