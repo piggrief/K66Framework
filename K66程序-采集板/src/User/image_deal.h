@@ -14,12 +14,17 @@
 
 #include "SEEKFREE_MT9V032.h"
 
+# define JumpThreshold 30 // 35
+# define ThreasHold_Fail 1150 // 440
+# define MaxJumpThreshold_1 42 // 30
+# define MaxJumpThreshold_2  42 // 30
+
 #define Deal_White  1
 #define Deal_Black  0
-#define ThreasHold 80//40  100
+#define ThreasHold 40//40  100
 
-# define StartLookLine 10
-# define EndLookLine 90//不包含这个值
+# define StartLookLine 9
+# define EndLookLine 75//不包含这个值
 
 typedef enum
 {
@@ -83,5 +88,18 @@ typedef struct
 
 void CalRegionGrayMinMax(uint8 imagebuff[120][188], uint8 startx, uint8 starty, uint8 height, uint8 width);
 
-
+void SunDeal();
+void SunDeal_2();
+extern uint8 SunDeal_3(int index);
+extern uint8 imageTemp_1[ROW][COL];
+extern uint8 imageCha_1[ROW][COL];
+extern uint8 imageTemp_2[ROW][COL];
+extern uint8 imageCha_2[ROW][COL];
+extern int MaxRow_1;
+extern int MaxCol_1;
+extern int MaxRow_2;
+extern int MaxCol_2;
+extern int MaxGray_1;
+extern int MaxGray_2;
+extern unsigned long LightNum_ChaImage;
 #endif

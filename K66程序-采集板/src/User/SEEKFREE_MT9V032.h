@@ -49,10 +49,10 @@
 
 //#include "headfile.h"
 
-//# define UseTwoCamera
+# define UseTwoCamera
    
-#define COL     188//图像宽度   范围1-752     K60采集不允许超过188
-#define ROW     120//图像高度	范围1-480
+#define COL     160//图像宽度   范围1-752     K60采集不允许超过188
+#define ROW     80//图像高度	范围1-480
 
 
 //摄像头命令枚举

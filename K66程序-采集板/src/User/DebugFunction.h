@@ -11,7 +11,7 @@
 # ifndef _DEBUGFUNCTION_H_
 # define _DEBUGFUNCTION_H_
 
-# define CRC_Uart_Port UART_3
+# define CRC_Uart_Port UART_4
 # define Series_Uart_Port UART_4
 # define Remote_Uart_Port UART_0
 /// <summary>

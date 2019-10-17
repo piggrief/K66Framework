@@ -138,7 +138,7 @@ void PIT0_Interrupt()
         //PID_SetTarget(&Car_Speed_Rotate,9);
         //PID_SetTarget()
         ControlCar_FromAnalog();
-        //Series_Control(0);
+        Series_Control(0);
         if (CA1 == Left_Turn)
         {
             if (Flag_MeasureDistance)

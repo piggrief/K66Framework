@@ -183,6 +183,7 @@ void PORTA_Interrupt()
 
 
 extern void VSYNC_1(void);
+
 void PORTB_Interrupt()
 {
   int n;

@@ -44,8 +44,8 @@ void ImageDealStructInit(ImageDeal_ForLight * ImageDeal)
     ImageDeal->Count_LightOff = 0;
 }
 
-# define BoardWidthThreshold 2
-# define JumpThreshold 35
+# define BoardWidthThreshold 0
+
 
 
 uint8 flag_LookedLeftLine = 0;
@@ -232,4 +232,339 @@ void CalRegionGrayMinMax(uint8 imagebuff[120][188], uint8 startx, uint8 starty, 
         }
     }
     NowRegionImage.MeanGray = (uint8)(GraySum / AddIndex);
+}
+
+float AverageGray_All = 0;
+float GraySum_All = 0;
+uint8 imageDealBuff_1[ROW][COL];
+uint8 imageDealBuff_2[ROW][COL];
+void SunDeal()
+{
+  GraySum_All = 0;
+  AverageGray_All = 0;
+  for(int i = 0; i < ROW; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+      imageDealBuff_1[i][j] = image_2[i][j];
+    }
+  }
+  for(int i = 15; i < 70; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+      GraySum_All+=image_2[i][j];
+      //image_2[i][j] -= 50;
+    }
+  }
+  AverageGray_All = GraySum_All / ROW / COL;
+//  for(int i = 0; i < ROW; i++)
+//  {
+//    for(int j = 0; j < COL; j++)
+//    {
+//      if(i < 70)
+//        image_2[i][j] -= AverageGray_All;
+//      else
+//        image_2[i][j] = 0;
+//    }
+//  }
+
+    //3窗口灰度级腐蚀
+  uint8 MinGray = 255;
+  for(int i = 0; i < ROW; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+      if(i < 70)
+      {
+        if (i - 1 >= 0 && j - 1 >= 0 && i + 1 <= ROW && j+1<=COL)
+        {
+          MinGray = 255;
+          for (int ii = i - 1; ii <= i + 1; ii++)
+          {
+            for(int jj = j - 1; jj <= j + 1; jj++)
+            {
+              if(image_2[ii][jj] < MinGray)
+              {
+                MinGray = image_2[ii][jj];
+              }
+            }
+          }
+          imageDealBuff_1[i][j] = MinGray;
+          
+        }
+      }
+      else
+      {
+        imageDealBuff_1[i][j] = 0;
+      }
+    }
+  }
+    //3窗口灰度级膨胀
+  uint8 MaxGray = 0;
+  for(int i = 0; i < ROW; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+      if(i < 70)
+      {
+        if (i - 1 >= 0 && j - 1 >= 0 && i + 1 <= ROW && j+1<=COL)
+        {
+          MaxGray = 0;
+          for (int ii = i - 1; ii <= i + 1; ii++)
+          {
+            for(int jj = j - 1; jj <= j + 1; jj++)
+            {
+              if(imageDealBuff_1[ii][jj] > MaxGray)
+              {
+                MaxGray = imageDealBuff_1[ii][jj];
+              }
+            }
+          }
+          imageDealBuff_2[i][j] = MaxGray;
+          
+        }
+      }
+      else
+      {
+        imageDealBuff_2[i][j] = 0;
+      }
+    }
+  } 
+
+  int buff = 0;
+  for(int i = 0; i < ROW; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+//      buff = imageDealBuff_2[i][j] - image_2[i][j];
+//      if(buff < 0)
+//      {
+//        image_2[i][j] = -buff;
+//      }
+//      else
+//      {
+//        image_2[i][j] = 0;
+//      }
+      image_2[i][j] = imageDealBuff_2[i][j];
+    }
+  }
+}
+
+void SunDeal_2()
+{
+  GraySum_All = 0;
+  AverageGray_All = 0;
+  for(int i = 0; i < ROW; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+      imageDealBuff_1[i][j] = image_2[i][j];
+    }
+  }
+  for(int i = 15; i < 70; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+      GraySum_All+=image_2[i][j];
+      //image_2[i][j] -= 50;
+    }
+  }
+  AverageGray_All = GraySum_All / ROW / COL;
+//  for(int i = 0; i < ROW; i++)
+//  {
+//    for(int j = 0; j < COL; j++)
+//    {
+//      if(i < 70)
+//        image_2[i][j] -= AverageGray_All;
+//      else
+//        image_2[i][j] = 0;
+//    }
+//  }
+    //3窗口灰度级膨胀
+  uint8 MaxGray = 0;
+  for(int i = 0; i < ROW; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+      if(i < 70)
+      {
+        if (i - 1 >= 0 && j - 1 >= 0 && i + 1 <= ROW && j+1<=COL)
+        {
+          MaxGray = 0;
+          for (int ii = i - 1; ii <= i + 1; ii++)
+          {
+            for(int jj = j - 1; jj <= j + 1; jj++)
+            {
+              if(image_2[ii][jj] > MaxGray)
+              {
+                MaxGray = image_2[ii][jj];
+              }
+            }
+          }
+          imageDealBuff_1[i][j] = MaxGray;
+          
+        }
+      }
+      else
+      {
+        imageDealBuff_1[i][j] = 0;
+      }
+    }
+  } 
+    //3窗口灰度级腐蚀
+  uint8 MinGray = 255;
+  for(int i = 0; i < ROW; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+      if(i < 70)
+      {
+        if (i - 1 >= 0 && j - 1 >= 0 && i + 1 <= ROW && j+1<=COL)
+        {
+          MinGray = 255;
+          for (int ii = i - 1; ii <= i + 1; ii++)
+          {
+            for(int jj = j - 1; jj <= j + 1; jj++)
+            {
+              if(imageDealBuff_1[ii][jj] < MinGray)
+              {
+                MinGray = imageDealBuff_1[ii][jj];
+              }
+            }
+          }
+          imageDealBuff_2[i][j] = MinGray;
+          
+        }
+      }
+      else
+      {
+        imageDealBuff_2[i][j] = 0;
+      }
+    }
+  }
+
+
+  int buff = 0;
+  for(int i = 0; i < ROW; i++)
+  {
+    for(int j = 0; j < COL; j++)
+    {
+      buff = imageDealBuff_2[i][j] - image_2[i][j];
+      if(buff > 0)
+      {
+        image_2[i][j] = buff;
+      }
+      else
+      {
+        image_2[i][j] = 0;
+      }
+      //image_2[i][j] = imageDealBuff_2[i][j];
+    }
+  }
+}
+uint8 imageTemp_1[ROW][COL];
+uint8 imageCha_1[ROW][COL];
+uint8 imageTemp_2[ROW][COL];
+uint8 imageCha_2[ROW][COL];
+unsigned long LightNum_ChaImage = 0;
+uint8 CheckImageEffective(uint8 ImageNow[ROW][COL], uint8 ImageTemp[ROW][COL], uint8 ImageCha[ROW][COL])
+{
+    int ChaBuff = 0;
+    LightNum_ChaImage = 0;
+    for (int i = StartLookLine; i < EndLookLine; i++)
+    {
+        for (int j = 0; j < COL; j++)
+        {
+            ChaBuff = ImageNow[i][j] - ImageTemp[i][j];
+            if(ChaBuff < 0)
+              ChaBuff = -ChaBuff;
+            ImageCha[i][j] = (uint8)(ChaBuff);
+            ImageTemp[i][j] = ImageNow[i][j];
+            if (ImageCha[i][j] > JumpThreshold)
+            {
+                LightNum_ChaImage++;
+            }
+        }
+    }
+    if (LightNum_ChaImage >= ThreasHold_Fail)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+int MaxGray_1 = 0;
+int MaxRow_1 = 0;
+int MaxCol_1 = 0;
+int MaxGray_2 = 0;
+int MaxRow_2 = 0;
+int MaxCol_2 = 0;
+uint8 SunDeal_3(int index)
+{
+  int MaxRowBuff = 0, MaxColBuff = 0;
+    if (index == 1)
+    {
+        if (CheckImageEffective(image_1, imageTemp_1, imageCha_1) == 1)
+        {
+            //LookLine(&ImageDeal_Camera1, imageCha_1);
+            //CalError(&ImageDeal_Camera1);
+            MaxGray_1 = 0;
+            
+            for (int i = StartLookLine; i < EndLookLine; i++)
+            {
+                for (int j = 0; j < COL; j++)
+                {
+                    if (imageCha_1[i][j] > MaxGray_1)
+                    {
+                        MaxGray_1 = imageCha_1[i][j];
+                        MaxRowBuff = i;
+                        MaxColBuff = j;
+                    }
+                }
+            }
+            if (MaxGray_1 >= MaxJumpThreshold_1)
+            {
+                MaxRow_1 = MaxRowBuff;
+                MaxCol_1 = MaxColBuff;
+                return 1;
+            }
+            return 0;
+        }
+        else
+            return 0;
+    }
+    else if (index == 2)
+    {
+        if (CheckImageEffective(image_2, imageTemp_2, imageCha_2) == 1)
+        {
+            MaxGray_2 = 0;
+
+            for (int i = StartLookLine; i < EndLookLine; i++)
+            {
+                for (int j = 0; j < COL; j++)
+                {
+                    if (imageCha_2[i][j] > MaxGray_2)
+                    {
+                        MaxGray_2 = imageCha_2[i][j];
+                        MaxRowBuff = i;
+                        MaxColBuff = j;
+                    }
+                }
+            }
+            if (MaxGray_2 >= MaxJumpThreshold_2)
+            {
+                MaxRow_2 = MaxRowBuff;
+                MaxCol_2 = MaxColBuff;
+                return 1;
+            }
+            return 0;
+        }
+        else
+            return 0;
+    }
+    
 }

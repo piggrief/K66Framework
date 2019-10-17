@@ -71,8 +71,7 @@ void TFT_showuint16(uint16 x, uint16 y, uint16 dat, int PenColor, int BackColor)
 void TFT_showimage(const unsigned char *p);
 void TFT_showimage_all(const unsigned char p[120][188], int Size_Height, int Size_Width);
 void TFT_showimage_gray(const unsigned char p[120][188], int SizeX_Image, int SizeY_Image, int SizeX_Show, int SizeY_Show);
-void displayimage032(uint8 *p, int , int);
-
+void displayimage032(uint8 *p, int Gate_lower, int Gate_upper, int ImageRow, int ImageCol);
 void TFTDrawLine(uint8 startx, uint8 starty, uint8 endx, uint8 endy, uint8 LineWidth, uint16 LineColor);
 void TFTDrawRectangle(uint8 startx, uint8 starty, uint8 height, uint8 width ,uint8 LineWidth, uint16 LineColor);
 

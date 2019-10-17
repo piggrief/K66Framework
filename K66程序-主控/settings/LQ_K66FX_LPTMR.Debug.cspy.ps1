@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "D:\software\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\settings\LQ_K66FX_LPTMR.Debug.general.xcl" --backend -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\settings\LQ_K66FX_LPTMR.Debug.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\settings\LQ_K66FX_LPTMR.Debug.general.xcl" --backend -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\settings\LQ_K66FX_LPTMR.Debug.driver.xcl" 
 }
 else
 {
-& "D:\software\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\settings\LQ_K66FX_LPTMR.Debug.general.xcl" --debug_file=$debugfile --backend -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\settings\LQ_K66FX_LPTMR.Debug.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\settings\LQ_K66FX_LPTMR.Debug.general.xcl" --debug_file=$debugfile --backend -f "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\settings\LQ_K66FX_LPTMR.Debug.driver.xcl" 
 }

@@ -46,6 +46,6 @@ void OLED_DrawPoint(uint8 x, uint8 y, uint8 t);
 /// <param name="ShowSizeY">OLED显示区域大小的Y值</param>
 /// <param name="ImageSizeHeight">待显示图像的高度</param>
 /// <param name="ImageSizeWidth">待显示图像的宽度</param>
-void OLED_ShowImage(int ShowSizeX, int ShowSizeY, int ImageSizeHeight, int ImageSizeWidth, int Gate_To2, unsigned char imagebuff[120][188]);
+void OLED_ShowImage(int ShowSizeX, int ShowSizeY, int ImageSizeHeight, int ImageSizeWidth, int Gate_To2, unsigned char imagebuff[80][160]);
 #endif
 

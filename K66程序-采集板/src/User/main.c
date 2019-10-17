@@ -62,13 +62,29 @@ extern uint32 SpeedCount[4];
 uint32 TimeMeassure = 0;
 void Init_All();
 
+void DataSend()
+{
+    //SEND(LightNum_ChaImage, MaxGray_1, MaxRow_1, MaxCol_1);
+    Deviation_Sendout = (uint8)MaxCol_1;
+    UART_Put_Char(UART_4, 0xFF);
+    UART_Put_Char(UART_4, Deviation_Sendout);
+    UART_Put_Char(UART_4, (uint8)MaxRow_1);
+    Deviation_Sendout = (uint8)MaxCol_2;
+    UART_Put_Char(UART_4, Deviation_Sendout);
+    UART_Put_Char(UART_4, (uint8)MaxRow_2);            
+    UART_Put_Char(UART_4, 0xFF); 
+}
+
 uint8 testbuff=0;
 uint8 ImageSizeToTFTSize(uint8 ImageSize, uint8 IfWidth);
+uint8 DisappearCount_1 = 0;
+uint8 DisappearCount_2 = 0;
 void main(void)
 {
     int minusresult = 0;
-    NowTFTShowMode = ShowImage_2;
     Init_All();
+    
+    //NowTFTShowMode = ShowImage_1;
     
     //PID_Speedloop_init(P_Set, D_Set, I_Set, I_limit, Max_output, DeadBand_Set);//80, 0, 0.1, 100000, 9500, 0
     //PID_locationloop_init(1, 0.5, 0, 0, 60, 0);
@@ -81,23 +97,50 @@ void main(void)
             LED_Ctrl(LED3, RVS);      //LED指示程序运行状态
             if(NowTFTShowMode == ShowImage_1)
             {
-              TFT_showuint8(0,0,1,WHITE,BLACK);
-              displayimage032(image_1[0], 0,80);
+              //TFT_showuint8(0,0,1,WHITE,BLACK);
+              displayimage032(image_1[0], 0,80, ROW, COL);
             }
-            //TFT_showuint8(0,0,ImageDeal_Camera1.Now_Error,WHITE, BLACK);
-            //TFT_showuint8(0,1,ImageDeal_Camera1.Num_EffectiveMidLine,WHITE, BLACK);
+
             
 	    //MedianFilter();未定义状态
-            LookLine(&ImageDeal_Camera1, image_1);
-            CalError(&ImageDeal_Camera1);
-            //seekfree_sendimg_032();   串口发送            
-            //testbuff = image_1[ImageDeal_Camera1.TopLineIndex + 1][ImageDeal_Camera1.LeftLine[ImageDeal_Camera1.TopLineIndex + 1]];
+            //LookLine(&ImageDeal_Camera1, image_1);
+            //CalError(&ImageDeal_Camera1);
+            
+            if (SunDeal_3(1) == 1)//阳光处理成功
+            {
+              DisappearCount_1 = 0;
+              //TFT_showuint8(0, 4, 001, WHITE, BLACK);
+            }   
+            else
+            {
+                DisappearCount_1++;
+                if(DisappearCount_1 >= 7)
+                {
+                  MaxCol_1 = 0;
+                  MaxRow_1 = 0;
+                  DisappearCount_1 = 0;
+                }
+                if (NowTFTShowMode == ShowImage_1)
+                {
+                    //TFT_showuint8(0, 4, 000, WHITE, BLACK);
+                }
+            }       
+            
+            
+//            if (NowTFTShowMode == ShowImage_1)
+//            {
+//                  //TFT_showuint8(0, 0, MaxCol_1, WHITE, BLACK);
+//                  //TFT_showuint8(0, 1, MaxRow_1, WHITE, BLACK);
+//                  //TFT_showuint8(0, 2, MaxGray_1, WHITE, BLACK);
+//            }
+//            //seekfree_sendimg_032();   串口发送            
+//            //testbuff = image_1[ImageDeal_Camera1.TopLineIndex + 1][ImageDeal_Camera1.LeftLine[ImageDeal_Camera1.TopLineIndex + 1]];
+            DataSend();            
             #ifndef UseTwoCamera
             ImageDealState_Now =  Image_DealingFinish;     
             #endif
             
-            //TimeMeassure = pit_time_get_ms(PIT1);
-            //pit_time_start(PIT1);
+
         }
 #ifdef UseTwoCamera
         if(ImageDealState_Now == Image2_CollectFinish)
@@ -106,28 +149,38 @@ void main(void)
             
             if(NowTFTShowMode == ShowImage_2)
             {
-              TFT_showuint8(0,0,2,WHITE,BLACK);
-              displayimage032(image_2[0], 0,80);
-              TFTDrawRectangle(127-95, 80
-                  , 15, 20, 2, RED);
-              //TFTDrawRectangle(80.0/ 120.0 * 188.0,60.0*(188.0 - 1.0) / (160.0 - 1.0),10*(188.0 - 1.0) / (160.0 - 1.0),10/ 120.0 * 188.0,2,RED);
-              CalRegionGrayMinMax(image_2, 95*119/122, 80*159/187, 20*119/122, 15*159/187);
-              //seekfree_sendimg_032();   //串口发送     
-
+              //SunDeal_2();
+              //TFT_showuint8(0,0,2,WHITE,BLACK);
+              displayimage032(image_2[0], 0,80, ROW, COL);
+            }
+            if (SunDeal_3(2) == 1)//阳光处理成功
+            {
+              DisappearCount_2 = 0;
+                if (NowTFTShowMode == ShowImage_2)
+                {
+                    TFT_showuint8(0, 0, MaxCol_2, WHITE, BLACK);
+                    TFT_showuint8(0, 1, MaxRow_2, WHITE, BLACK);
+                    TFT_showuint8(0, 2, MaxGray_2, WHITE, BLACK);
+                }
+            }
+            else
+            {
+                DisappearCount_2++;
+                if(DisappearCount_2 >= 7)
+                {
+                  MaxCol_2 = 0;
+                  MaxRow_2 = 0;
+                  DisappearCount_2 = 0;
+                }
+                if (NowTFTShowMode == ShowImage_2)
+                {
+                    TFT_showuint8(0, 0, 999, WHITE, BLACK);
+                }
             }
             LED_Ctrl(LED2, RVS);      //LED指示程序运行状态 
-            
-	   //MedianFilter();未定义状态
-           // LookLine(&ImageDeal_Camera2, image_2);
-            //CalError(&ImageDeal_Camera2);
-//            Deviation_Sendout = (uint8)ImageDeal_Camera1.Now_Error;
-//            UART_Put_Char(UART_4, 0xFF);
-//            UART_Put_Char(UART_4, Deviation_Sendout);
-//            UART_Put_Char(UART_4, (uint8)ImageDeal_Camera1.Num_EffectiveMidLine);
-//            Deviation_Sendout = (uint8)ImageDeal_Camera2.Now_Error;
-//            UART_Put_Char(UART_4, Deviation_Sendout);
-//            UART_Put_Char(UART_4, (uint8)ImageDeal_Camera2.Num_EffectiveMidLine);            
-//            UART_Put_Char(UART_4, 0xFF); 
+
+            ////	   //MedianFilter();未定义状态
+            //DataSend();
         }
 #endif        
     }
@@ -148,24 +201,25 @@ uint8 ImageSizeToTFTSize(uint8 ImageSize, uint8 IfWidth)
 void Init_All()
 {
     DisableInterrupts;           //关闭中断
-    PLL_Init(PLL230);            //初始化PLL为200M,总线为40M  
+    PLL_Init(PLL235);            //初始化PLL为200M,总线为40M  
 
     /*******************GPIO***************************/
     LED_Init();                  //LED初始化    
     TFT_init(SPI_1, SPIn_PCS0);
     LCD_Init();
     ButtonInit();
-    UART_Init(UART_3, 256000);
+    //UART_Init(UART_3, 256000);
     //EncoderMeasure_Init();
     //RemoteInit();
     Series_Sendout_init();
-
+pit_time_start(PIT2);
     //PIT_Init(PIT0, 1);
     EnableInterrupts;
     
+    
     TFT_showstr(0, 0, "Initing!", BLACK, WHITE);
     camera_init_1();
-    //camera_init_2();
+    camera_init_2();
     
     TFT_showstr(0, 0, "Success!", BLACK, WHITE);
     dsp_single_colour(0xffff);//全白

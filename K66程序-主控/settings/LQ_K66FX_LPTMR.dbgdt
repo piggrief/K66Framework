@@ -997,7 +997,7 @@
                     <item>BUF</item>
                     <item>time_consume</item>
                     <item>starttime</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.30.1.114/W32 for ARM                  05/Jun/2019  18:07:00
+# IAR ELF Linker V8.30.1.114/W32 for ARM                  17/Oct/2019  17:16:13
 # Copyright 2007-2018 IAR Systems AB.
 #
 #    Output file  =  
@@ -8,7 +8,7 @@
 #    Map file     =  
 #        D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-采集板\Debug\List\LQ_K66FX_LPTMR.map
 #    Command line =  
-#        -f C:\Users\zhuzh\AppData\Local\Temp\EW842F.tmp
+#        -f C:\Users\zhuzh\AppData\Local\Temp\EW835E.tmp
 #        (D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-采集板\Debug\Obj\ADC.o
 #        D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-采集板\Debug\Obj\AttitudeCalculation.o
 #        D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-采集板\Debug\Obj\common.o
@@ -87,159 +87,169 @@ No sections matched the following patterns:
   section .textrw_init  in block CodeRelocate
 
 
-  Section              Kind         Address    Size  Object
-  -------              ----         -------    ----  ------
-"A0":                                         0x1d0
-  .intvec              const            0x0   0x1d0  vectors.o [1]
-                                    - 0x1d0   0x1d0
+  Section              Kind         Address     Size  Object
+  -------              ----         -------     ----  ------
+"A0":                                          0x1d0
+  .intvec              const            0x0    0x1d0  vectors.o [1]
+                                    - 0x1d0    0x1d0
 
-"P1", part 1 of 3:                              0x0
-  .rodata              const          0x1d0     0x0  zero_init3.o [4]
+"P1", part 1 of 3:                               0x0
+  .rodata              const          0x1d0      0x0  zero_init3.o [4]
 
-"P1", part 2 of 3:                              0x0
-  CodeRelocate                        0x1d0     0x0  <Block>
+"P1", part 2 of 3:                               0x0
+  CodeRelocate                        0x1d0      0x0  <Block>
 
-"A1":                                          0x7c
-  .noinit              ro code        0x410    0x7c  crt0.o [1]
-                                    - 0x48c    0x7c
+"A1":                                           0x7c
+  .noinit              ro code        0x410     0x7c  crt0.o [1]
+                                    - 0x48c     0x7c
 
-"P1", part 3 of 3:                           0x31b0
-  .rodata              const          0x48c   0x5f0  TFTDriver.o [1]
-  .text                ro code        0xa7c   0x5d8  TFTDriver.o [1]
-  .text                ro code       0x1054   0x220  GPIO.o [1]
-  .text                ro code       0x1274   0x328  SPI.o [1]
-  .text                ro code       0x159c   0x2f4  SEEKFREE_MT9V032.o [1]
-  .text                ro code       0x1890   0x106  DebugFuction.o [1]
-  .text                ro code       0x1996    0x3a  zero_init3.o [4]
-  .text                ro code       0x19d0    0x86  ABImemcpy.o [4]
-  .text                ro code       0x1a56     0x8  abs.o [2]
-  .text                ro code       0x1a5e     0xa  xsprout.o [2]
-  .text                ro code       0x1a68   0x334  UART.o [1]
-  .text                ro code       0x1d9c    0x60  LPTMR.o [1]
-  .text                ro code       0x1dfc   0x2f8  DMA.o [1]
-  .text                ro code       0x20f4    0x42  common.o [1]
-  .text                ro code       0x2138    0x40  sprintf.o [2]
-  .text                ro code       0x2178   0x1c8  LQLED.o [1]
-  .text                ro code       0x2340   0x13e  xprintftiny.o [2]
-  .text                ro code       0x2480    0x36  strlen.o [4]
-  .text                ro code       0x24b8   0x2fc  image_deal.o [1]
-  .text                ro code       0x27b4    0x22  S32ToDbl.o [3]
-  .text                ro code       0x27d8   0x1a2  DblMul.o [3]
-  .text                ro code       0x297c    0x68  DblToFlt.o [3]
-  .text                ro code       0x29e4    0x3a  DblToS32.o [3]
-  .text                ro code       0x2a20   0x234  LQ12864.o [1]
-  .text                ro code       0x2c54   0x198  main.o [1]
-  .text                ro code       0x2dec   0x144  PLL.o [1]
-  .text                ro code       0x2f30    0x78  MecanumWheelControl.o [1]
-  .text                ro code       0x2fa8   0x118  vectors.o [1]
-  .text                ro code       0x30c0    0x28  printf.o [2]
-  .text                ro code       0x30e8    0xb4  start.o [1]
-  .text                ro code       0x319c    0x34  wdog.o [1]
-  .data_init                         0x31d0    0xa8  <Block>
-    Initializer bytes  const         0x31d0    0xa8  <for .data-1>
-  .text                ro code       0x3278    0x80  iarttio.o [5]
-  .text                ro code       0x32f8    0x3c  XShttio.o [2]
-  .rodata              const         0x3334    0x40  SPI.o [1]
-  .text                ro code       0x3374    0x38  FTM.o [1]
-  .rodata              const         0x33ac    0x30  vectors.o [1]
-  .text                ro code       0x33dc    0x28  data_init.o [4]
-  .rodata              const         0x3404    0x24  vectors.o [1]
-  .text                ro code       0x3428    0x22  fpinit_M.o [3]
-  .text                ro code       0x344a    0x22  iarwrite.o [5]
-  .iar.init_table      const         0x346c    0x10  - Linker created -
-  .text                ro code       0x347c    0x20  putchar.o [2]
-  .text                ro code       0x349c    0x10  write.o [5]
-  .text                ro code       0x34ac    0x1e  dwrite.o [5]
-  .text                ro code       0x34ca    0x20  iarwstd.o [5]
-  .text                ro code       0x34ec    0x1e  cmain.o [4]
-  .text                ro code       0x350a     0x4  low_level_init.o [2]
-  .text                ro code       0x350e     0x4  exit.o [2]
-  .text                ro code       0x3514     0xa  cexit.o [4]
-  .text                ro code       0x3520    0x14  exit.o [5]
-  .rodata              const         0x3534    0x18  vectors.o [1]
-  .text                ro code       0x354c    0x16  xprout.o [2]
-  .rodata              const         0x3564    0x14  UART.o [1]
-  .rodata              const         0x3578     0xc  main.o [1]
-  .rodata              const         0x3584     0xc  main.o [1]
-  .rodata              const         0x3590     0xc  vectors.o [1]
-  .rodata              const         0x359c     0xc  vectors.o [1]
-  .rodata              const         0x35a8     0xc  vectors.o [1]
-  .rodata              const         0x35b4     0xc  vectors.o [1]
-  .rodata              const         0x35c0     0xc  vectors.o [1]
-  .rodata              const         0x35cc     0xc  vectors.o [1]
-  .rodata              const         0x35d8     0xc  vectors.o [1]
-  .rodata              const         0x35e4     0xc  vectors.o [1]
-  .rodata              const         0x35f0     0xc  vectors.o [1]
-  .rodata              const         0x35fc     0xc  vectors.o [1]
-  .rodata              const         0x3608     0xc  vectors.o [1]
-  .rodata              const         0x3614     0xc  vectors.o [1]
-  .rodata              const         0x3620     0xc  vectors.o [1]
-  .text                ro code       0x362c     0xc  cstartup_M.o [4]
-  .rodata              const         0x3638     0x4  SPI.o [1]
-                                   - 0x363c  0x31b0
+"P1", part 3 of 3:                            0x3284
+  .rodata              const          0x48c    0x5f0  TFTDriver.o [1]
+  .text                ro code        0xa7c    0x5ee  TFTDriver.o [1]
+  .text                ro code       0x106a     0x3a  zero_init3.o [4]
+  .text                ro code       0x10a4    0x220  GPIO.o [1]
+  .text                ro code       0x12c4    0x328  SPI.o [1]
+  .text                ro code       0x15ec    0x4c4  SEEKFREE_MT9V032.o [1]
+  .text                ro code       0x1ab0    0x106  DebugFuction.o [1]
+  .text                ro code       0x1bb6      0xa  xsprout.o [2]
+  .text                ro code       0x1bc0     0x86  ABImemcpy.o [4]
+  .text                ro code       0x1c46      0x8  abs.o [2]
+  .text                ro code       0x1c50    0x334  UART.o [1]
+  .text                ro code       0x1f84     0x60  LPTMR.o [1]
+  .text                ro code       0x1fe4    0x2f8  DMA.o [1]
+  .text                ro code       0x22dc     0x42  common.o [1]
+  .text                ro code       0x2320     0xe4  PIT.o [1]
+  .text                ro code       0x2404     0x40  sprintf.o [2]
+  .text                ro code       0x2444    0x1c8  LQLED.o [1]
+  .text                ro code       0x260c    0x13e  xprintftiny.o [2]
+  .text                ro code       0x274c     0x36  strlen.o [4]
+  .text                ro code       0x2784    0x2d8  main.o [1]
+  .text                ro code       0x2a5c    0x1ec  image_deal.o [1]
+  .text                ro code       0x2c48    0x144  PLL.o [1]
+  .text                ro code       0x2d8c    0x234  LQ12864.o [1]
+  .text                ro code       0x2fc0     0x78  MecanumWheelControl.o [1]
+  .text                ro code       0x3038    0x118  vectors.o [1]
+  .text                ro code       0x3150     0x28  printf.o [2]
+  .data_init                         0x3178     0xec  <Block>
+    Initializer bytes  const         0x3178     0xec  <for .data-1>
+  .text                ro code       0x3264     0xb4  start.o [1]
+  .text                ro code       0x3318     0x34  wdog.o [1]
+  .text                ro code       0x334c     0x80  iarttio.o [5]
+  .text                ro code       0x33cc     0x3c  XShttio.o [2]
+  .rodata              const         0x3408     0x40  SPI.o [1]
+  .text                ro code       0x3448     0x38  FTM.o [1]
+  .rodata              const         0x3480     0x30  vectors.o [1]
+  .text                ro code       0x34b0     0x28  data_init.o [4]
+  .rodata              const         0x34d8     0x24  vectors.o [1]
+  .text                ro code       0x34fc     0x22  fpinit_M.o [3]
+  .text                ro code       0x351e     0x22  iarwrite.o [5]
+  .iar.init_table      const         0x3540     0x10  - Linker created -
+  .text                ro code       0x3550     0x20  putchar.o [2]
+  .text                ro code       0x3570     0x10  write.o [5]
+  .text                ro code       0x3580     0x1e  dwrite.o [5]
+  .text                ro code       0x359e     0x20  iarwstd.o [5]
+  .text                ro code       0x35c0     0x1e  cmain.o [4]
+  .text                ro code       0x35de      0x4  low_level_init.o [2]
+  .text                ro code       0x35e2      0x4  exit.o [2]
+  .text                ro code       0x35e8      0xa  cexit.o [4]
+  .text                ro code       0x35f4     0x14  exit.o [5]
+  .rodata              const         0x3608     0x18  vectors.o [1]
+  .text                ro code       0x3620     0x16  xprout.o [2]
+  .rodata              const         0x3638     0x14  UART.o [1]
+  .rodata              const         0x364c      0xc  main.o [1]
+  .rodata              const         0x3658      0xc  main.o [1]
+  .rodata              const         0x3664      0xc  vectors.o [1]
+  .rodata              const         0x3670      0xc  vectors.o [1]
+  .rodata              const         0x367c      0xc  vectors.o [1]
+  .rodata              const         0x3688      0xc  vectors.o [1]
+  .rodata              const         0x3694      0xc  vectors.o [1]
+  .rodata              const         0x36a0      0xc  vectors.o [1]
+  .rodata              const         0x36ac      0xc  vectors.o [1]
+  .rodata              const         0x36b8      0xc  vectors.o [1]
+  .rodata              const         0x36c4      0xc  vectors.o [1]
+  .rodata              const         0x36d0      0xc  vectors.o [1]
+  .rodata              const         0x36dc      0xc  vectors.o [1]
+  .rodata              const         0x36e8      0xc  vectors.o [1]
+  .rodata              const         0x36f4      0xc  vectors.o [1]
+  .text                ro code       0x3700      0xc  cstartup_M.o [4]
+  .rodata              const         0x370c      0x4  SPI.o [1]
+                                   - 0x3710   0x3284
 
-"P2", part 1 of 3:                             0xa8
-  .data                         0x1fff'0410    0xa8  <Block>
-    .data-1                     0x1fff'0410    0xa7  <Init block>
-      .data            inited   0x1fff'0410     0x4  DebugFuction.o [1]
-      .data            inited   0x1fff'0414    0x14  GPIO.o [1]
-      .data            inited   0x1fff'0428    0x14  GPIO.o [1]
-      .data            inited   0x1fff'043c     0x4  MecanumWheelControl.o [1]
-      .data            inited   0x1fff'0440     0x4  MecanumWheelControl.o [1]
-      .data            inited   0x1fff'0444     0x4  MecanumWheelControl.o [1]
-      .data            inited   0x1fff'0448    0x24  SEEKFREE_MT9V032.o [1]
-      .data            inited   0x1fff'046c    0x20  SEEKFREE_MT9V032.o [1]
-      .data            inited   0x1fff'048c     0xc  SPI.o [1]
-      .data            inited   0x1fff'0498    0x14  UART.o [1]
-      .data            inited   0x1fff'04ac     0x8  XShttio.o [2]
-      .data            inited   0x1fff'04b4     0x1  DebugFuction.o [1]
-      .data            inited   0x1fff'04b5     0x1  SEEKFREE_MT9V032.o [1]
-      .data            inited   0x1fff'04b6     0x1  SEEKFREE_MT9V032.o [1]
-                              - 0x1fff'04b8    0xa8
+"P2", part 1 of 3:                              0xec
+  .data                         0x1fff'0410     0xec  <Block>
+    .data-1                     0x1fff'0410     0xeb  <Init block>
+      .data            inited   0x1fff'0410      0x4  DebugFuction.o [1]
+      .data            inited   0x1fff'0414     0x14  GPIO.o [1]
+      .data            inited   0x1fff'0428     0x14  GPIO.o [1]
+      .data            inited   0x1fff'043c      0x4  MecanumWheelControl.o [1]
+      .data            inited   0x1fff'0440      0x4  MecanumWheelControl.o [1]
+      .data            inited   0x1fff'0444      0x4  MecanumWheelControl.o [1]
+      .data            inited   0x1fff'0448     0x24  SEEKFREE_MT9V032.o [1]
+      .data            inited   0x1fff'046c     0x24  SEEKFREE_MT9V032.o [1]
+      .data            inited   0x1fff'0490     0x20  SEEKFREE_MT9V032.o [1]
+      .data            inited   0x1fff'04b0     0x20  SEEKFREE_MT9V032.o [1]
+      .data            inited   0x1fff'04d0      0xc  SPI.o [1]
+      .data            inited   0x1fff'04dc     0x14  UART.o [1]
+      .data            inited   0x1fff'04f0      0x8  XShttio.o [2]
+      .data            inited   0x1fff'04f8      0x1  DebugFuction.o [1]
+      .data            inited   0x1fff'04f9      0x1  SEEKFREE_MT9V032.o [1]
+      .data            inited   0x1fff'04fa      0x1  SEEKFREE_MT9V032.o [1]
+                              - 0x1fff'04fc     0xec
 
-"P2", part 2 of 3:                           0xbb80
-  .bss                          0x1fff'04b8  0xbb80  <Block>
-    .bss               zero     0x1fff'04b8     0xc  DebugFuction.o [1]
-    .bss               zero     0x1fff'04c4     0xc  DebugFuction.o [1]
-    .bss               zero     0x1fff'04d0    0x40  DMA.o [1]
-    .bss               zero     0x1fff'0510   0x540  image_deal.o [1]
-    .bss               zero     0x1fff'0a50   0x540  image_deal.o [1]
-    .bss               zero     0x1fff'0f90     0x4  main.o [1]
-    .bss               zero     0x1fff'0f94     0x4  main.o [1]
-    .bss               zero     0x1fff'0f98    0x10  main.o [1]
-    .bss               zero     0x1fff'0fa8     0x4  main.o [1]
-    .bss               zero     0x1fff'0fac    0x10  MecanumWheelControl.o [1]
-    .bss               zero     0x1fff'0fbc    0x10  MecanumWheelControl.o [1]
-    .bss               zero     0x1fff'0fcc    0x10  MecanumWheelControl.o [1]
-    .bss               zero     0x1fff'0fdc     0x4  PLL.o [1]
-    .bss               zero     0x1fff'0fe0     0x4  PLL.o [1]
-    .bss               zero     0x1fff'0fe4  0x5820  SEEKFREE_MT9V032.o [1]
-    .bss               zero     0x1fff'6804  0x5820  SEEKFREE_MT9V032.o [1]
-    .bss               zero     0x1fff'c024     0x4  SEEKFREE_MT9V032.o [1]
-    .bss               zero     0x1fff'c028     0x4  SEEKFREE_MT9V032.o [1]
-    .bss               zero     0x1fff'c02c     0x1  image_deal.o [1]
-    .bss               zero     0x1fff'c02d     0x1  image_deal.o [1]
-    .bss               zero     0x1fff'c02e     0x1  image_deal.o [1]
-    .bss               zero     0x1fff'c02f     0x1  image_deal.o [1]
-    .bss               zero     0x1fff'c030     0x1  SEEKFREE_MT9V032.o [1]
-    .bss               zero     0x1fff'c031     0x1  SEEKFREE_MT9V032.o [1]
-    .bss               zero     0x1fff'c032     0x1  SEEKFREE_MT9V032.o [1]
-    .bss               zero     0x1fff'c033     0x1  TFTDriver.o [1]
-    .bss               zero     0x1fff'c034     0x1  TFTDriver.o [1]
-    .bss               zero     0x1fff'c035     0x1  XShttio.o [2]
-                              - 0x1fff'c038  0xbb80
+"P2", part 2 of 3:                           0x135a0
+  .bss                          0x1fff'04fc  0x135a0  <Block>
+    .bss               zero     0x1fff'04fc      0xc  DebugFuction.o [1]
+    .bss               zero     0x1fff'0508      0xc  DebugFuction.o [1]
+    .bss               zero     0x1fff'0514     0x40  DMA.o [1]
+    .bss               zero     0x1fff'0554    0x460  image_deal.o [1]
+    .bss               zero     0x1fff'09b4    0x460  image_deal.o [1]
+    .bss               zero     0x1fff'0e14   0x3200  image_deal.o [1]
+    .bss               zero     0x1fff'4014   0x3200  image_deal.o [1]
+    .bss               zero     0x1fff'7214   0x3200  image_deal.o [1]
+    .bss               zero     0x1fff'a414   0x3200  image_deal.o [1]
+    .bss               zero     0x1fff'd614      0x4  image_deal.o [1]
+    .bss               zero     0x1fff'd618      0x4  image_deal.o [1]
+    .bss               zero     0x1fff'd61c      0x4  image_deal.o [1]
+    .bss               zero     0x1fff'd620      0x4  image_deal.o [1]
+    .bss               zero     0x1fff'd624      0x4  image_deal.o [1]
+    .bss               zero     0x1fff'd628      0x4  image_deal.o [1]
+    .bss               zero     0x1fff'd62c      0x4  image_deal.o [1]
+    .bss               zero     0x1fff'd630      0x4  main.o [1]
+    .bss               zero     0x1fff'd634      0x4  main.o [1]
+    .bss               zero     0x1fff'd638      0x4  main.o [1]
+    .bss               zero     0x1fff'd63c     0x10  main.o [1]
+    .bss               zero     0x1fff'd64c      0x4  main.o [1]
+    .bss               zero     0x1fff'd650     0x10  MecanumWheelControl.o [1]
+    .bss               zero     0x1fff'd660     0x10  MecanumWheelControl.o [1]
+    .bss               zero     0x1fff'd670     0x10  MecanumWheelControl.o [1]
+    .bss               zero     0x1fff'd680      0x4  PLL.o [1]
+    .bss               zero     0x1fff'd684      0x4  PLL.o [1]
+    .bss               zero     0x1fff'd688   0x3200  SEEKFREE_MT9V032.o [1]
+    .bss               zero     0x2000'0888   0x3200  SEEKFREE_MT9V032.o [1]
+    .bss               zero     0x2000'3a88      0x4  SEEKFREE_MT9V032.o [1]
+    .bss               zero     0x2000'3a8c      0x4  SEEKFREE_MT9V032.o [1]
+    .bss               zero     0x2000'3a90      0x1  main.o [1]
+    .bss               zero     0x2000'3a91      0x1  main.o [1]
+    .bss               zero     0x2000'3a92      0x1  main.o [1]
+    .bss               zero     0x2000'3a93      0x1  SEEKFREE_MT9V032.o [1]
+    .bss               zero     0x2000'3a94      0x1  SEEKFREE_MT9V032.o [1]
+    .bss               zero     0x2000'3a95      0x1  SEEKFREE_MT9V032.o [1]
+    .bss               zero     0x2000'3a96      0x1  TFTDriver.o [1]
+    .bss               zero     0x2000'3a97      0x1  TFTDriver.o [1]
+    .bss               zero     0x2000'3a98      0x1  XShttio.o [2]
+                              - 0x2000'3a9c  0x135a0
 
-"P2", part 3 of 3:                              0x0
-  CodeRelocateRam               0x1fff'c038     0x0  <Block>
+"P2", part 3 of 3:                               0x0
+  CodeRelocateRam               0x2000'3a9c      0x0  <Block>
 
 Unused ranges:
 
          From           To      Size
          ----           --      ----
         0x1d0        0x40f     0x240
-       0x363c    0x10'0000  0xf'c9c5
+       0x3710    0x10'0000  0xf'c8f1
   0x1000'0000  0x1004'0000  0x4'0001
-  0x1fff'c038  0x2003'0000  0x3'3fc9
+  0x2000'3a9c  0x2003'0000  0x2'c565
 
 
 *******************************************************************************
@@ -249,8 +259,8 @@ Unused ranges:
           Address      Size
           -------      ----
 Zero (__iar_zero_init3)
-    1 destination range, total size 0xbb7e:
-          0x1fff'04b8  0xbb7e
+    1 destination range, total size 0x1359d:
+          0x1fff'04fc  0x1359d
 
 
 
@@ -273,20 +283,21 @@ D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-采集板\Debug\Obj: [1]
     LQ12864.o                  564
     LQLED.o                    456
     MecanumWheelControl.o      120       12       60
+    PIT.o                      228
     PLL.o                      324                 8
-    SEEKFREE_MT9V032.o         756       70   45 201
+    SEEKFREE_MT9V032.o       1 220      138   25 749
     SPI.o                      808       80       12
-    TFTDriver.o              1 496    1 520        2
+    TFTDriver.o              1 518    1 520        2
     UART.o                     820       40       20
     common.o                    66
     crt0.o                     124
-    image_deal.o               764             2 692
-    main.o                     408       24       28
+    image_deal.o               492            53 468
+    main.o                     728       24       35
     start.o                    180
     vectors.o                  280      728
     wdog.o                      52
     ------------------------------------------------
-    Total:                   8 936    2 519   48 156
+    Total:                   9 698    2 587   79 487
 
 dl7M_tln.a: [2]
     XShttio.o                   60        8        9
@@ -303,13 +314,9 @@ dl7M_tln.a: [2]
     Total:                     562        8        9
 
 m7M_tls.a: [3]
-    DblMul.o                   418
-    DblToFlt.o                 104
-    DblToS32.o                  58
-    S32ToDbl.o                  34
     fpinit_M.o                  34
     ------------------------------------------------
-    Total:                     648
+    Total:                      34
 
 rt7M_tl.a: [4]
     ABImemcpy.o                134
@@ -332,10 +339,10 @@ shb_l.a: [5]
     ------------------------------------------------
     Total:                     260
 
-    Gaps                        18        2
+    Gaps                        14        2
     Linker created                       17
 ----------------------------------------------------
-    Grand Total:            10 762    2 546   48 165
+    Grand Total:            10 906    2 614   79 496
 
 
 *******************************************************************************
@@ -344,194 +351,208 @@ shb_l.a: [5]
 
 Entry                       Address    Size  Type      Object
 -----                       -------    ----  ----      ------
-.bss$$Base              0x1fff'04b8           --   Gb  - Linker created -
-.bss$$Limit             0x1fff'c038           --   Gb  - Linker created -
+.bss$$Base              0x1fff'04fc           --   Gb  - Linker created -
+.bss$$Limit             0x2000'3a9c           --   Gb  - Linker created -
 .data$$Base             0x1fff'0410           --   Gb  - Linker created -
-.data$$Limit            0x1fff'04b8           --   Gb  - Linker created -
-.data_init$$Base             0x31d0           --   Gb  - Linker created -
-.data_init$$Limit            0x3278           --   Gb  - Linker created -
-.iar.init_table$$Base        0x346c           --   Gb  - Linker created -
-.iar.init_table$$Limit       0x347c           --   Gb  - Linker created -
-?main                        0x34ed          Code  Gb  cmain.o [4]
+.data$$Limit            0x1fff'04fc           --   Gb  - Linker created -
+.data_init$$Base             0x3178           --   Gb  - Linker created -
+.data_init$$Limit            0x3264           --   Gb  - Linker created -
+.iar.init_table$$Base        0x3540           --   Gb  - Linker created -
+.iar.init_table$$Limit       0x3550           --   Gb  - Linker created -
+?main                        0x35c1          Code  Gb  cmain.o [4]
 Button                  0x1fff'0410     0x4  Data  Gb  DebugFuction.o [1]
-ButtonInit                   0x1891     0xe  Code  Gb  DebugFuction.o [1]
-ButtonOnceBuffFlag      0x1fff'04b8     0xc  Data  Gb  DebugFuction.o [1]
-ButtonOnceFlag          0x1fff'04c4     0xc  Data  Gb  DebugFuction.o [1]
-ButtonScan_interrupt         0x18a1    0xd0  Code  Gb  DebugFuction.o [1]
-CalError                     0x2641   0x156  Code  Gb  image_deal.o [1]
+ButtonInit                   0x1ab1     0xe  Code  Gb  DebugFuction.o [1]
+ButtonOnceBuffFlag      0x1fff'04fc     0xc  Data  Gb  DebugFuction.o [1]
+ButtonOnceFlag          0x1fff'0508     0xc  Data  Gb  DebugFuction.o [1]
+ButtonScan_interrupt         0x1ac1    0xd0  Code  Gb  DebugFuction.o [1]
+CheckImageEffective          0x2ab7    0x80  Code  Gb  image_deal.o [1]
 CodeRelocate$$Base            0x1d0           --   Gb  - Linker created -
 CodeRelocate$$Limit           0x1d0           --   Gb  - Linker created -
-CodeRelocateRam$$Base   0x1fff'c038           --   Gb  - Linker created -
-CodeRelocateRam$$Limit  0x1fff'c038           --   Gb  - Linker created -
-DMA_CH4_Handler              0x20a9    0x1c  Code  Gb  DMA.o [1]
-DMA_Count_Get                0x207b    0x18  Code  Gb  DMA.o [1]
-DMA_Count_Reset              0x2093    0x16  Code  Gb  DMA.o [1]
-DMA_PORTx2BUFF_Init          0x1dfd   0x27e  Code  Gb  DMA.o [1]
-EXTI_Init                    0x1139    0x5e  Code  Gb  GPIO.o [1]
+CodeRelocateRam$$Base   0x2000'3a9c           --   Gb  - Linker created -
+CodeRelocateRam$$Limit  0x2000'3a9c           --   Gb  - Linker created -
+DMA_CH4_Handler              0x2291    0x1c  Code  Gb  DMA.o [1]
+DMA_Count_Get                0x2263    0x18  Code  Gb  DMA.o [1]
+DMA_Count_Reset              0x227b    0x16  Code  Gb  DMA.o [1]
+DMA_PORTx2BUFF_Init          0x1fe5   0x27e  Code  Gb  DMA.o [1]
+DataSend                     0x2785    0x4e  Code  Gb  main.o [1]
+Deviation_Sendout       0x2000'3a90     0x1  Data  Gb  main.o [1]
+DisappearCount_1        0x2000'3a91     0x1  Data  Gb  main.o [1]
+DisappearCount_2        0x2000'3a92     0x1  Data  Gb  main.o [1]
+EXTI_Init                    0x1189    0x5e  Code  Gb  GPIO.o [1]
 Encoder_DMAChannel      0x1fff'043c     0x4  Data  Gb  MecanumWheelControl.o [1]
 Encoder_Direction       0x1fff'0440     0x4  Data  Gb  MecanumWheelControl.o [1]
-FTM0_interrupt               0x3375     0xe  Code  Gb  FTM.o [1]
-FTM1_interrupt               0x3383     0xe  Code  Gb  FTM.o [1]
-FTM2_interrupt               0x3391     0xe  Code  Gb  FTM.o [1]
+FTM0_interrupt               0x3449     0xe  Code  Gb  FTM.o [1]
+FTM1_interrupt               0x3457     0xe  Code  Gb  FTM.o [1]
+FTM2_interrupt               0x3465     0xe  Code  Gb  FTM.o [1]
 Flag_Reverse            0x1fff'0444     0x4  Data  Gb  MecanumWheelControl.o [1]
-GET_CFG_1               0x1fff'046c    0x20  Data  Gb  SEEKFREE_MT9V032.o [1]
+GET_CFG_1               0x1fff'0490    0x20  Data  Gb  SEEKFREE_MT9V032.o [1]
+GET_CFG_2               0x1fff'04b0    0x20  Data  Gb  SEEKFREE_MT9V032.o [1]
 GPIOX                   0x1fff'0414    0x14  Data  Gb  GPIO.o [1]
-GPIO_Ctrl                    0x10ed    0x22  Code  Gb  GPIO.o [1]
-GPIO_Get                     0x111d    0x1c  Code  Gb  GPIO.o [1]
-GPIO_Init                    0x1069    0x84  Code  Gb  GPIO.o [1]
-GPIO_Reverse                 0x110f     0xe  Code  Gb  GPIO.o [1]
-GetSpeed                     0x2f31    0x4c  Code  Gb  MecanumWheelControl.o [1]
-ImageDealState_Now      0x1fff'c032     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
-ImageDealStructInit          0x24b9    0x5a  Code  Gb  image_deal.o [1]
-ImageDeal_Camera1       0x1fff'0510   0x540  Data  Gb  image_deal.o [1]
-ImageDeal_Camera2       0x1fff'0a50   0x540  Data  Gb  image_deal.o [1]
-Init_All                     0x2cb1    0x66  Code  Gb  main.o [1]
-LCD_DLY_ms                   0x2b2f    0x16  Code  Gb  LQ12864.o [1]
-LCD_Fill                     0x2aef    0x40  Code  Gb  LQ12864.o [1]
-LCD_Init                     0x2b45   0x10c  Code  Gb  LQ12864.o [1]
-LCD_Set_Pos                  0x2abf    0x30  Code  Gb  LQ12864.o [1]
-LCD_WrCmd                    0x2a71    0x4e  Code  Gb  LQ12864.o [1]
-LCD_WrDat                    0x2a21    0x4e  Code  Gb  LQ12864.o [1]
+GPIO_Ctrl                    0x113d    0x22  Code  Gb  GPIO.o [1]
+GPIO_Get                     0x116d    0x1c  Code  Gb  GPIO.o [1]
+GPIO_Init                    0x10b9    0x84  Code  Gb  GPIO.o [1]
+GPIO_Reverse                 0x115f     0xe  Code  Gb  GPIO.o [1]
+GetSpeed                     0x2fc1    0x4c  Code  Gb  MecanumWheelControl.o [1]
+ImageDealState_Now      0x2000'3a95     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
+ImageDealStructInit          0x2a5d    0x5a  Code  Gb  image_deal.o [1]
+ImageDeal_Camera1       0x1fff'0554   0x460  Data  Gb  image_deal.o [1]
+ImageDeal_Camera2       0x1fff'09b4   0x460  Data  Gb  image_deal.o [1]
+Init_All                     0x28fd    0x66  Code  Gb  main.o [1]
+LCD_DLY_ms                   0x2e9b    0x16  Code  Gb  LQ12864.o [1]
+LCD_Fill                     0x2e5b    0x40  Code  Gb  LQ12864.o [1]
+LCD_Init                     0x2eb1   0x10c  Code  Gb  LQ12864.o [1]
+LCD_Set_Pos                  0x2e2b    0x30  Code  Gb  LQ12864.o [1]
+LCD_WrCmd                    0x2ddd    0x4e  Code  Gb  LQ12864.o [1]
+LCD_WrDat                    0x2d8d    0x4e  Code  Gb  LQ12864.o [1]
 LCD_WriteData_16Bit           0xadb    0x4a  Code  Gb  TFTDriver.o [1]
-LED_Ctrl                     0x21ad   0x184  Code  Gb  LQLED.o [1]
-LED_Init                     0x2179    0x34  Code  Gb  LQLED.o [1]
-LPTMR_Interrupt              0x1dd5    0x16  Code  Gb  LPTMR.o [1]
-LPTMR_delay_ms               0x1d9d    0x38  Code  Gb  LPTMR.o [1]
+LED_Ctrl                     0x2479   0x184  Code  Gb  LQLED.o [1]
+LED_Init                     0x2445    0x34  Code  Gb  LQLED.o [1]
+LPTMR_Interrupt              0x1fbd    0x16  Code  Gb  LPTMR.o [1]
+LPTMR_delay_ms               0x1f85    0x38  Code  Gb  LPTMR.o [1]
 Lcd_SetRegion                 0xb25    0x5e  Code  Gb  TFTDriver.o [1]
 Lcd_WriteData                 0xab1    0x2a  Code  Gb  TFTDriver.o [1]
 Lcd_WriteIndex                0xa87    0x2a  Code  Gb  TFTDriver.o [1]
-LookLine                     0x2513    0xcc  Code  Gb  image_deal.o [1]
+LightNum_ChaImage       0x1fff'd614     0x4  Data  Gb  image_deal.o [1]
 MT9V032_CFG_1           0x1fff'0448    0x24  Data  Gb  SEEKFREE_MT9V032.o [1]
-NVIC_EnableIRQ               0x1055    0x14  Code  Lc  GPIO.o [1]
-NVIC_EnableIRQ               0x1a69    0x16  Code  Lc  UART.o [1]
-NVIC_SetPriority             0x20f5    0x24  Code  Lc  common.o [1]
-NowTFTShowMode          0x1fff'04b4     0x1  Data  Gb  DebugFuction.o [1]
-PIT0_Interrupt               0x2d17    0x68  Code  Gb  main.o [1]
-PIT1_Interrupt               0x2d7f    0x14  Code  Gb  main.o [1]
-PIT2_Interrupt               0x2d93     0xc  Code  Gb  main.o [1]
-PIT3_Interrupt               0x2d9f     0xc  Code  Gb  main.o [1]
-PLL_Init                     0x2ded   0x144  Code  Gb  PLL.o [1]
-PORTA_Interrupt              0x1197    0x20  Code  Gb  GPIO.o [1]
-PORTB_Interrupt              0x11b7    0x36  Code  Gb  GPIO.o [1]
-PORTC_Interrupt              0x11ed    0x1a  Code  Gb  GPIO.o [1]
-PORTD_Interrupt              0x1207    0x30  Code  Gb  GPIO.o [1]
-PORTE_Interrupt              0x126d     0x8  Code  Gb  GPIO.o [1]
+MT9V032_CFG_2           0x1fff'046c    0x24  Data  Gb  SEEKFREE_MT9V032.o [1]
+MaxCol_1                0x1fff'd620     0x4  Data  Gb  image_deal.o [1]
+MaxCol_2                0x1fff'd62c     0x4  Data  Gb  image_deal.o [1]
+MaxGray_1               0x1fff'd618     0x4  Data  Gb  image_deal.o [1]
+MaxGray_2               0x1fff'd624     0x4  Data  Gb  image_deal.o [1]
+MaxRow_1                0x1fff'd61c     0x4  Data  Gb  image_deal.o [1]
+MaxRow_2                0x1fff'd628     0x4  Data  Gb  image_deal.o [1]
+NVIC_EnableIRQ               0x10a5    0x14  Code  Lc  GPIO.o [1]
+NVIC_EnableIRQ               0x1c51    0x16  Code  Lc  UART.o [1]
+NVIC_SetPriority             0x22dd    0x24  Code  Lc  common.o [1]
+NowTFTShowMode          0x1fff'04f8     0x1  Data  Gb  DebugFuction.o [1]
+PIT0_Interrupt               0x2963    0x68  Code  Gb  main.o [1]
+PIT1_Interrupt               0x29cb    0x14  Code  Gb  main.o [1]
+PIT2_Interrupt               0x29df     0xc  Code  Gb  main.o [1]
+PIT3_Interrupt               0x29eb     0xc  Code  Gb  main.o [1]
+PLL_Init                     0x2c49   0x144  Code  Gb  PLL.o [1]
+PORTA_Interrupt              0x11e7    0x20  Code  Gb  GPIO.o [1]
+PORTB_Interrupt              0x1207    0x36  Code  Gb  GPIO.o [1]
+PORTC_Interrupt              0x123d    0x1a  Code  Gb  GPIO.o [1]
+PORTD_Interrupt              0x1257    0x30  Code  Gb  GPIO.o [1]
+PORTE_Interrupt              0x12bd     0x8  Code  Gb  GPIO.o [1]
 PORTX                   0x1fff'0428    0x14  Data  Gb  GPIO.o [1]
-Region$$Table$$Base          0x346c           --   Gb  - Linker created -
-Region$$Table$$Limit         0x347c           --   Gb  - Linker created -
-RenewLightStatus             0x25df    0x60  Code  Gb  image_deal.o [1]
-SPIN                    0x1fff'048c     0xc  Data  Gb  SPI.o [1]
-Series_Sendout_init          0x1989     0xe  Code  Gb  DebugFuction.o [1]
+Region$$Table$$Base          0x3540           --   Gb  - Linker created -
+Region$$Table$$Limit         0x3550           --   Gb  - Linker created -
+SPIN                    0x1fff'04d0     0xc  Data  Gb  SPI.o [1]
+Series_Sendout_init          0x1ba9     0xe  Code  Gb  DebugFuction.o [1]
 Series_deviation_received
-                        0x1fff'0f90     0x4  Data  Gb  main.o [1]
-SpeedClean                   0x2f7d    0x16  Code  Gb  MecanumWheelControl.o [1]
-SpeedCount              0x1fff'0fbc    0x10  Data  Gb  MecanumWheelControl.o [1]
-Speed_get               0x1fff'0fcc    0x10  Data  Gb  MecanumWheelControl.o [1]
-Speed_watch             0x1fff'0f98    0x10  Data  Gb  main.o [1]
-TFTSPI                  0x1fff'c033     0x1  Data  Gb  TFTDriver.o [1]
-TFTSPICS                0x1fff'c034     0x1  Data  Gb  TFTDriver.o [1]
+                        0x1fff'd630     0x4  Data  Gb  main.o [1]
+SpeedClean                   0x300d    0x16  Code  Gb  MecanumWheelControl.o [1]
+SpeedCount              0x1fff'd660    0x10  Data  Gb  MecanumWheelControl.o [1]
+Speed_get               0x1fff'd670    0x10  Data  Gb  MecanumWheelControl.o [1]
+Speed_watch             0x1fff'd63c    0x10  Data  Gb  main.o [1]
+SunDeal_3                    0x2b39    0xd8  Code  Gb  image_deal.o [1]
+TFTSPI                  0x2000'3a96     0x1  Data  Gb  TFTDriver.o [1]
+TFTSPICS                0x2000'3a97     0x1  Data  Gb  TFTDriver.o [1]
 TFT_init                      0xbb9   0x28a  Code  Gb  TFTDriver.o [1]
 TFT_showchar                  0xe43    0x90  Code  Gb  TFTDriver.o [1]
 TFT_showstr                   0xed3    0x4a  Code  Gb  TFTDriver.o [1]
 TFT_showuint8                 0xf1d    0x82  Code  Gb  TFTDriver.o [1]
-TimeCount_test          0x1fff'0fa8     0x4  Data  Gb  main.o [1]
-UART0_IRQHandler             0x15db    0x3e  Code  Gb  SEEKFREE_MT9V032.o [1]
-UART1_IRQHandler             0x1cdd    0x24  Code  Gb  UART.o [1]
-UART2_IRQHandler             0x1d01    0x24  Code  Gb  UART.o [1]
-UART3_IRQHandler             0x159d    0x3e  Code  Gb  SEEKFREE_MT9V032.o [1]
-UART4_IRQHandler             0x1d25    0x18  Code  Gb  UART.o [1]
-UARTN                   0x1fff'0498    0x14  Data  Gb  UART.o [1]
-UART_Get_Char                0x1c17    0x1a  Code  Gb  UART.o [1]
-UART_Init                    0x1a7f   0x198  Code  Gb  UART.o [1]
-UART_Irq_En                  0x1c6b    0x72  Code  Gb  UART.o [1]
-UART_Put_Buff                0x1c4b    0x20  Code  Gb  UART.o [1]
-UART_Put_Char                0x1c31    0x1a  Code  Gb  UART.o [1]
-VSYNC_1                      0x17b5    0x44  Code  Gb  SEEKFREE_MT9V032.o [1]
-VSYNC_2                      0x17f9    0x44  Code  Gb  SEEKFREE_MT9V032.o [1]
-_PrintfTiny                  0x2359   0x126  Code  Gb  xprintftiny.o [2]
-_Prout                       0x354d    0x16  Code  Gb  xprout.o [2]
-_SProut                      0x1a5f     0xa  Code  Gb  xsprout.o [2]
+TimeCount_test          0x1fff'd64c     0x4  Data  Gb  main.o [1]
+TimeMeassure            0x1fff'd634     0x4  Data  Gb  main.o [1]
+UART0_IRQHandler             0x162b    0x3e  Code  Gb  SEEKFREE_MT9V032.o [1]
+UART1_IRQHandler             0x1ec5    0x24  Code  Gb  UART.o [1]
+UART2_IRQHandler             0x1ee9    0x24  Code  Gb  UART.o [1]
+UART3_IRQHandler             0x15ed    0x3e  Code  Gb  SEEKFREE_MT9V032.o [1]
+UART4_IRQHandler             0x1f0d    0x18  Code  Gb  UART.o [1]
+UARTN                   0x1fff'04dc    0x14  Data  Gb  UART.o [1]
+UART_Get_Char                0x1dff    0x1a  Code  Gb  UART.o [1]
+UART_Init                    0x1c67   0x198  Code  Gb  UART.o [1]
+UART_Irq_En                  0x1e53    0x72  Code  Gb  UART.o [1]
+UART_Put_Buff                0x1e33    0x20  Code  Gb  UART.o [1]
+UART_Put_Char                0x1e19    0x1a  Code  Gb  UART.o [1]
+VSYNC_1                      0x199b    0x66  Code  Gb  SEEKFREE_MT9V032.o [1]
+VSYNC_2                      0x1a01    0x44  Code  Gb  SEEKFREE_MT9V032.o [1]
+_PrintfTiny                  0x2625   0x126  Code  Gb  xprintftiny.o [2]
+_Prout                       0x3621    0x16  Code  Gb  xprout.o [2]
+_SProut                      0x1bb7     0xa  Code  Gb  xsprout.o [2]
 __BOOT_STACK_ADDRESS {Abs}
                         0x2002'fff8          Data  Gb  <internal module>
 __VECTOR_RAM {Abs}      0x1fff'0000          Data  Gb  <internal module>
 __VECTOR_TABLE {Abs}            0x0          Data  Gb  <internal module>
-__aeabi_d2f                  0x297d          Code  Gb  DblToFlt.o [3]
-__aeabi_d2iz                 0x29e5          Code  Gb  DblToS32.o [3]
-__aeabi_dmul                 0x27d9          Code  Gb  DblMul.o [3]
-__aeabi_i2d                  0x27b5          Code  Gb  S32ToDbl.o [3]
-__aeabi_memcpy4              0x19d1          Code  Gb  ABImemcpy.o [4]
-__aeabi_memcpy8              0x19d1          Code  Gb  ABImemcpy.o [4]
-__cmain                      0x34ed          Code  Gb  cmain.o [4]
-__dwrite                     0x34ad    0x1e  Code  Gb  dwrite.o [5]
-__exit                       0x3521    0x14  Code  Gb  exit.o [5]
+__aeabi_memcpy4              0x1bc1          Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy8              0x1bc1          Code  Gb  ABImemcpy.o [4]
+__cmain                      0x35c1          Code  Gb  cmain.o [4]
+__dwrite                     0x3581    0x1e  Code  Gb  dwrite.o [5]
+__exit                       0x35f5    0x14  Code  Gb  exit.o [5]
 __hard_fault_handler_asm
                               0x44d          Code  Gb  crt0.o [1]
-__iar_close_ttio             0x3279    0x2e  Code  Gb  iarttio.o [5]
-__iar_data_init3             0x33dd    0x28  Code  Gb  data_init.o [4]
-__iar_get_ttio               0x32a9    0x4c  Code  Gb  iarttio.o [5]
-__iar_init_vfp               0x3429          Code  Gb  fpinit_M.o [3]
-__iar_lookup_ttioh           0x3327     0x4  Code  Gb  XShttio.o [2]
-__iar_program_start          0x362d          Code  Gb  cstartup_M.o [4]
-__iar_sh_stdout              0x34cb    0x20  Code  Gb  iarwstd.o [5]
-__iar_sh_write               0x344b    0x22  Code  Gb  iarwrite.o [5]
-__iar_ttio_guard_lock        0x32f9    0x1e  Code  Gb  XShttio.o [2]
+__iar_close_ttio             0x334d    0x2e  Code  Gb  iarttio.o [5]
+__iar_data_init3             0x34b1    0x28  Code  Gb  data_init.o [4]
+__iar_get_ttio               0x337d    0x4c  Code  Gb  iarttio.o [5]
+__iar_init_vfp               0x34fd          Code  Gb  fpinit_M.o [3]
+__iar_lookup_ttioh           0x33fb     0x4  Code  Gb  XShttio.o [2]
+__iar_program_start          0x3701          Code  Gb  cstartup_M.o [4]
+__iar_sh_stdout              0x359f    0x20  Code  Gb  iarwstd.o [5]
+__iar_sh_write               0x351f    0x22  Code  Gb  iarwrite.o [5]
+__iar_ttio_guard_lock        0x33cd    0x1e  Code  Gb  XShttio.o [2]
 __iar_ttio_guard_unlock
-                             0x3317    0x10  Code  Gb  XShttio.o [2]
-__iar_ttio_handles      0x1fff'04ac     0x8  Data  Lc  XShttio.o [2]
-__iar_zero_init3             0x1997    0x3a  Code  Gb  zero_init3.o [4]
-__low_level_init             0x350b     0x4  Code  Gb  low_level_init.o [2]
+                             0x33eb    0x10  Code  Gb  XShttio.o [2]
+__iar_ttio_handles      0x1fff'04f0     0x8  Data  Lc  XShttio.o [2]
+__iar_zero_init3             0x106b    0x3a  Code  Gb  zero_init3.o [4]
+__low_level_init             0x35df     0x4  Code  Gb  low_level_init.o [2]
 __startup                     0x411          Code  Gb  crt0.o [1]
 __vector_table                  0x0   0x1d0  Data  Gb  vectors.o [1]
-__write                      0x349d    0x10  Code  Gb  write.o [5]
-_call_main                   0x34f9          Code  Gb  cmain.o [4]
-_exit                        0x3515          Code  Gb  cexit.o [4]
-_main                        0x3507          Code  Gb  cmain.o [4]
-abort_isr                    0x2fb9    0x14  Code  Gb  vectors.o [1]
-abs                          0x1a57     0x8  Code  Gb  abs.o [2]
-bus_clk_M               0x1fff'0fe0     0x4  Data  Gb  PLL.o [1]
-camera_init_1                0x16e1    0xd2  Code  Gb  SEEKFREE_MT9V032.o [1]
-common_startup               0x3103    0x6e  Code  Gb  start.o [1]
-core_clk_M              0x1fff'0fdc     0x4  Data  Gb  PLL.o [1]
-count_init              0x1fff'04d0    0x40  Data  Gb  DMA.o [1]
-default_isr                  0x2fa9    0x10  Code  Gb  vectors.o [1]
-displayimage032               0xfb9    0x9c  Code  Gb  TFTDriver.o [1]
+__write                      0x3571    0x10  Code  Gb  write.o [5]
+_call_main                   0x35cd          Code  Gb  cmain.o [4]
+_exit                        0x35e9          Code  Gb  cexit.o [4]
+_main                        0x35db          Code  Gb  cmain.o [4]
+abort_isr                    0x3049    0x14  Code  Gb  vectors.o [1]
+abs                          0x1c47     0x8  Code  Gb  abs.o [2]
+bus_clk_M               0x1fff'd684     0x4  Data  Gb  PLL.o [1]
+camera_init_1                0x17fd    0xd2  Code  Gb  SEEKFREE_MT9V032.o [1]
+camera_init_2                0x18d1    0xca  Code  Gb  SEEKFREE_MT9V032.o [1]
+common_startup               0x327f    0x6e  Code  Gb  start.o [1]
+core_clk_M              0x1fff'd680     0x4  Data  Gb  PLL.o [1]
+count_init              0x1fff'0514    0x40  Data  Gb  DMA.o [1]
+default_isr                  0x3039    0x10  Code  Gb  vectors.o [1]
+displayimage032               0xfb9    0xb2  Code  Gb  TFTDriver.o [1]
 dsp_single_colour             0xb83    0x36  Code  Gb  TFTDriver.o [1]
-exit                         0x350f     0x4  Code  Gb  exit.o [2]
-f                       0x1fff'0f94     0x4  Data  Gb  main.o [1]
-flag_FindBottomLine     0x1fff'c02f     0x1  Data  Gb  image_deal.o [1]
-flag_FindTopLine        0x1fff'c02e     0x1  Data  Gb  image_deal.o [1]
-flag_LookedLeftLine     0x1fff'c02c     0x1  Data  Gb  image_deal.o [1]
-flag_LookedRightLine    0x1fff'c02d     0x1  Data  Gb  image_deal.o [1]
-get_config_1                 0x1619    0x62  Code  Gb  SEEKFREE_MT9V032.o [1]
-hard_fault_handler_c         0x2fcd    0x96  Code  Gb  vectors.o [1]
-image_1                 0x1fff'0fe4  0x5820  Data  Gb  SEEKFREE_MT9V032.o [1]
-image_2                 0x1fff'6804  0x5820  Data  Gb  SEEKFREE_MT9V032.o [1]
-main                         0x2c55    0x5a  Code  Gb  main.o [1]
-out                          0x2341    0x18  Code  Lc  xprintftiny.o [2]
-printf                       0x30c1    0x28  Code  Gb  printf.o [2]
-putchar                      0x347d    0x20  Code  Gb  putchar.o [2]
-receive_1               0x1fff'c024     0x4  Data  Gb  SEEKFREE_MT9V032.o [1]
-receive_2               0x1fff'c028     0x4  Data  Gb  SEEKFREE_MT9V032.o [1]
-receive_num_1           0x1fff'c030     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
-receive_num_2           0x1fff'c031     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
-row_finished                 0x183d     0x2  Code  Gb  SEEKFREE_MT9V032.o [1]
-set_irq_priority             0x212d     0xa  Code  Gb  common.o [1]
-set_mt9v032_reg_1            0x167b    0x64  Code  Gb  SEEKFREE_MT9V032.o [1]
+exit                         0x35e3     0x4  Code  Gb  exit.o [2]
+f                       0x1fff'd638     0x4  Data  Gb  main.o [1]
+get_config_1                 0x1669    0x62  Code  Gb  SEEKFREE_MT9V032.o [1]
+get_config_2                 0x16cb    0x64  Code  Gb  SEEKFREE_MT9V032.o [1]
+hard_fault_handler_c         0x305d    0x96  Code  Gb  vectors.o [1]
+imageCha_1              0x1fff'4014  0x3200  Data  Gb  image_deal.o [1]
+imageCha_2              0x1fff'a414  0x3200  Data  Gb  image_deal.o [1]
+imageTemp_1             0x1fff'0e14  0x3200  Data  Gb  image_deal.o [1]
+imageTemp_2             0x1fff'7214  0x3200  Data  Gb  image_deal.o [1]
+image_1                 0x1fff'd688  0x3200  Data  Gb  SEEKFREE_MT9V032.o [1]
+image_2                 0x2000'0888  0x3200  Data  Gb  SEEKFREE_MT9V032.o [1]
+main                         0x27d3   0x128  Code  Gb  main.o [1]
+out                          0x260d    0x18  Code  Lc  xprintftiny.o [2]
+pit_time_get                 0x2397    0x60  Code  Gb  PIT.o [1]
+pit_time_start               0x2321    0x76  Code  Gb  PIT.o [1]
+printf                       0x3151    0x28  Code  Gb  printf.o [2]
+putchar                      0x3551    0x20  Code  Gb  putchar.o [2]
+receive_1               0x2000'3a88     0x4  Data  Gb  SEEKFREE_MT9V032.o [1]
+receive_2               0x2000'3a8c     0x4  Data  Gb  SEEKFREE_MT9V032.o [1]
+receive_num_1           0x2000'3a93     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
+receive_num_2           0x2000'3a94     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
+row_finished                 0x1a45     0x2  Code  Gb  SEEKFREE_MT9V032.o [1]
+set_irq_priority             0x2315     0xa  Code  Gb  common.o [1]
+set_mt9v032_reg_1            0x172f    0x66  Code  Gb  SEEKFREE_MT9V032.o [1]
+set_mt9v032_reg_2            0x1795    0x64  Code  Gb  SEEKFREE_MT9V032.o [1]
 set_pit                       0x45f          Code  Gb  crt0.o [1]
-spi_init                     0x1275   0x1b6  Code  Gb  SPI.o [1]
-spi_mosi                     0x142b   0x11c  Code  Gb  SPI.o [1]
-sprintf                      0x2139    0x40  Code  Gb  sprintf.o [2]
-start                        0x30e9    0x1a  Code  Gb  start.o [1]
-strlen                       0x2481          Code  Gb  strlen.o [4]
-temp_Speed              0x1fff'0fac    0x10  Data  Gb  MecanumWheelControl.o [1]
+spi_init                     0x12c5   0x1b6  Code  Gb  SPI.o [1]
+spi_mosi                     0x147b   0x11c  Code  Gb  SPI.o [1]
+sprintf                      0x2405    0x40  Code  Gb  sprintf.o [2]
+start                        0x3265    0x1a  Code  Gb  start.o [1]
+strlen                       0x274d          Code  Gb  strlen.o [4]
+temp_Speed              0x1fff'd650    0x10  Data  Gb  MecanumWheelControl.o [1]
 tft_ascii                     0x48c   0x5f0  Data  Gb  TFTDriver.o [1]
 tft_delay                     0xa7d     0xa  Code  Gb  TFTDriver.o [1]
-ttio_guard              0x1fff'c035     0x1  Data  Lc  XShttio.o [2]
-uart_receive_flag_1     0x1fff'04b5     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
-uart_receive_flag_2     0x1fff'04b6     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
-wdog_disable                 0x319d    0x14  Code  Gb  wdog.o [1]
-wdog_unlock                  0x31b5    0x14  Code  Gb  wdog.o [1]
-write_vtor                   0x2119     0x6  Code  Gb  common.o [1]
+ttio_guard              0x2000'3a98     0x1  Data  Lc  XShttio.o [2]
+uart_receive_flag_1     0x1fff'04f9     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
+uart_receive_flag_2     0x1fff'04fa     0x1  Data  Gb  SEEKFREE_MT9V032.o [1]
+wdog_disable                 0x3319    0x14  Code  Gb  wdog.o [1]
+wdog_unlock                  0x3331    0x14  Code  Gb  wdog.o [1]
+write_vtor                   0x2301     0x6  Code  Gb  common.o [1]
 
 
 [1] = D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-采集板\Debug\Obj
@@ -540,9 +561,9 @@ write_vtor                   0x2119     0x6  Code  Gb  common.o [1]
 [4] = rt7M_tl.a
 [5] = shb_l.a
 
-  10 762 bytes of readonly  code memory
-   2 546 bytes of readonly  data memory
-  48 165 bytes of readwrite data memory
+  10 906 bytes of readonly  code memory
+   2 614 bytes of readonly  data memory
+  79 496 bytes of readwrite data memory
 
 Errors: none
 Warnings: none

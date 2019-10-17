@@ -1,16 +1,16 @@
-"D:\software\IAR Systems\Embedded Workbench 8.1\arm\bin\armproc.dll" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\bin\armproc.dll" 
 
-"D:\software\IAR Systems\Embedded Workbench 8.1\arm\bin\armjlink2.dll" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\bin\armjlink2.dll" 
 
 "D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\Debug\Exe\LQ_K66FX_LPTMR.out" 
 
---plugin="D:\software\IAR Systems\Embedded Workbench 8.1\arm\bin\armbat.dll" 
+--plugin="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\bin\armbat.dll" 
 
 --rtc_enable 
 
---device_macro="D:\software\IAR Systems\Embedded Workbench 8.1\arm\config\debugger\NXP\Kxx.dmac" 
+--device_macro="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\config\debugger\NXP\Kxx.dmac" 
 
---device_macro="D:\software\IAR Systems\Embedded Workbench 8.1\arm\config\debugger\NXP\K6x_Trace.dmac" 
+--device_macro="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\config\debugger\NXP\K6x_Trace.dmac" 
 
 --flash_loader="D:\智能车\麦轮信标\程序\K66框架\K66Framework\K66程序-主控\src\Project_Setting\Linker_Files\FlashK66Fxxx256K.board" 
 
